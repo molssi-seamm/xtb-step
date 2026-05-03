@@ -112,6 +112,18 @@ class EnergyParameters(seamm.Parameters):
                 "selected."
             ),
         },
+        "extra keywords": {
+            "default": [],
+            "kind": "list",
+            "default_units": "",
+            "enumeration": tuple(),
+            "format_string": "",
+            "description": "Extra keywords",
+            "help_text": (
+                "Extra keywords to append to those from the GUI. "
+                "This allows you to add to and override the GUI."
+            ),
+        },
         "results": {
             "default": {},
             "kind": "dictionary",

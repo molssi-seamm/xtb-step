@@ -77,6 +77,9 @@ setup(
         'Programming Language :: Python :: 3.9',
     ],
     entry_points={
+        'console_scripts': [
+            'xtb-step-installer=xtb_step.__main__:run',
+        ],
         'org.molssi.seamm': [
             'xTB = xtb_step:xTBStep',
         ],

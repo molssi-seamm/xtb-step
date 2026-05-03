@@ -102,8 +102,6 @@ class xTB(seamm.Node):
             logger=logger,
         )  # yapf: disable
 
-        self._metadata = xtb_step.metadata
-
     @property
     def version(self):
         """The semantic version of this module."""
