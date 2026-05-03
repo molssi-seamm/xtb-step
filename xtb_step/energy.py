@@ -7,6 +7,9 @@ import logging
 import math
 from pathlib import Path
 import pprint  # noqa: F401
+import textwrap
+
+from tabulate import tabulate
 
 import xtb_step
 from .substep import Substep
@@ -86,7 +89,12 @@ class Energy(Substep):
     # ------------------------------------------------------------------
 
     def description_text(self, P=None, calculation_type="single-point energy"):
-        """Create the text description of what this step will do."""
+        """Create the text description of what this step will do.
+
+        Note: charge and spin multiplicity are NOT mentioned here. They
+        are properties of the system, not of the calculation, and the
+        SEAMM convention is to not echo them at the step level.
+        """
         if not P:
             P = self.parameters.values_to_dict()
 
@@ -100,12 +108,6 @@ class Energy(Substep):
         if smodel != "none":
             text += f" with implicit solvation in {P['solvent']} ({smodel})"
         text += "."
-
-        # Charge / multiplicity
-        charge = P.get("charge", 0)
-        mult = P.get("multiplicity", 1)
-        if charge != 0 or mult != 1:
-            text += f" Total charge {charge}, spin multiplicity {mult}."
 
         # Accuracy
         try:
@@ -150,6 +152,7 @@ class Energy(Substep):
         directory.mkdir(parents=True, exist_ok=True)
 
         # Get the current configuration; refuse periodic input.
+        # Charge and spin multiplicity come from the configuration, not P.
         _, configuration = self.get_system_configuration(None)
         self.check_periodicity(configuration)
 
@@ -163,10 +166,17 @@ class Energy(Substep):
         # Write coord.xyz
         self.write_coord_xyz(directory, configuration)
 
-        # Build the command line
+        # Build the command line. base_xtb_args() reads charge and
+        # multiplicity from the configuration.
         args = self.base_xtb_args(P, configuration)
         if extra_args:
             args += list(extra_args)
+
+        # Allow user-specified extra keywords to be appended.
+        extra_kw = P.get("extra keywords", []) or []
+        if isinstance(extra_kw, str):
+            extra_kw = extra_kw.split()
+        args += [str(k) for k in extra_kw]
 
         # Default returned files. Subclasses may extend.
         return_files = ["xtbout.json", "xtbrestart"]
@@ -186,8 +196,8 @@ class Energy(Substep):
         # Store in the SEAMM property database / variables / tables
         self.store_results(configuration=configuration, data=data)
 
-        # Print a brief summary into step.out
-        self.analyze(data=data)
+        # Print a brief summary into step.out as a table
+        self.analyze(data=data, P=P)
 
         return next_node
 
@@ -211,8 +221,8 @@ class Energy(Substep):
     def _harvest_json(self, json_data, data, configuration):
         """Populate ``data`` from the xtbout.json contents.
 
-        The schema as documented by xTB (see e.g. the PTB doc page) uses
-        these top-level keys, with mild version-to-version drift:
+        The schema as documented by xTB uses these top-level keys, with
+        mild version-to-version drift:
 
         * ``"total energy"`` (E_h)
         * ``"electronic energy"`` (E_h)
@@ -220,8 +230,8 @@ class Energy(Substep):
         * ``"dipole / a.u."`` (3-vector)
         * ``"partial charges"``
 
-        This method is defensive: a missing key just means that result
-        does not get stored, not that the run failed.
+        Defensive: a missing key just means that result does not get
+        stored, not that the run failed.
         """
         if "total energy" in json_data:
             data["total_energy"] = float(json_data["total energy"])
@@ -319,16 +329,68 @@ class Energy(Substep):
                 logger.debug("Ehlert2021 missing from bibliography")
 
     # ------------------------------------------------------------------
-    # Analysis / printing
+    # Analysis / printing -- table-based
     # ------------------------------------------------------------------
 
-    def analyze(self, indent="", data=None, **kwargs):
-        """Print a brief results summary to step.out.
+    def analyze(self, indent="", data=None, table=None, P=None):
+        """Print the results as a tabulated summary in step.out.
 
-        Heavy result handling lives in store_results(); this is just a
-        human-readable echo for the local step.out file.
+        Follows the Gaussian step pattern: subclasses build up a single
+        ``table`` dict and pass it to ``super().analyze()``. The base
+        Energy class adds the basic energy/HOMO/LUMO/dipole rows and
+        prints the table at the end. This way, an Optimization or
+        Frequencies substep can prepend its own rows (e.g. converged-
+        energy, ZPE) in a single, ordered table.
+
+        Parameters
+        ----------
+        indent : str
+            Extra indentation (currently unused; ``self.indent`` controls
+            the final wrap indent).
+        data : dict
+            Results from ``_collect_results`` and any subclass extensions.
+        table : dict, optional
+            A dict with three lists -- ``"Property"``, ``"Value"``,
+            ``"Units"`` -- that subclasses have already populated. If
+            None, a fresh empty table is created here.
+        P : dict, optional
+            The current parameter values. Not directly used in this
+            base implementation but accepted so subclasses can pass it.
         """
-        if not data:
+        if data is None:
+            data = {}
+
+        if table is None:
+            table = {"Property": [], "Value": [], "Units": []}
+
+        metadata = xtb_step.metadata.get("results", {})
+
+        # Standard energy / orbital / dipole rows. Order matters for
+        # readability.
+        keys = (
+            "total_energy",
+            "electronic_energy",
+            "homo_energy",
+            "lumo_energy",
+            "homo_lumo_gap",
+            "dipole_moment",
+        )
+        for key in keys:
+            if key not in data:
+                continue
+            mdata = metadata.get(key, {})
+            label = mdata.get("description", key)
+            fmt = mdata.get("format", ".4f")
+            units = mdata.get("units", "")
+            try:
+                value_str = f"{float(data[key]):{fmt}}"
+            except (TypeError, ValueError):
+                value_str = str(data[key])
+            table["Property"].append(label)
+            table["Value"].append(value_str)
+            table["Units"].append(units)
+
+        if not table["Property"]:
             printer.normal(
                 __(
                     "No results were collected for this xTB step. Check "
@@ -340,20 +402,21 @@ class Energy(Substep):
             )
             return
 
-        lines = []
-        if "total_energy" in data:
-            lines.append(f"Total energy:       {data['total_energy']:.8f} E_h")
-        if "homo_lumo_gap" in data:
-            lines.append(f"HOMO-LUMO gap:      {data['homo_lumo_gap']:.4f} eV")
-        if "dipole_moment" in data:
-            lines.append(f"Dipole moment:      {data['dipole_moment']:.4f} D")
-
-        if lines:
-            printer.normal(
-                __(
-                    "\n".join(lines),
-                    indent=4 * " ",
-                    wrap=False,
-                    dedent=False,
-                )
-            )
+        tmp = tabulate(
+            table,
+            headers="keys",
+            tablefmt="rounded_outline",
+            colalign=("center", "decimal", "left"),
+            disable_numparse=True,
+        )
+        length = len(tmp.splitlines()[0])
+        text_lines = []
+        title = "xTB Results"
+        if self._model:
+            title = f"xTB ({self._model}) Results"
+        text_lines.append(title.center(length))
+        text_lines.append(tmp)
+        text = textwrap.indent("\n".join(text_lines), self.indent + 4 * " ")
+        printer.normal("")
+        printer.normal(text)
+        printer.normal("")

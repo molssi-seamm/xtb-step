@@ -284,16 +284,20 @@ class Substep(seamm.Node):
     def base_xtb_args(self, P, configuration):
         """Build the parts of the xtb CLI common to all substeps.
 
+        Charge and spin multiplicity are read from the configuration, not
+        from ``P``. This matches the SEAMM convention (charge and spin are
+        properties of the chemical system, not of the calculation) and
+        lets high-throughput flowcharts loop over systems without per-
+        system parameter editing.
+
         Parameters
         ----------
         P : dict
             The current parameter values (from
             ``parameters.current_values_to_dict()``). Expected keys include
-            ``method``, ``charge``, ``multiplicity``, ``accuracy``,
-            ``solvation model``, ``solvent``.
+            ``method``, ``accuracy``, ``solvation model``, ``solvent``.
         configuration : molsystem.Configuration
-            Used only to provide a default total spin if the user has not
-            specified one.
+            Provides the net charge and spin multiplicity for the system.
 
         Returns
         -------
@@ -305,13 +309,13 @@ class Substep(seamm.Node):
         args += METHOD_TO_CLI[P["method"]]
         args += ["--json"]
 
-        # Charge
-        charge = int(P.get("charge", 0))
+        # Charge: from the configuration, always.
+        charge = int(configuration.charge)
         args += ["--chrg", str(charge)]
 
         # Multiplicity / unpaired electrons. xtb takes --uhf with the number
         # of UNPAIRED electrons (M - 1 for spin multiplicity M).
-        mult = int(P.get("multiplicity", 1))
+        mult = int(configuration.spin_multiplicity)
         n_unpaired = max(mult - 1, 0)
         args += ["--uhf", str(n_unpaired)]
 

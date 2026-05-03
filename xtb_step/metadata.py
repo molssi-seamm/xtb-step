@@ -101,6 +101,7 @@ metadata["results"] = {
         "property": "total energy#xTB#{model}",
         "type": "float",
         "units": "E_h",
+        "format": ".6f",
     },
     "electronic_energy": {
         "calculation": ["Energy", "Optimization", "Frequencies"],
@@ -109,6 +110,7 @@ metadata["results"] = {
         "property": "electronic energy#xTB#{model}",
         "type": "float",
         "units": "E_h",
+        "format": ".6f",
     },
     "homo_lumo_gap": {
         "calculation": ["Energy", "Optimization", "Frequencies"],
@@ -117,6 +119,7 @@ metadata["results"] = {
         "property": "band gap#xTB#{model}",
         "type": "float",
         "units": "eV",
+        "format": ".4f",
     },
     "homo_energy": {
         "calculation": ["Energy", "Optimization", "Frequencies"],
@@ -125,6 +128,7 @@ metadata["results"] = {
         "property": "HOMO energy#xTB#{model}",
         "type": "float",
         "units": "eV",
+        "format": ".4f",
     },
     "lumo_energy": {
         "calculation": ["Energy", "Optimization", "Frequencies"],
@@ -133,6 +137,7 @@ metadata["results"] = {
         "property": "LUMO energy#xTB#{model}",
         "type": "float",
         "units": "eV",
+        "format": ".4f",
     },
     "dipole_moment": {
         "calculation": ["Energy", "Optimization", "Frequencies"],
@@ -141,6 +146,7 @@ metadata["results"] = {
         "property": "dipole moment#xTB#{model}",
         "type": "float",
         "units": "debye",
+        "format": ".4f",
     },
     "dipole_vector": {
         "calculation": ["Energy", "Optimization", "Frequencies"],
@@ -192,6 +198,7 @@ metadata["results"] = {
         "property": "zero point energy#xTB#{model}",
         "type": "float",
         "units": "E_h",
+        "format": ".6f",
     },
     "enthalpy": {
         "calculation": ["Frequencies"],
@@ -199,6 +206,7 @@ metadata["results"] = {
         "dimensionality": "scalar",
         "type": "float",
         "units": "E_h",
+        "format": ".6f",
     },
     "entropy_term": {
         "calculation": ["Frequencies"],
@@ -206,6 +214,7 @@ metadata["results"] = {
         "dimensionality": "scalar",
         "type": "float",
         "units": "E_h",
+        "format": ".6f",
     },
     "gibbs_free_energy": {
         "calculation": ["Frequencies"],
@@ -214,6 +223,7 @@ metadata["results"] = {
         "property": "Gibbs free energy#xTB#{model}",
         "type": "float",
         "units": "E_h",
+        "format": ".6f",
     },
     "total_free_energy": {
         "calculation": ["Frequencies"],
@@ -221,6 +231,7 @@ metadata["results"] = {
         "dimensionality": "scalar",
         "type": "float",
         "units": "E_h",
+        "format": ".6f",
     },
     "temperature": {
         "calculation": ["Frequencies"],
@@ -228,5 +239,6 @@ metadata["results"] = {
         "dimensionality": "scalar",
         "type": "float",
         "units": "K",
+        "format": ".2f",
     },
 }

@@ -21,8 +21,14 @@ class EnergyParameters(seamm.Parameters):
 
     These parameters are inherited by Optimization (which adds optimizer
     controls) and Frequencies (which adds Hessian controls). Anything that is
-    common to all substeps -- method, charge, spin, accuracy, threading,
-    solvation -- lives here.
+    common to all substeps -- method, accuracy, solvation -- lives here.
+
+    Note that net charge and spin multiplicity are NOT parameters of this
+    step. They are properties of the configuration, accessed at run time
+    via ``configuration.charge`` and ``configuration.spin_multiplicity``.
+    This matches the convention throughout SEAMM: O2 (S=0), O2 triplet,
+    and O2+ are different chemical species, not different parameter
+    settings on the same calculation.
     """
 
     parameters = {
@@ -41,29 +47,6 @@ class EnergyParameters(seamm.Parameters):
                 "useful for rough screening or as a robust starting point. "
                 "GFN-FF is a generic force field automatically "
                 "parameterized by xTB."
-            ),
-        },
-        "charge": {
-            "default": 0,
-            "kind": "integer",
-            "default_units": "",
-            "enumeration": tuple(),
-            "format_string": "d",
-            "description": "Net charge:",
-            "help_text": "The total electronic charge of the system.",
-        },
-        "multiplicity": {
-            "default": 1,
-            "kind": "integer",
-            "default_units": "",
-            "enumeration": tuple(),
-            "format_string": "d",
-            "description": "Spin multiplicity:",
-            "help_text": (
-                "The spin multiplicity (2S+1). 1 = singlet (closed shell), "
-                "2 = doublet (one unpaired electron), 3 = triplet, etc. "
-                "xTB internally uses the number of unpaired electrons "
-                "(multiplicity - 1)."
             ),
         },
         "accuracy": {

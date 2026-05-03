@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""The graphical part of a Energy step"""
+"""The graphical part of an xTB Energy step."""
 
 import pprint  # noqa: F401
 import tkinter as tk
@@ -12,35 +12,15 @@ import seamm_widgets as sw
 
 
 class TkEnergy(seamm.TkNode):
-    """
-    The graphical part of a Energy step in a flowchart.
+    """The graphical part of an Energy step in a flowchart.
 
-    Attributes
-    ----------
-    tk_flowchart : TkFlowchart = None
-        The flowchart that we belong to.
-    node : Node = None
-        The corresponding node of the non-graphical flowchart
-    canvas: tkCanvas = None
-        The Tk Canvas to draw on
-    dialog : Dialog
-        The Pmw dialog object
-    x : int = None
-        The x-coordinate of the center of the picture of the node
-    y : int = None
-        The y-coordinate of the center of the picture of the node
-    w : int = 200
-        The width in pixels of the picture of the node
-    h : int = 50
-        The height in pixels of the picture of the node
-    self[widget] : dict
-        A dictionary of tk widgets built using the information
-        contained in Energy_parameters.py
+    The dialog dynamically hides the ``solvent`` widget when the
+    ``solvation model`` is ``"none"``, and indents it under the
+    solvation-model label when shown -- a common SEAMM pattern.
 
     See Also
     --------
-    Energy, TkEnergy,
-    EnergyParameters,
+    Energy, EnergyParameters
     """
 
     def __init__(
@@ -53,32 +33,7 @@ class TkEnergy(seamm.TkNode):
         w=200,
         h=50,
     ):
-        """
-        Initialize a graphical node.
-
-        Parameters
-        ----------
-        tk_flowchart: Tk_Flowchart
-            The graphical flowchart that we are in.
-        node: Node
-            The non-graphical node for this step.
-        namespace: str
-            The stevedore namespace for finding sub-nodes.
-        canvas: Canvas
-           The Tk canvas to draw on.
-        x: float
-            The x position of the nodes center on the canvas.
-        y: float
-            The y position of the nodes cetner on the canvas.
-        w: float
-            The nodes graphical width, in pixels.
-        h: float
-            The nodes graphical height, in pixels.
-
-        Returns
-        -------
-        None
-        """
+        """Initialize a graphical node."""
         self.dialog = None
 
         super().__init__(
@@ -92,30 +47,13 @@ class TkEnergy(seamm.TkNode):
         )
 
     def create_dialog(self):
-        """
-        Create the dialog. A set of widgets will be chosen by default
-        based on what is specified in the Energy_parameters
-        module.
-
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
-
-        See Also
-        --------
-        TkEnergy.reset_dialog
-        """
-
-        frame = super().create_dialog(title="Energy")
+        """Create the dialog."""
+        frame = super().create_dialog(title="xTB Energy")
 
         # Shortcut for parameters
         P = self.node.parameters
 
-        # Then create the widgets
+        # Create all the value widgets (skip non-display ones)
         for key in P:
             if key[0] != "_" and key not in (
                 "results",
@@ -124,83 +62,71 @@ class TkEnergy(seamm.TkNode):
             ):
                 self[key] = P[key].widget(frame)
 
-        # and lay them out
+        # Bind the solvation-model widget so changes redraw the layout.
+        # We bind to the underlying combobox for enum-type parameters.
+        smodel = self["solvation model"]
+        smodel.combobox.bind("<<ComboboxSelected>>", self.reset_energy_frame)
+        smodel.combobox.bind("<Return>", self.reset_energy_frame)
+        smodel.combobox.bind("<FocusOut>", self.reset_energy_frame)
+
+        # Lay them out for the first time.
         self.reset_dialog()
 
     def reset_dialog(self, widget=None):
-        """Layout the widgets in the dialog.
-
-        The widgets are chosen by default from the information in
-        Energy_parameter.
-
-        This function simply lays them out row by row with
-        aligned labels. You may wish a more complicated layout that
-        is controlled by values of some of the control parameters.
-        If so, edit or override this method
-
-        Parameters
-        ----------
-        widget : Tk Widget = None
-
-        Returns
-        -------
-        None
-
-        See Also
-        --------
-        TkEnergy.create_dialog
-        """
-
+        """Top-level layout entry. Delegates to ``reset_energy_frame``."""
         # Remove any widgets previously packed
         frame = self["frame"]
         for slave in frame.grid_slaves():
             slave.grid_forget()
 
-        # Shortcut for parameters
-        P = self.node.parameters
+        # Lay out the energy widgets, with conditional visibility.
+        self.reset_energy_frame()
 
-        # keep track of the row in a variable, so that the layout is flexible
-        # if e.g. rows are skipped to control such as "method" here
-        row = 0
-        widgets = []
-        for key in P:
-            if key[0] != "_" and key not in (
-                "results",
-                "extra keywords",
-                "create tables",
-            ):
-                self[key].grid(row=row, column=0, sticky=tk.EW)
-                widgets.append(self[key])
-                row += 1
-
-        # Align the labels
-        sw.align_labels(widgets, sticky=tk.E)
-
-        # Setup the results if there are any
+        # Setup results tab if there are any
         have_results = (
             "results" in self.node.metadata and len(self.node.metadata["results"]) > 0
         )
-        if have_results and "results" in P:
+        if have_results and "results" in self.node.parameters:
             self.setup_results()
 
+    def reset_energy_frame(self, widget=None):
+        """Layout the energy parameters, hiding/indenting solvent.
+
+        Two-column layout: column 0 holds left-aligned labels for the
+        always-visible parameters; column 1 holds the indented
+        ``solvent`` widget when it is shown. ``sw.align_labels`` is
+        called separately on each column's widget list so the labels
+        line up nicely within their groups.
+        """
+        frame = self["frame"]
+        for slave in frame.grid_slaves():
+            slave.grid_forget()
+
+        row = 0
+        widgets_main = []
+        widgets_indented = []
+
+        # Always-visible widgets, full width
+        for key in ("method", "accuracy", "solvation model"):
+            self[key].grid(row=row, column=0, columnspan=2, sticky=tk.EW)
+            widgets_main.append(self[key])
+            row += 1
+
+        # Conditional: solvent visible only if solvation != "none"
+        smodel = self["solvation model"].get()
+        if smodel != "none":
+            self["solvent"].grid(row=row, column=1, sticky=tk.EW)
+            widgets_indented.append(self["solvent"])
+            row += 1
+
+        sw.align_labels(widgets_main, sticky=tk.E)
+        if widgets_indented:
+            sw.align_labels(widgets_indented, sticky=tk.E)
+
+        return row
+
     def right_click(self, event):
-        """
-        Handles the right click event on the node.
-
-        Parameters
-        ----------
-        event : Tk Event
-
-        Returns
-        -------
-        None
-
-        See Also
-        --------
-        TkEnergy.edit
-        """
-
+        """Right-click context menu."""
         super().right_click(event)
         self.popup_menu.add_command(label="Edit..", command=self.edit)
-
         self.popup_menu.tk_popup(event.x_root, event.y_root, 0)

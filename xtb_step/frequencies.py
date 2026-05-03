@@ -110,10 +110,9 @@ class Frequencies(Optimization):
         else:
             hess_args = ["--hess"]
 
-        # Temperature passes through xtb's --etemp? No -- --etemp is the
-        # electronic temperature. Thermo temperature is set via xcontrol's
-        # $thermo block. For v1, we leave xtb's default (298.15 K) and
-        # warn if the user requests something different.
+        # Temperature: xtb uses the $thermo block in xcontrol for non-default
+        # temperatures. v1 only supports the default 298.15 K and warns if
+        # something else is requested.
         try:
             T_req = float(P.get("temperature", 298.15))
         except (TypeError, ValueError):
@@ -130,8 +129,10 @@ class Frequencies(Optimization):
             hess_args = list(extra_args) + hess_args
 
         # Call Energy.run() (the grandparent) with the hessian args. This
-        # writes coord.xyz, invokes xtb, parses xtbout.json, and calls
-        # store_results() / analyze().
+        # writes coord.xyz, invokes xtb, parses xtbout.json, calls
+        # store_results(), and calls self.analyze() (which dispatches to
+        # Frequencies.analyze() because of the inheritance chain -- so we
+        # build the thermo + freq additions there).
         next_node = Energy.run(self, extra_args=hess_args)
 
         # If we did an optimize-first, also pick up the optimized geometry.
@@ -139,27 +140,26 @@ class Frequencies(Optimization):
         if opt_first:
             self._handle_optimized_structure(directory, P)
 
-        # Augment data with thermo block from stdout, and frequencies from
-        # JSON / vibspectrum if not already present.
-        self._post_run_thermo_and_freqs(directory)
-
         return next_node
 
     # ------------------------------------------------------------------
-    # Post-processing: thermo block and frequencies
+    # Analysis: extend the Energy table with thermo + freq rows
     # ------------------------------------------------------------------
 
-    def _post_run_thermo_and_freqs(self, directory):
-        """Re-read xtb outputs to extract Hessian-specific quantities.
+    def analyze(self, indent="", data=None, table=None, P=None):
+        """Augment the data dict with thermo / freq results, then defer to
+        Energy.analyze() which formats the table.
 
-        Energy._collect_results() captured the JSON-based scalars. Here we
-        add: vibrational frequencies (from JSON if present, else
-        ``vibspectrum``), thermochemistry quantities (from ``xtb.out``),
-        and the model has already been set in Energy.run().
+        Energy.run() calls ``self.analyze(data=..., P=...)`` BEFORE we
+        have parsed the thermo block from xtb.out. We re-parse here so
+        the thermo rows are available when the table is built.
         """
-        data = {}
+        if data is None:
+            data = {}
 
-        # Frequencies and intensities from JSON if available
+        directory = Path(self.directory)
+
+        # JSON frequencies / IR intensities (newer xtb versions)
         json_data = self.read_xtbout_json(directory)
         if json_data:
             for key in (
@@ -170,7 +170,11 @@ class Frequencies(Optimization):
                 if key in json_data:
                     data["frequencies"] = [float(f) for f in json_data[key]]
                     break
-            for key in ("IR intensities", "ir intensities", "IR intensities/(km/mol)"):
+            for key in (
+                "IR intensities",
+                "ir intensities",
+                "IR intensities/(km/mol)",
+            ):
                 if key in json_data:
                     data["ir_intensities"] = [float(v) for v in json_data[key]]
                     break
@@ -198,38 +202,116 @@ class Frequencies(Optimization):
             thermo = self.parse_thermo_block(stdout) if stdout else {}
             data.update(thermo)
 
-        if data:
+        # Persist the new fields we picked up here. (Energy.run() already
+        # called store_results once with the JSON data; this second call
+        # adds the freq / thermo entries.)
+        if "frequencies" in data or "zero_point_energy" in data:
             _, configuration = self.get_system_configuration(None)
             self.store_results(configuration=configuration, data=data)
 
-            # Brief printout
-            lines = []
-            if "frequencies" in data:
-                freqs = data["frequencies"]
-                n_imag = sum(1 for f in freqs if f < 0)
-                lines.append(f"Number of frequencies:   {len(freqs)}")
-                lines.append(f"Imaginary frequencies:   {n_imag}")
-            if "zero_point_energy" in data:
-                lines.append(
-                    f"Zero-point energy:       {data['zero_point_energy']:.6f} E_h"
-                )
-            if "gibbs_free_energy" in data:
-                lines.append(
-                    f"Gibbs free energy G(T):  {data['gibbs_free_energy']:.6f} E_h"
-                )
-            if "total_free_energy" in data:
-                lines.append(
-                    f"Total free energy:       {data['total_free_energy']:.6f} E_h"
-                )
-            if lines:
-                printer.normal(
-                    __(
-                        "\n".join(lines),
-                        indent=4 * " ",
-                        wrap=False,
-                        dedent=False,
-                    )
-                )
+        # Build a fresh table; add freq summary rows BEFORE Energy's
+        # standard rows.
+        if table is None:
+            table = {"Property": [], "Value": [], "Units": []}
+
+        if "frequencies" in data:
+            freqs = data["frequencies"]
+            n_imag = sum(1 for f in freqs if f < 0)
+            table["Property"].append("Number of frequencies")
+            table["Value"].append(f"{len(freqs):d}")
+            table["Units"].append("")
+            table["Property"].append("Imaginary frequencies")
+            table["Value"].append(f"{n_imag:d}")
+            table["Units"].append("")
+
+        # Now defer to Energy.analyze() which appends the standard
+        # energy/HOMO/LUMO/dipole rows AND the post-energy rows we add
+        # below by extending the metadata-driven loop. To keep the order
+        # "energies first, thermo after", we let Energy.analyze run and
+        # then add a tail. Easier: build everything ourselves.
+
+        # Append thermo rows AFTER the energy rows. We do this by
+        # patching the Energy.analyze flow: call Energy.analyze with the
+        # current table (which includes our freq prefix) and have it
+        # append its rows; then we add our thermo rows; then print.
+        #
+        # But Energy.analyze() prints the table itself. To avoid double
+        # printing, we replicate the pattern here directly.
+
+        metadata = xtb_step.metadata.get("results", {})
+
+        # Energy block (same set as Energy.analyze)
+        for key in (
+            "total_energy",
+            "electronic_energy",
+            "homo_energy",
+            "lumo_energy",
+            "homo_lumo_gap",
+            "dipole_moment",
+        ):
+            if key not in data:
+                continue
+            mdata = metadata.get(key, {})
+            label = mdata.get("description", key)
+            fmt = mdata.get("format", ".4f")
+            units = mdata.get("units", "")
+            try:
+                value_str = f"{float(data[key]):{fmt}}"
+            except (TypeError, ValueError):
+                value_str = str(data[key])
+            table["Property"].append(label)
+            table["Value"].append(value_str)
+            table["Units"].append(units)
+
+        # Thermo block
+        for key in (
+            "zero_point_energy",
+            "enthalpy",
+            "entropy_term",
+            "gibbs_free_energy",
+            "total_free_energy",
+            "temperature",
+        ):
+            if key not in data:
+                continue
+            mdata = metadata.get(key, {})
+            label = mdata.get("description", key)
+            fmt = mdata.get("format", ".4f")
+            units = mdata.get("units", "")
+            try:
+                value_str = f"{float(data[key]):{fmt}}"
+            except (TypeError, ValueError):
+                value_str = str(data[key])
+            table["Property"].append(label)
+            table["Value"].append(value_str)
+            table["Units"].append(units)
+
+        # Print the assembled table directly (do NOT call super().analyze,
+        # which would re-add the energy rows we already appended).
+        if not table["Property"]:
+            return
+
+        from tabulate import tabulate
+        import textwrap
+
+        tmp = tabulate(
+            table,
+            headers="keys",
+            tablefmt="rounded_outline",
+            colalign=("center", "decimal", "left"),
+            disable_numparse=True,
+        )
+        length = len(tmp.splitlines()[0])
+        text_lines = []
+        title = "xTB Results"
+        if self._model:
+            title = f"xTB ({self._model}) Frequencies / Thermochemistry"
+        text_lines.append(title.center(length))
+        text_lines.append(tmp)
+        text = textwrap.indent("\n".join(text_lines), self.indent + 4 * " ")
+        printer.normal("")
+        printer.normal(text)
+        printer.normal("")
 
     # ------------------------------------------------------------------
     # vibspectrum parser
@@ -237,18 +319,6 @@ class Frequencies(Optimization):
 
     def _parse_vibspectrum(self, path):
         """Parse Turbomole-format ``vibspectrum`` if JSON freqs missing.
-
-        The format is::
-
-           $vibrational spectrum
-           #  mode    symmetry  wavenumber   IR intensity   selection rules
-           #                       cm**(-1)      km/mol         IR    Raman
-              1                       0.00      0.00000       -      -
-              2                       0.00      0.00000       -      -
-              ...
-              7        a              40.69     0.16700       YES    NO
-           ...
-           $end
 
         Returns (frequencies, intensities) lists. Empty lists on failure.
         """
@@ -265,7 +335,6 @@ class Frequencies(Optimization):
             line = line.strip()
             if not line or line.startswith("#") or line.startswith("$"):
                 continue
-            # Mode index, optional symmetry label, frequency, intensity
             num = r"-?\d+(?:\.\d+)?(?:[Ee][+-]?\d+)?"
             m = re.match(
                 rf"^\d+\s+(?:[A-Za-z][A-Za-z0-9'\"]*\s+)?({num})\s+({num})", line
