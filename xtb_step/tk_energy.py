@@ -1,9 +1,22 @@
 # -*- coding: utf-8 -*-
 
-"""The graphical part of an xTB Energy step."""
+"""The graphical part of an xTB Energy step.
+
+This class is also the base class for ``TkOptimization`` and
+``TkFrequencies``. It owns the "energy frame", which holds the
+energy / Hamiltonian / solvation widgets common to all xTB substeps.
+Subclasses inherit ``create_dialog``, ``reset_dialog``, and
+``reset_energy_frame`` unchanged, and just add their own frames below
+the energy frame -- exactly the MOPAC ``TkEnergy`` / ``TkOptimization``
+pattern.
+
+The dialog hides the ``solvent`` widget when ``solvation model`` is
+``"none"`` and indents it under the solvation row when shown.
+"""
 
 import pprint  # noqa: F401
 import tkinter as tk
+import tkinter.ttk as ttk
 
 import xtb_step  # noqa: F401, E999
 import seamm
@@ -14,13 +27,9 @@ import seamm_widgets as sw
 class TkEnergy(seamm.TkNode):
     """The graphical part of an Energy step in a flowchart.
 
-    The dialog dynamically hides the ``solvent`` widget when the
-    ``solvation model`` is ``"none"``, and indents it under the
-    solvation-model label when shown -- a common SEAMM pattern.
-
-    See Also
-    --------
-    Energy, EnergyParameters
+    Subclasses (TkOptimization, TkFrequencies, ...) inherit the
+    energy-frame layout and the conditional solvent display, and add
+    their own frames in their own ``create_dialog`` / ``reset_dialog``.
     """
 
     def __init__(
@@ -46,67 +55,92 @@ class TkEnergy(seamm.TkNode):
             h=h,
         )
 
-    def create_dialog(self):
-        """Create the dialog."""
-        frame = super().create_dialog(title="xTB Energy")
+    def create_dialog(self, title="xTB Energy"):
+        """Create the dialog and the energy frame.
+
+        Subclasses should call ``super().create_dialog(title=...)`` first
+        and then add their own frames into ``self["frame"]``.
+        """
+        frame = super().create_dialog(title=title)
 
         # Shortcut for parameters
         P = self.node.parameters
 
-        # Create all the value widgets (skip non-display ones)
-        for key in P:
-            if key[0] != "_" and key not in (
-                "results",
-                "extra keywords",
-                "create tables",
-            ):
-                self[key] = P[key].widget(frame)
+        # Energy frame -- holds method, accuracy, solvation, solvent
+        e_frame = self["energy frame"] = ttk.LabelFrame(
+            frame,
+            borderwidth=4,
+            relief="sunken",
+            text="Hamiltonian Parameters",
+            labelanchor="n",
+            padding=10,
+        )
 
-        # Bind the solvation-model widget so changes redraw the layout.
-        # We bind to the underlying combobox for enum-type parameters.
+        # Create the value widgets (skip non-display ones)
+        for key in xtb_step.EnergyParameters.parameters:
+            if key in ("results", "extra keywords", "create tables"):
+                continue
+            self[key] = P[key].widget(e_frame)
+
+        # Bind the solvation-model widget so changes redraw the energy
+        # frame layout.
         smodel = self["solvation model"]
         smodel.combobox.bind("<<ComboboxSelected>>", self.reset_energy_frame)
         smodel.combobox.bind("<Return>", self.reset_energy_frame)
         smodel.combobox.bind("<FocusOut>", self.reset_energy_frame)
 
-        # Lay them out for the first time.
+        # Lay everything out for the first time.
         self.reset_dialog()
 
+        return frame
+
     def reset_dialog(self, widget=None):
-        """Top-level layout entry. Delegates to ``reset_energy_frame``."""
-        # Remove any widgets previously packed
+        """Top-level layout. Subclasses override and call ``super()``.
+
+        Returns
+        -------
+        int
+            The next free row in ``self["frame"]``, so subclasses can
+            grid their additional frames below the energy frame.
+        """
+        # Remove any widgets previously packed in the top-level frame
         frame = self["frame"]
         for slave in frame.grid_slaves():
             slave.grid_forget()
 
-        # Lay out the energy widgets, with conditional visibility.
+        # Place the energy frame at the top
+        row = 0
+        self["energy frame"].grid(row=row, column=0, sticky=tk.EW)
+        row += 1
+
+        # Lay out the energy widgets inside the energy frame, with the
+        # conditional solvent visibility.
         self.reset_energy_frame()
 
-        # Setup results tab if there are any
+        # Setup the results tab if there are any
         have_results = (
             "results" in self.node.metadata and len(self.node.metadata["results"]) > 0
         )
         if have_results and "results" in self.node.parameters:
             self.setup_results()
 
-    def reset_energy_frame(self, widget=None):
-        """Layout the energy parameters, hiding/indenting solvent.
+        return row
 
-        Two-column layout: column 0 holds left-aligned labels for the
-        always-visible parameters; column 1 holds the indented
-        ``solvent`` widget when it is shown. ``sw.align_labels`` is
-        called separately on each column's widget list so the labels
-        line up nicely within their groups.
+    def reset_energy_frame(self, widget=None):
+        """Layout the widgets inside the energy frame.
+
+        The ``solvent`` widget is shown only when ``solvation model`` is
+        not ``"none"``, and is indented under the solvation row.
         """
-        frame = self["frame"]
-        for slave in frame.grid_slaves():
+        e_frame = self["energy frame"]
+        for slave in e_frame.grid_slaves():
             slave.grid_forget()
 
         row = 0
         widgets_main = []
         widgets_indented = []
 
-        # Always-visible widgets, full width
+        # Always-visible widgets
         for key in ("method", "accuracy", "solvation model"):
             self[key].grid(row=row, column=0, columnspan=2, sticky=tk.EW)
             widgets_main.append(self[key])

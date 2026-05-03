@@ -1,206 +1,94 @@
 # -*- coding: utf-8 -*-
 
-"""The graphical part of a Optimization step"""
+"""The graphical part of an xTB Optimization step.
+
+Inherits from :class:`TkEnergy` to reuse the energy frame and the
+dynamic solvation/solvent visibility. Adds its own "optimization frame"
+below the energy frame, holding the optimizer-specific parameters.
+"""
 
 import pprint  # noqa: F401
 import tkinter as tk
+import tkinter.ttk as ttk
 
 import xtb_step  # noqa: F401, E999
-import seamm
+from .tk_energy import TkEnergy
 from seamm_util import ureg, Q_, units_class  # noqa: F401, E999
 import seamm_widgets as sw
 
 
-class TkOptimization(seamm.TkNode):
-    """
-    The graphical part of a Optimization step in a flowchart.
-
-    Attributes
-    ----------
-    tk_flowchart : TkFlowchart = None
-        The flowchart that we belong to.
-    node : Node = None
-        The corresponding node of the non-graphical flowchart
-    canvas: tkCanvas = None
-        The Tk Canvas to draw on
-    dialog : Dialog
-        The Pmw dialog object
-    x : int = None
-        The x-coordinate of the center of the picture of the node
-    y : int = None
-        The y-coordinate of the center of the picture of the node
-    w : int = 200
-        The width in pixels of the picture of the node
-    h : int = 50
-        The height in pixels of the picture of the node
-    self[widget] : dict
-        A dictionary of tk widgets built using the information
-        contained in Optimization_parameters.py
+class TkOptimization(TkEnergy):
+    """The graphical part of an Optimization step in a flowchart.
 
     See Also
     --------
-    Optimization, TkOptimization,
-    OptimizationParameters,
+    TkEnergy, Optimization, OptimizationParameters
     """
 
-    def __init__(
-        self,
-        tk_flowchart=None,
-        node=None,
-        canvas=None,
-        x=None,
-        y=None,
-        w=200,
-        h=50,
-    ):
-        """
-        Initialize a graphical node.
+    def create_dialog(self, title="xTB Optimization"):
+        """Create the dialog: energy frame from parent, plus opt frame."""
+        # Let TkEnergy build the energy frame and bind its widgets.
+        frame = super().create_dialog(title=title)
 
-        Parameters
-        ----------
-        tk_flowchart: Tk_Flowchart
-            The graphical flowchart that we are in.
-        node: Node
-            The non-graphical node for this step.
-        namespace: str
-            The stevedore namespace for finding sub-nodes.
-        canvas: Canvas
-           The Tk canvas to draw on.
-        x: float
-            The x position of the nodes center on the canvas.
-        y: float
-            The y position of the nodes cetner on the canvas.
-        w: float
-            The nodes graphical width, in pixels.
-        h: float
-            The nodes graphical height, in pixels.
-
-        Returns
-        -------
-        None
-        """
-        self.dialog = None
-
-        super().__init__(
-            tk_flowchart=tk_flowchart,
-            node=node,
-            canvas=canvas,
-            x=x,
-            y=y,
-            w=w,
-            h=h,
-        )
-
-    def create_dialog(self):
-        """
-        Create the dialog. A set of widgets will be chosen by default
-        based on what is specified in the Optimization_parameters
-        module.
-
-        Parameters
-        ----------
-        None
-
-        Returns
-        -------
-        None
-
-        See Also
-        --------
-        TkOptimization.reset_dialog
-        """
-
-        frame = super().create_dialog(title="Optimization")
-
-        # Shortcut for parameters
         P = self.node.parameters
 
-        # Then create the widgets
-        for key in P:
-            if key[0] != "_" and key not in (
-                "results",
-                "extra keywords",
-                "create tables",
-            ):
-                self[key] = P[key].widget(frame)
+        # Optimization frame
+        o_frame = self["optimization frame"] = ttk.LabelFrame(
+            frame,
+            borderwidth=4,
+            relief="sunken",
+            text="Optimization",
+            labelanchor="n",
+            padding=10,
+        )
 
-        # and lay them out
+        # Create the optimization-specific widgets (skip the parent's keys
+        # so we don't redraw them in this frame).
+        parent_keys = set(xtb_step.EnergyParameters.parameters)
+        skip = parent_keys | {"results", "extra keywords", "create tables"}
+        for key in xtb_step.OptimizationParameters.parameters:
+            if key in skip:
+                continue
+            self[key] = P[key].widget(o_frame)
+
+        # Re-layout now that we have the second frame.
         self.reset_dialog()
 
+        return frame
+
     def reset_dialog(self, widget=None):
-        """Layout the widgets in the dialog.
+        """Layout the energy frame (parent) then the optimization frame."""
+        # Parent lays out the energy frame at row 0 and returns the next row.
+        row = super().reset_dialog()
 
-        The widgets are chosen by default from the information in
-        Optimization_parameter.
+        # Place our optimization frame below it.
+        self["optimization frame"].grid(row=row, column=0, sticky=tk.EW, pady=5)
+        row += 1
 
-        This function simply lays them out row by row with
-        aligned labels. You may wish a more complicated layout that
-        is controlled by values of some of the control parameters.
-        If so, edit or override this method
+        # Lay out the widgets inside our frame.
+        self.reset_optimization_frame()
 
-        Parameters
-        ----------
-        widget : Tk Widget = None
+        return row
 
-        Returns
-        -------
-        None
-
-        See Also
-        --------
-        TkOptimization.create_dialog
-        """
-
-        # Remove any widgets previously packed
-        frame = self["frame"]
-        for slave in frame.grid_slaves():
+    def reset_optimization_frame(self, widget=None):
+        """Layout the widgets inside the optimization frame."""
+        o_frame = self["optimization frame"]
+        for slave in o_frame.grid_slaves():
             slave.grid_forget()
 
-        # Shortcut for parameters
-        P = self.node.parameters
-
-        # keep track of the row in a variable, so that the layout is flexible
-        # if e.g. rows are skipped to control such as "method" here
         row = 0
         widgets = []
-        for key in P:
-            if key[0] != "_" and key not in (
-                "results",
-                "extra keywords",
-                "create tables",
-            ):
-                self[key].grid(row=row, column=0, sticky=tk.EW)
-                widgets.append(self[key])
-                row += 1
+        # Walk the OptimizationParameters keys, in their declared order,
+        # picking only the keys we actually created in this frame.
+        parent_keys = set(xtb_step.EnergyParameters.parameters)
+        skip = parent_keys | {"results", "extra keywords", "create tables"}
+        for key in xtb_step.OptimizationParameters.parameters:
+            if key in skip:
+                continue
+            self[key].grid(row=row, column=0, sticky=tk.EW)
+            widgets.append(self[key])
+            row += 1
 
-        # Align the labels
         sw.align_labels(widgets, sticky=tk.E)
 
-        # Setup the results if there are any
-        have_results = (
-            "results" in self.node.metadata and len(self.node.metadata["results"]) > 0
-        )
-        if have_results and "results" in P:
-            self.setup_results()
-
-    def right_click(self, event):
-        """
-        Handles the right click event on the node.
-
-        Parameters
-        ----------
-        event : Tk Event
-
-        Returns
-        -------
-        None
-
-        See Also
-        --------
-        TkOptimization.edit
-        """
-
-        super().right_click(event)
-        self.popup_menu.add_command(label="Edit..", command=self.edit)
-
-        self.popup_menu.tk_popup(event.x_root, event.y_root, 0)
+        return row
