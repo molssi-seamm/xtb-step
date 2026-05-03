@@ -66,7 +66,8 @@ class TkFrequencies(TkOptimization):
                 of.combobox.bind("<Return>", self.reset_dialog)
                 of.combobox.bind("<FocusOut>", self.reset_dialog)
 
-        self.reset_dialog()
+        # Note: do NOT call self.reset_dialog() here -- the seamm framework
+        # does it after create_dialog returns. See TkEnergy for details.
 
         return frame
 

@@ -51,8 +51,8 @@ class TkOptimization(TkEnergy):
                 continue
             self[key] = P[key].widget(o_frame)
 
-        # Re-layout now that we have the second frame.
-        self.reset_dialog()
+        # Note: do NOT call self.reset_dialog() here -- the seamm framework
+        # does it after create_dialog returns. See TkEnergy for details.
 
         return frame
 

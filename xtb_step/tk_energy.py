@@ -89,8 +89,11 @@ class TkEnergy(seamm.TkNode):
         smodel.combobox.bind("<Return>", self.reset_energy_frame)
         smodel.combobox.bind("<FocusOut>", self.reset_energy_frame)
 
-        # Lay everything out for the first time.
-        self.reset_dialog()
+        # Note: do NOT call self.reset_dialog() here. The seamm framework
+        # calls reset_dialog() itself after create_dialog() returns, by
+        # which time any subclass create_dialog has already built its own
+        # frames. Calling it here triggers MRO-dispatched subclass
+        # reset_dialog() before subclass frames exist (KeyError).
 
         return frame
 

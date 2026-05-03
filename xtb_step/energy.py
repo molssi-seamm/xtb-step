@@ -178,8 +178,25 @@ class Energy(Substep):
             extra_kw = extra_kw.split()
         args += [str(k) for k in extra_kw]
 
-        # Default returned files. Subclasses may extend.
-        return_files = ["xtbout.json", "xtbrestart"]
+        # Default returned files. Globs ensure we pick up files xtb writes
+        # whose names depend on the calculation type:
+        #   *.xyz       -- xtbopt.xyz and any other geometry files xtb writes
+        #   *.mol       -- xtbtopo.mol (topology with bond orders)
+        #   *.log       -- xtbopt.log (optimization trajectory)
+        #   vibspectrum -- IR spectrum (Turbomole format) from Hessian runs
+        #   hessian     -- Hessian matrix (Turbomole format)
+        #   g98.out     -- Gaussian-98-format output for visualization
+        # Subclasses may extend this list further.
+        return_files = [
+            "xtbout.json",
+            "xtbrestart",
+            "*.xyz",
+            "*.mol",
+            "*.log",
+            "vibspectrum",
+            "hessian",
+            "g98.out",
+        ]
 
         result = self.run_xtb(args, return_files=return_files)
 
