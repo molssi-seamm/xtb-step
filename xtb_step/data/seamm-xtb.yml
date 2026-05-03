@@ -1,0 +1,6 @@
+name: seamm-xtb
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - xtb

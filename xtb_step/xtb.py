@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""Non-graphical part of the xTB step in a SEAMM flowchart
-"""
+"""Non-graphical part of the xTB step in a SEAMM flowchart"""
 
+import importlib.resources
 import logging
-from pathlib import Path
-import pkg_resources
 import pprint  # noqa: F401
 import sys
 
@@ -29,7 +27,7 @@ job = printing.getPrinter()
 printer = printing.getPrinter("xTB")
 
 # Add this module's properties to the standard properties
-path = Path(pkg_resources.resource_filename(__name__, "data/"))
+path = importlib.resources.files("xtb_step") / "data"
 csv_file = path / "properties.csv"
 if path.exists():
     molsystem.add_properties_from_file(csv_file)
@@ -66,7 +64,7 @@ class xTB(seamm.Node):
         title="xTB",
         namespace="org.molssi.seamm.xtb",
         extension=None,
-        logger=logger
+        logger=logger,
     ):
         """A step for xTB in a SEAMM flowchart.
 
@@ -93,9 +91,7 @@ class xTB(seamm.Node):
         """
         logger.debug(f"Creating xTB {self}")
         self.subflowchart = seamm.Flowchart(
-            parent=self,
-            name="xTB",
-            namespace=namespace
+            parent=self, name="xTB", namespace=namespace
         )  # yapf: disable
 
         super().__init__(
@@ -117,6 +113,7 @@ class xTB(seamm.Node):
     def git_revision(self):
         """The git version of this module."""
         return xtb_step.__git_revision__
+
     def set_id(self, node_id):
         """Set the id for node to a given tuple"""
         self._id = node_id
@@ -151,21 +148,19 @@ class xTB(seamm.Node):
             try:
                 text += __(node.description_text(), indent=3 * " ").__str__()
             except Exception as e:
-                print(
-                    f"Error describing xtb flowchart: {e} in {node}"
-                )
-                logger.critical(
-                    f"Error describing xtb flowchart: {e} in {node}"
-                )
+                print(f"Error describing xtb flowchart: {e} in {node}")
+                logger.critical(f"Error describing xtb flowchart: {e} in {node}")
                 raise
             except:  # noqa: E722
                 print(
-                    "Unexpected error describing xtb flowchart: {} in {}"
-                    .format(sys.exc_info()[0], str(node))
+                    "Unexpected error describing xtb flowchart: {} in {}".format(
+                        sys.exc_info()[0], str(node)
+                    )
                 )
                 logger.critical(
-                    "Unexpected error describing xtb flowchart: {} in {}"
-                    .format(sys.exc_info()[0], str(node))
+                    "Unexpected error describing xtb flowchart: {} in {}".format(
+                        sys.exc_info()[0], str(node)
+                    )
                 )
                 raise
             text += "\n"
@@ -174,7 +169,13 @@ class xTB(seamm.Node):
         return text
 
     def run(self):
-        """Run a xTB step.
+        """Run the xTB step.
+
+        This iterates over the substeps in the subflowchart, asking each one
+        to run itself. Each substep is responsible for invoking the xtb
+        executable with its own command line. This is the FHI-aims pattern,
+        not the LAMMPS/MOPAC pattern of building a single combined input
+        file and invoking the binary once.
 
         Parameters
         ----------
@@ -183,43 +184,19 @@ class xTB(seamm.Node):
         Returns
         -------
         seamm.Node
-            The next node object in the flowchart.
+            The next node in the flowchart, after this xTB step.
         """
         next_node = super().run(printer)
-        # Get the first real node
+
+        # Make sure the subflowchart has the right root directory
+        self.subflowchart.root_directory = self.flowchart.root_directory
+
+        # Walk the subflowchart, asking each substep to run itself.
+        # Each substep's run() returns the next substep node, or None at
+        # the end of the subflowchart.
         node = self.subflowchart.get_node("1").next()
-
-        input_data = []
         while node is not None:
-            keywords = node.get_input()
-            input_data.append(" ".join(keywords))
-            node = node.next()
-
-        files = {"molssi.dat": "\n".join(input_data)}
-        logger.info("molssi.dat:\n" + files["molssi.dat"])
-
-        local = seamm.ExecLocal()
-        result = local.run(
-            cmd=["xTB", "-in", "molssi.dat"],
-            files=files,
-            return_files=[]
-        )  # yapf: disable
-
-        if result is None:
-            logger.error("There was an error running xTB")
-            return None
-
-        logger.debug("\n" + pprint.pformat(result))
-
-        logger.info("stdout:\n" + result["stdout"])
-        if result["stderr"] != "":
-            logger.warning("stderr:\n" + result["stderr"])
-
-        # Analyze the results
-        self.analyze()
-        # Add other citations here or in the appropriate place in the code.
-        # Add the bibtex to data/references.bib, and add a self.reference.cite
-        # similar to the above to actually add the citation to the references.
+            node = node.run()
 
         return next_node
 

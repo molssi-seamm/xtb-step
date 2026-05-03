@@ -1,1 +1,14 @@
 Property,Type,Units,Description,URL
+total energy#xTB#{model},float,E_h,"The {model} total energy.",
+electronic energy#xTB#{model},float,E_h,"The {model} electronic energy (excluding nuclear repulsion).",
+HOMO energy#xTB#{model},float,eV,"The {model} energy of the highest occupied molecular orbital (HOMO).",https://en.wikipedia.org/wiki/HOMO_and_LUMO
+LUMO energy#xTB#{model},float,eV,"The {model} energy of the lowest unoccupied molecular orbital (LUMO).",https://en.wikipedia.org/wiki/HOMO_and_LUMO
+band gap#xTB#{model},float,eV,"The {model} HOMO-LUMO gap.",https://en.wikipedia.org/wiki/Band_gap
+dipole moment#xTB#{model},float,debye,"The {model} electric dipole moment, magnitude of the dipole vector.",https://en.wikipedia.org/wiki/Electric_dipole_moment
+gradients#xTB#{model},json,E_h/Å,The {model} gradients of the energy with respect to the atomic coordinates.,
+force constants#xTB#{model},json,E_h/Å^2,The {model} mass-weighted Hessian / force constants.,
+enthalpy of formation#xTB#{model},float,kJ/mol,"The {model} enthalpy of formation.",https://en.wikipedia.org/wiki/Standard_enthalpy_of_formation
+zero point energy#xTB#{model},float,kJ/mol,"The {model} zero-point vibrational energy.",
+entropy#xTB#{model},float,J/mol/K,"The {model} standard entropy at the chosen temperature and pressure.",https://en.wikipedia.org/wiki/Entropy
+constant pressure heat capacity#xTB#{model},float,J/mol/K,"The {model} constant-pressure heat capacity, Cp.",https://en.wikipedia.org/wiki/Heat_capacity
+Gibbs free energy#xTB#{model},float,kJ/mol,"The {model} Gibbs free energy at the chosen temperature and pressure.",

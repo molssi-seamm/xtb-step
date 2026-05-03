@@ -30,11 +30,105 @@ See the documentation for the Reference Handler for the other arguments to cite(
 
 @Misc{xtb_step,
 	author = {Paul Saxe},
-	title = {Xtb plug-in for SEAMM},
+	title = {xTB plug-in for SEAMM},
 	month = {$month},
 	year = {$year},
-	organization = {molssi-seamm},
-	url = {https://github.com/molssi-seamm/xtb_step },
-	address = {USA},
+	organization = {The Molecular Sciences Software Institute (MolSSI)},
+	url = {https://github.com/molssi-seamm/xtb_step},
+	address = {Virginia Tech, Blacksburg, VA, USA},
 	version = {$version}
+}
+
+# ----------------------------------------------------------------------
+# References for xTB itself and the GFN method family
+# ----------------------------------------------------------------------
+
+# The general xTB review. Cited at level 1 whenever any GFN-x-TB or GFN-FF
+# method is used.
+@article{Bannwarth2021,
+	author = {Bannwarth, Christoph and Caldeweyher, Eike and Ehlert, Sebastian and
+	          Hansen, Andreas and Pracht, Philipp and Seibert, Jakob and
+	          Spicher, Sebastian and Grimme, Stefan},
+	title = {Extended tight-binding quantum chemistry methods},
+	journal = {WIREs Computational Molecular Science},
+	volume = {11},
+	number = {2},
+	pages = {e1493},
+	year = {2021},
+	doi = {10.1002/wcms.1493},
+	url = {https://doi.org/10.1002/wcms.1493}
+}
+
+# GFN2-xTB primary citation.
+@article{Bannwarth2019,
+	author = {Bannwarth, Christoph and Ehlert, Sebastian and Grimme, Stefan},
+	title = {{GFN2}-{xTB}---{An} Accurate and Broadly Parametrized Self-Consistent
+	         Tight-Binding Quantum Chemical Method with Multipole Electrostatics
+	         and Density-Dependent Dispersion Contributions},
+	journal = {Journal of Chemical Theory and Computation},
+	volume = {15},
+	number = {3},
+	pages = {1652--1671},
+	year = {2019},
+	doi = {10.1021/acs.jctc.8b01176},
+	url = {https://doi.org/10.1021/acs.jctc.8b01176}
+}
+
+# GFN1-xTB primary citation.
+@article{Grimme2017,
+	author = {Grimme, Stefan and Bannwarth, Christoph and Shushkov, Philip},
+	title = {A Robust and Accurate Tight-Binding Quantum Chemical Method for
+	         Structures, Vibrational Frequencies, and Noncovalent Interactions of
+	         Large Molecular Systems Parametrized for All spd-Block Elements
+	         ({Z} = 1--86)},
+	journal = {Journal of Chemical Theory and Computation},
+	volume = {13},
+	number = {5},
+	pages = {1989--2009},
+	year = {2017},
+	doi = {10.1021/acs.jctc.7b00118},
+	url = {https://doi.org/10.1021/acs.jctc.7b00118}
+}
+
+# GFN0-xTB. As of last check, this method has only a ChemRxiv preprint, not a
+# peer-reviewed journal paper. Update if/when a journal version appears.
+@misc{Pracht2019,
+	author = {Pracht, Philipp and Caldeweyher, Eike and Ehlert, Sebastian and
+	          Grimme, Stefan},
+	title = {A Robust Non-Self-Consistent Tight-Binding Quantum Chemistry Method
+	         for Large Molecules},
+	howpublished = {ChemRxiv preprint},
+	year = {2019},
+	doi = {10.26434/chemrxiv.8326202.v1},
+	url = {https://doi.org/10.26434/chemrxiv.8326202.v1},
+	note = {Preprint; no peer-reviewed journal paper as of plug-in v1 release.}
+}
+
+# GFN-FF: a generic force field automatically parameterized via xTB.
+@article{Spicher2020,
+	author = {Spicher, Sebastian and Grimme, Stefan},
+	title = {Robust Atomistic Modeling of Materials, Organometallic, and
+	         Biochemical Systems},
+	journal = {Angewandte Chemie International Edition},
+	volume = {59},
+	number = {36},
+	pages = {15665--15673},
+	year = {2020},
+	doi = {10.1002/anie.202004239},
+	url = {https://doi.org/10.1002/anie.202004239}
+}
+
+# Implicit solvation: ALPB and the related GBSA implementation in xTB.
+@article{Ehlert2021,
+	author = {Ehlert, Sebastian and Stahn, Marcel and Spicher, Sebastian and
+	          Grimme, Stefan},
+	title = {Robust and Efficient Implicit Solvation Model for Fast
+	         Semiempirical Methods},
+	journal = {Journal of Chemical Theory and Computation},
+	volume = {17},
+	number = {7},
+	pages = {4250--4261},
+	year = {2021},
+	doi = {10.1021/acs.jctc.1c00471},
+	url = {https://doi.org/10.1021/acs.jctc.1c00471}
 }

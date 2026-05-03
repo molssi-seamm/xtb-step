@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 
-"""The graphical part of a xTB step"""
+"""The graphical part of a Energy step"""
 
 import pprint  # noqa: F401
-import tkinter as tk  # noqa: F401
+import tkinter as tk
 
-import xtb_step  # noqa: F401
+import xtb_step  # noqa: F401, E999
 import seamm
-from seamm_util import ureg, Q_, units_class  # noqa: F401
+from seamm_util import ureg, Q_, units_class  # noqa: F401, E999
+import seamm_widgets as sw
 
 
-class TkxTB(seamm.TkNode):
+class TkEnergy(seamm.TkNode):
     """
-    The graphical part of a xTB step in a flowchart.
+    The graphical part of a Energy step in a flowchart.
 
     Attributes
     ----------
@@ -34,19 +35,18 @@ class TkxTB(seamm.TkNode):
         The height in pixels of the picture of the node
     self[widget] : dict
         A dictionary of tk widgets built using the information
-        contained in xTB_parameters.py
+        contained in Energy_parameters.py
 
     See Also
     --------
-    xTB, TkxTB,
-    xTBParameters,
+    Energy, TkEnergy,
+    EnergyParameters,
     """
 
     def __init__(
         self,
         tk_flowchart=None,
         node=None,
-        namespace="org.molssi.seamm.xtb.tk",
         canvas=None,
         x=None,
         y=None,
@@ -79,7 +79,6 @@ class TkxTB(seamm.TkNode):
         -------
         None
         """
-        self.namespace = namespace
         self.dialog = None
 
         super().__init__(
@@ -91,12 +90,11 @@ class TkxTB(seamm.TkNode):
             w=w,
             h=h,
         )
-        self.create_dialog()
 
     def create_dialog(self):
         """
         Create the dialog. A set of widgets will be chosen by default
-        based on what is specified in the xTB_parameters
+        based on what is specified in the Energy_parameters
         module.
 
         Parameters
@@ -109,24 +107,81 @@ class TkxTB(seamm.TkNode):
 
         See Also
         --------
-        TkxTB.reset_dialog
+        TkEnergy.reset_dialog
         """
 
-        frame = super().create_dialog(title="xTB")
-        # make it large!
-        screen_w = self.dialog.winfo_screenwidth()
-        screen_h = self.dialog.winfo_screenheight()
-        w = int(0.9 * screen_w)
-        h = int(0.8 * screen_h)
-        x = int(0.05 * screen_w / 2)
-        y = int(0.1 * screen_h / 2)
+        frame = super().create_dialog(title="Energy")
 
-        self.dialog.geometry(f"{w}x{h}+{x}+{y}")
+        # Shortcut for parameters
+        P = self.node.parameters
 
-        self.tk_subflowchart = seamm.TkFlowchart(
-            master=frame, flowchart=self.node.subflowchart, namespace=self.namespace
+        # Then create the widgets
+        for key in P:
+            if key[0] != "_" and key not in (
+                "results",
+                "extra keywords",
+                "create tables",
+            ):
+                self[key] = P[key].widget(frame)
+
+        # and lay them out
+        self.reset_dialog()
+
+    def reset_dialog(self, widget=None):
+        """Layout the widgets in the dialog.
+
+        The widgets are chosen by default from the information in
+        Energy_parameter.
+
+        This function simply lays them out row by row with
+        aligned labels. You may wish a more complicated layout that
+        is controlled by values of some of the control parameters.
+        If so, edit or override this method
+
+        Parameters
+        ----------
+        widget : Tk Widget = None
+
+        Returns
+        -------
+        None
+
+        See Also
+        --------
+        TkEnergy.create_dialog
+        """
+
+        # Remove any widgets previously packed
+        frame = self["frame"]
+        for slave in frame.grid_slaves():
+            slave.grid_forget()
+
+        # Shortcut for parameters
+        P = self.node.parameters
+
+        # keep track of the row in a variable, so that the layout is flexible
+        # if e.g. rows are skipped to control such as "method" here
+        row = 0
+        widgets = []
+        for key in P:
+            if key[0] != "_" and key not in (
+                "results",
+                "extra keywords",
+                "create tables",
+            ):
+                self[key].grid(row=row, column=0, sticky=tk.EW)
+                widgets.append(self[key])
+                row += 1
+
+        # Align the labels
+        sw.align_labels(widgets, sticky=tk.E)
+
+        # Setup the results if there are any
+        have_results = (
+            "results" in self.node.metadata and len(self.node.metadata["results"]) > 0
         )
-        self.tk_subflowchart.draw()
+        if have_results and "results" in P:
+            self.setup_results()
 
     def right_click(self, event):
         """
@@ -142,7 +197,7 @@ class TkxTB(seamm.TkNode):
 
         See Also
         --------
-        TkxTB.edit
+        TkEnergy.edit
         """
 
         super().right_click(event)

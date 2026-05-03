@@ -1,146 +1,232 @@
 # -*- coding: utf-8 -*-
 
-"""This file contains metadata describing the results from xTB
+"""This file contains metadata describing the results from xTB.
+
+The dictionary ``metadata`` is consumed by SEAMM's ``store_results`` machinery
+on ``seamm.Node`` to:
+
+* describe the computational models (Hamiltonians) the plug-in supports;
+* enumerate any keywords the plug-in defines (xTB is controlled almost
+  entirely by command-line flags, so this section is small);
+* enumerate the results the plug-in can produce, with their dimensionality,
+  units, the property name in the SEAMM database, and which sub-step
+  (calculation) generates them.
 """
 
 metadata = {}
 
-"""Description of the computational models for xTB.
-
-Hamiltonians, approximations, and basis set or parameterizations,
-only if appropriate for this code. For example::
-
-    metadata["computational models"] = {
-        "Hartree-Fock": {
-            "models": {
-                "PM7": {
-                    "parameterizations": {
-                        "PM7": {
-                            "elements": "1-60,62-83",
-                            "periodic": True,
-                            "reactions": True,
-                            "optimization": True,
-                            "code": "mopac",
-                        },
-                        "PM7-TS": {
-                            "elements": "1-60,62-83",
-                            "periodic": True,
-                            "reactions": True,
-                            "optimization": False,
-                            "code": "mopac",
-                        },
+# ---------------------------------------------------------------------------
+# Computational models
+# ---------------------------------------------------------------------------
+# xTB is a tight-binding family of methods; "Hamiltonian" is used loosely here
+# to group GFN0/GFN1/GFN2/GFN-FF together. ``periodic`` is False because v1
+# refuses periodic input.
+#
+# ``elements`` reflects the parametrization range. GFN0/1/2 are parametrized
+# for Z = 1-86 (H-Rn). GFN-FF covers the whole periodic table up to Z = 86 as
+# well, per Spicher & Grimme 2020.
+metadata["computational models"] = {
+    "Tight binding": {
+        "models": {
+            "GFN2-xTB": {
+                "parameterizations": {
+                    "GFN2-xTB": {
+                        "elements": "1-86",
+                        "periodic": False,
+                        "reactions": True,
+                        "optimization": True,
+                        "code": "xtb",
+                    },
+                },
+            },
+            "GFN1-xTB": {
+                "parameterizations": {
+                    "GFN1-xTB": {
+                        "elements": "1-86",
+                        "periodic": False,
+                        "reactions": True,
+                        "optimization": True,
+                        "code": "xtb",
+                    },
+                },
+            },
+            "GFN0-xTB": {
+                "parameterizations": {
+                    "GFN0-xTB": {
+                        "elements": "1-86",
+                        "periodic": False,
+                        "reactions": True,
+                        "optimization": True,
+                        "code": "xtb",
+                    },
+                },
+            },
+            "GFN-FF": {
+                "parameterizations": {
+                    "GFN-FF": {
+                        "elements": "1-86",
+                        "periodic": False,
+                        "reactions": False,
+                        "optimization": True,
+                        "code": "xtb",
                     },
                 },
             },
         },
-    }
-"""
-# metadata["computational models"] = {
-# }
+    },
+}
 
-"""Description of the xTB keywords.
+# ---------------------------------------------------------------------------
+# Keywords
+# ---------------------------------------------------------------------------
+# xTB does not really have an input deck for the simple workflows we expose
+# in v1; control happens via command-line flags. We leave this empty for now
+# but keep the slot so future work (e.g. xcontrol detailed input) has a
+# natural home.
+metadata["keywords"] = {}
 
-(Only needed if this code uses keywords)
-
-Fields
-------
-description : str
-    A human readable description of the keyword.
-takes values : int (optional)
-    Number of values the keyword takes. If missing the keyword takes no values.
-default : str (optional)
-    The default value(s) if the keyword takes values.
-format : str (optional)
-    How the keyword is formatted in the MOPAC input.
-
-For example::
-    metadata["keywords"] = {
-        "0SCF": {
-            "description": "Read in data, then stop",
-        },
-        "ALT_A": {
-            "description": "In PDB files with alternative atoms, select atoms A",
-            "takes values": 1,
-            "default": "A",
-            "format": "{}={}",
-        },
-    }
-"""
-# metadata["keywords"] = {
-# }
-
-"""Properties that xTB produces.
-`metadata["results"]` describes the results that this step can produce. It is a
-dictionary where the keys are the internal names of the results within this step, and
-the values are a dictionary describing the result. For example::
-
-    metadata["results"] = {
-        "total_energy": {
-            "calculation": [
-                "energy",
-                "optimization",
-            ],
-            "description": "The total energy",
-            "dimensionality": "scalar",
-            "methods": [
-                "ccsd",
-                "ccsd(t)",
-                "dft",
-                "hf",
-            ],
-            "property": "total energy#Psi4#{model}",
-            "type": "float",
-            "units": "E_h",
-        },
-    }
-
-Fields
-______
-
-calculation : [str]
-    Optional metadata describing what subtype of the step produces this result.
-    The subtypes are completely arbitrary, but often they are types of calculations
-    which is why this is name `calculation`. To use this, the step or a substep
-    define `self._calculation` as a value. That value is used to select only the
-    results with that value in this field.
-
-description : str
-    A human-readable description of the result.
-
-dimensionality : str
-    The dimensions of the data. The value can be "scalar" or an array definition
-    of the form "[dim1, dim2,...]". Symmetric tringular matrices are denoted
-    "triangular[n,n]". The dimensions can be integers, other scalar
-    results, or standard parameters such as `n_atoms`. For example, '[3]',
-    [3, n_atoms], or "triangular[n_aos, n_aos]".
-
-methods : str
-    Optional metadata like the `calculation` data. `methods` provides a second
-    level of filtering, often used for the Hamiltionian for *ab initio* calculations
-    where some properties may or may not be calculated depending on the type of
-    theory.
-
-property : str
-    An optional definition of the property for storing this result. Must be one of
-    the standard properties defined either in SEAMM or in this steps property
-    metadata in `data/properties.csv`.
-
-type : str
-    The type of the data: string, integer, or float.
-
-units : str
-    Optional units for the result. If present, the value should be in these units.
-"""
-# metadata["results"] = {
-#     "total_energy": {
-#         "calculation": [
-#             "energy",
-#             "optimization",
-#         ],
-#         "description": "The total energy",
-#         "dimensionality": "scalar",
-#         "property": "total energy#xTB#{model}",
-#         "type": "float",
-#         "units": "E_h",
-#     },
-# }
+# ---------------------------------------------------------------------------
+# Results
+# ---------------------------------------------------------------------------
+# Each entry's ``calculation`` field lists which sub-step (matching
+# ``self._calculation`` in the substep classes) can produce that result. The
+# ``property`` field, if present, is the database property name, with the
+# ``{model}`` placeholder substituted at storage time with the active xTB
+# Hamiltonian (e.g. "GFN2-xTB").
+metadata["results"] = {
+    "total_energy": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The total energy",
+        "dimensionality": "scalar",
+        "property": "total energy#xTB#{model}",
+        "type": "float",
+        "units": "E_h",
+    },
+    "electronic_energy": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The electronic energy (excluding nuclear repulsion)",
+        "dimensionality": "scalar",
+        "property": "electronic energy#xTB#{model}",
+        "type": "float",
+        "units": "E_h",
+    },
+    "homo_lumo_gap": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The HOMO-LUMO gap",
+        "dimensionality": "scalar",
+        "property": "band gap#xTB#{model}",
+        "type": "float",
+        "units": "eV",
+    },
+    "homo_energy": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The HOMO orbital energy",
+        "dimensionality": "scalar",
+        "property": "HOMO energy#xTB#{model}",
+        "type": "float",
+        "units": "eV",
+    },
+    "lumo_energy": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The LUMO orbital energy",
+        "dimensionality": "scalar",
+        "property": "LUMO energy#xTB#{model}",
+        "type": "float",
+        "units": "eV",
+    },
+    "dipole_moment": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The molecular dipole moment magnitude",
+        "dimensionality": "scalar",
+        "property": "dipole moment#xTB#{model}",
+        "type": "float",
+        "units": "debye",
+    },
+    "dipole_vector": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The molecular dipole moment vector",
+        "dimensionality": [3],
+        "type": "float",
+        "units": "debye",
+    },
+    "partial_charges": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The atomic partial charges",
+        "dimensionality": ["n_atoms"],
+        "type": "float",
+        "units": "e",
+    },
+    "gradients": {
+        "calculation": ["Energy", "Optimization", "Frequencies"],
+        "description": "The gradient of the energy with respect to the coordinates",
+        "dimensionality": [3, "n_atoms"],
+        "property": "gradients#xTB#{model}",
+        "type": "json",
+        "units": "E_h/Å",
+    },
+    "frequencies": {
+        "calculation": ["Frequencies"],
+        "description": "The vibrational frequencies",
+        "dimensionality": ["n_modes"],
+        "type": "float",
+        "units": "1/cm",
+    },
+    "ir_intensities": {
+        "calculation": ["Frequencies"],
+        "description": "The IR intensities for each vibrational mode",
+        "dimensionality": ["n_modes"],
+        "type": "float",
+        "units": "km/mol",
+    },
+    "reduced_masses": {
+        "calculation": ["Frequencies"],
+        "description": "The reduced masses for each vibrational mode",
+        "dimensionality": ["n_modes"],
+        "type": "float",
+        "units": "amu",
+    },
+    "zero_point_energy": {
+        "calculation": ["Frequencies"],
+        "description": "The zero-point vibrational energy",
+        "dimensionality": "scalar",
+        "property": "zero point energy#xTB#{model}",
+        "type": "float",
+        "units": "E_h",
+    },
+    "enthalpy": {
+        "calculation": ["Frequencies"],
+        "description": "The thermal enthalpy H(T)",
+        "dimensionality": "scalar",
+        "type": "float",
+        "units": "E_h",
+    },
+    "entropy_term": {
+        "calculation": ["Frequencies"],
+        "description": "The entropic contribution T*S",
+        "dimensionality": "scalar",
+        "type": "float",
+        "units": "E_h",
+    },
+    "gibbs_free_energy": {
+        "calculation": ["Frequencies"],
+        "description": "The Gibbs free energy G(T)",
+        "dimensionality": "scalar",
+        "property": "Gibbs free energy#xTB#{model}",
+        "type": "float",
+        "units": "E_h",
+    },
+    "total_free_energy": {
+        "calculation": ["Frequencies"],
+        "description": "The total free energy (electronic + G(RRHO))",
+        "dimensionality": "scalar",
+        "type": "float",
+        "units": "E_h",
+    },
+    "temperature": {
+        "calculation": ["Frequencies"],
+        "description": "The temperature for the thermochemistry",
+        "dimensionality": "scalar",
+        "type": "float",
+        "units": "K",
+    },
+}

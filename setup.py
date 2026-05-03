@@ -83,5 +83,15 @@ setup(
         'org.molssi.seamm.tk': [
             'xTB = xtb_step:xTBStep',
         ],
-    }
+        'org.molssi.seamm.xtb': [
+            'Frequencies = xtb_step:FrequenciesStep',
+            'Optimization = xtb_step:OptimizationStep',
+            'Energy = xtb_step:EnergyStep',
+        ],
+        'org.molssi.seamm.xtb.tk': [
+            'Frequencies = xtb_step:FrequenciesStep',
+            'Optimization = xtb_step:OptimizationStep',
+            'Energy = xtb_step:EnergyStep',
+        ],
+    },
 )
