@@ -296,11 +296,31 @@ class Energy(Substep):
     # ------------------------------------------------------------------
 
     def _cite_references(self, method, solvation_model):
-        """Add the appropriate citations to the references handler."""
+        """Add the appropriate citations to the references handler.
+
+        SEAMM's convention (per MOPAC) is to put at level 1 every paper
+        that contributed to producing the result -- the program, the
+        method, the dispersion correction, the solvation model, etc. --
+        and let the user cull the list to fit the citation budget of
+        their target journal. Level 2 is for component-of-component
+        references that a typical paper would not include.
+
+        For an xTB calculation the level-1 citations are:
+            - General xTB review (Bannwarth2021), always
+            - The method-specific paper (Bannwarth2019, Grimme2017,
+              Pracht2019, Spicher2020) for the active Hamiltonian
+            - The implicit-solvation paper (Ehlert2021 for ALPB/GBSA,
+              Stahn2023 for CPCM-X) when solvation is on
+            - The DFT-D4 papers (Caldeweyher 2017, 2019, 2020) when
+              GFN2-xTB is used, since GFN2 incorporates a D4-style
+              dispersion correction. Other GFN methods use older or
+              different dispersion treatments and do not trigger
+              these.
+        """
         if self.references is None:
             return
 
-        # The general xTB review is always relevant.
+        # Level 1: The general xTB review is always relevant.
         try:
             self.references.cite(
                 raw=self._bibliography["Bannwarth2021"],
@@ -312,7 +332,7 @@ class Energy(Substep):
         except KeyError:
             logger.debug("Bannwarth2021 missing from bibliography")
 
-        # Method-specific citation
+        # Level 1: Method-specific citation
         method_to_bib = {
             "GFN2-xTB": "Bannwarth2019",
             "GFN1-xTB": "Grimme2017",
@@ -332,7 +352,7 @@ class Energy(Substep):
             except KeyError:
                 logger.debug(f"{bib_key} missing from bibliography")
 
-        # Solvation citation
+        # Level 1: Solvation citation
         if solvation_model in ("ALPB", "GBSA"):
             try:
                 self.references.cite(
@@ -344,6 +364,40 @@ class Energy(Substep):
                 )
             except KeyError:
                 logger.debug("Ehlert2021 missing from bibliography")
+        elif solvation_model == "CPCM-X":
+            try:
+                self.references.cite(
+                    raw=self._bibliography["Stahn2023"],
+                    alias="cpcmx",
+                    module="xtb_step",
+                    level=1,
+                    note="Citation for the CPCM-X solvation model.",
+                )
+            except KeyError:
+                logger.debug("Stahn2023 missing from bibliography")
+
+        # DFT-D4 dispersion citations -- GFN2-xTB uses a
+        # density-dependent dispersion correction in the D4 family. The
+        # D4 papers are level-1 citations whenever GFN2 is used,
+        # following the MOPAC convention of citing dispersion
+        # corrections at level 1. (GFN1, GFN0, GFN-FF use older D3-style
+        # or other dispersion treatments and are NOT cited here.)
+        if method == "GFN2-xTB":
+            for d4_key, d4_note in (
+                ("Caldeweyher2017", "DFT-D4 dispersion correction (original)."),
+                ("Caldeweyher2019", "DFT-D4 dispersion correction (revised)."),
+                ("Caldeweyher2020", "DFT-D4 dispersion correction (extended)."),
+            ):
+                try:
+                    self.references.cite(
+                        raw=self._bibliography[d4_key],
+                        alias=d4_key,
+                        module="xtb_step",
+                        level=1,
+                        note=d4_note,
+                    )
+                except KeyError:
+                    logger.debug(f"{d4_key} missing from bibliography")
 
     # ------------------------------------------------------------------
     # Analysis / printing -- table-based

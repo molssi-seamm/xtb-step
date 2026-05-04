@@ -486,6 +486,12 @@ class Substep(seamm.Node):
            T/K   H(0)-H(T)+PV   H(T)/Eh   T*S/Eh   G(T)/Eh
            298.15  ...   ...   ...   ...
 
+        Energies are converted from E_h (xtb's native unit) to kJ/mol so
+        the values returned here are chemist-friendly. The entropy
+        contribution is reported both as ``entropy_term`` (T*S in
+        kJ/mol, the form xtb prints) and as ``entropy`` (S in J/mol/K,
+        the form that appears in standard tables and chemistry papers).
+
         Parameters
         ----------
         stdout : str
@@ -497,13 +503,16 @@ class Substep(seamm.Node):
         dict
             Possibly containing keys: ``total_free_energy``,
             ``zero_point_energy``, ``temperature``, ``enthalpy``,
-            ``entropy_term``, ``gibbs_free_energy``. All energies in E_h,
-            temperature in K. Missing entries indicate parsing failed for
-            that quantity; callers should handle absence gracefully.
+            ``entropy_term``, ``entropy``, ``gibbs_free_energy``. All
+            energies in kJ/mol, ``entropy`` in J/mol/K, ``temperature``
+            in K. Missing entries indicate parsing failed for that
+            quantity; callers should handle absence gracefully.
         """
         out = {}
+        eh_to_kjmol = (1.0 * ureg.hartree).to("kJ/mol").magnitude
 
-        # Scalar lines from the THERMODYNAMIC summary block.
+        # Scalar lines from the THERMODYNAMIC summary block. Values in
+        # the file are in E_h; convert to kJ/mol on the fly.
         scalar_patterns = {
             "total_free_energy": r":: total free energy\s+(-?\d+\.\d+)\s*Eh",
             "zero_point_energy": r":: zero point energy\s+(-?\d+\.\d+)\s*Eh",
@@ -512,7 +521,7 @@ class Substep(seamm.Node):
             m = re.search(pat, stdout)
             if m:
                 try:
-                    out[key] = float(m.group(1))
+                    out[key] = float(m.group(1)) * eh_to_kjmol
                 except ValueError:
                     pass
 
@@ -536,12 +545,19 @@ class Substep(seamm.Node):
                 m = re.match(rf"({num})\s+({num})\s+({num})\s+({num})\s+({num})", line)
                 if m:
                     try:
-                        out["temperature"] = float(m.group(1))
-                        out["enthalpy"] = float(m.group(3))
-                        out["entropy_term"] = float(m.group(4))
-                        out["gibbs_free_energy"] = float(m.group(5))
+                        T = float(m.group(1))
+                        H_eh = float(m.group(3))
+                        TS_eh = float(m.group(4))
+                        G_eh = float(m.group(5))
                     except ValueError:
-                        pass
+                        break
+                    out["temperature"] = T  # K
+                    out["enthalpy"] = H_eh * eh_to_kjmol  # kJ/mol
+                    out["entropy_term"] = TS_eh * eh_to_kjmol  # T*S as kJ/mol
+                    out["gibbs_free_energy"] = G_eh * eh_to_kjmol  # kJ/mol
+                    # Derive entropy itself in J/mol/K (chemist's preferred form).
+                    if T > 0.0:
+                        out["entropy"] = (TS_eh * eh_to_kjmol * 1000.0) / T
                     break
 
         return out

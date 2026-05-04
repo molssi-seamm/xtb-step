@@ -63,6 +63,16 @@ class TkEnergy(seamm.TkNode):
         """
         frame = super().create_dialog(title=title)
 
+        # Size the dialog generously so the results tab fits without
+        # heavy scrolling. Same pattern as TkxTB.create_dialog.
+        screen_w = self.dialog.winfo_screenwidth()
+        screen_h = self.dialog.winfo_screenheight()
+        w = int(0.9 * screen_w)
+        h = int(0.8 * screen_h)
+        x = int(0.05 * screen_w / 2)
+        y = int(0.1 * screen_h / 2)
+        self.dialog.geometry(f"{w}x{h}+{x}+{y}")
+
         # Shortcut for parameters
         P = self.node.parameters
 
@@ -133,32 +143,38 @@ class TkEnergy(seamm.TkNode):
         """Layout the widgets inside the energy frame.
 
         The ``solvent`` widget is shown only when ``solvation model`` is
-        not ``"none"``, and is indented under the solvation row.
+        not ``"none"``. To get the indentation right despite the varying
+        widths of the main-column labels, we use the Gaussian-step
+        pattern: layout column 0 widgets and column 1 (indented)
+        widgets separately, ``align_labels`` on each, and then size
+        column 0 to ``w1 - w2 + 30`` so the column-1 label starts at
+        roughly the position of the column-0 value.
         """
         e_frame = self["energy frame"]
         for slave in e_frame.grid_slaves():
             slave.grid_forget()
 
         row = 0
-        widgets_main = []
-        widgets_indented = []
+        widgets = []
+        widgets2 = []
 
-        # Always-visible widgets
+        # Always-visible widgets in column 0
         for key in ("method", "accuracy", "solvation model"):
             self[key].grid(row=row, column=0, columnspan=2, sticky=tk.EW)
-            widgets_main.append(self[key])
+            widgets.append(self[key])
             row += 1
 
-        # Conditional: solvent visible only if solvation != "none"
+        # Conditional: solvent in column 1 (indented) only if solvation != "none"
         smodel = self["solvation model"].get()
         if smodel != "none":
             self["solvent"].grid(row=row, column=1, sticky=tk.EW)
-            widgets_indented.append(self["solvent"])
+            widgets2.append(self["solvent"])
             row += 1
 
-        sw.align_labels(widgets_main, sticky=tk.E)
-        if widgets_indented:
-            sw.align_labels(widgets_indented, sticky=tk.E)
+        w1 = sw.align_labels(widgets, sticky=tk.E)
+        if widgets2:
+            w2 = sw.align_labels(widgets2, sticky=tk.E)
+            e_frame.columnconfigure(0, minsize=w1 - w2 + 30)
 
         return row
 

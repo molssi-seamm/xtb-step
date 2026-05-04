@@ -267,6 +267,7 @@ class Frequencies(Optimization):
             "zero_point_energy",
             "enthalpy",
             "entropy_term",
+            "entropy",
             "gibbs_free_energy",
             "total_free_energy",
             "temperature",
