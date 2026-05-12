@@ -1,6 +1,6 @@
-==========================================================
+=============================================================
 xtb_step Phase C -- xTBParameters Fix Drop -- File Drop Notes
-==========================================================
+=============================================================
 
 This drop fixes the ``TypeError: 'NoneType' object is not subscriptable``
 that you saw when adding the xTB step to a flowchart. The root cause was

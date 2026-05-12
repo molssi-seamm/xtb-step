@@ -1,6 +1,6 @@
-==================================
+===================================
 xtb_step Phase B -- File Drop Notes
-==================================
+===================================
 
 This drop fills in the actual xTB-running functionality. After installing
 this on top of Phase A, the three substeps should produce real results

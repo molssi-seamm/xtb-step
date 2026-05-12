@@ -1,6 +1,6 @@
-==================================
+===================================
 xtb_step Phase H -- File Drop Notes
-==================================
+===================================
 
 Two design changes from the citations / units discussion:
 

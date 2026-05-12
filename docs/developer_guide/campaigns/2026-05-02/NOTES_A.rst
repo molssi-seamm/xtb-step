@@ -1,6 +1,6 @@
-==================================
+===================================
 xtb_step Phase A -- File Drop Notes
-==================================
+===================================
 
 This drop fixes the two cookiecutter-template issues identified in the
 review and bootstraps the ``data/`` directory.  No real plug-in

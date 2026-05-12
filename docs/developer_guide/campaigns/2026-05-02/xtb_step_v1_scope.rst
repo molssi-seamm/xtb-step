@@ -1,6 +1,6 @@
-============================
+=============================
 xtb_step v1 -- Scope Document
-============================
+=============================
 
 :Status: Draft, agreed in chat
 :Plug-in:    ``xtb_step``
@@ -114,8 +114,7 @@ Tasks and CLI mapping
 ============  =================================================================
 Sub-step       xTB invocation
 ============  =================================================================
-Energy         ``xtb coord.xyz --<method> --json [--alpb solvent]
-                  --chrg N --uhf M``
+Energy         ``xtb coord.xyz --<method> --json [--alpb solvent] --chrg N --uhf M``
 Optimization   adds ``--opt <level>`` (level in
                   {crude,sloppy,loose,normal,tight,vtight,extreme}; default
                   ``normal``)
