@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>xtb_step Phase D – File Drop Notes &#8212; SEAMM xTB Plug-in 2026.5.12+2.ga073d3d documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=c224919a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../../_static/documentation_options.js?v=30e2d5dc"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developer_guide/campaigns/2026-05-02/NOTES_D';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="xtb_step Phase E – File Drop Notes" href="NOTES_E.html" />
+    <link rel="prev" title="xtb_step Phase C – xTBParameters Fix Drop – File Drop Notes" href="NOTES_C.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.5.12+2.ga073d3d" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/SEAMM logo.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/SEAMM Inverted 288x181.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">xTB</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Developer Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../authors.html">
+    Development Team
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../history.html">
+    History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi-seamm.github.io">
+    Main SEAMM documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi-seamm.github.io">
+    SEAMM Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Developer Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../authors.html">
+    Development Team
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../history.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+    Main SEAMM documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+    SEAMM Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Campaigns</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">2026-05-02 Initial development campaign</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="xtb_step_v1_scope.html">xtb_step v1 – Scope Document</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_A.html">xtb_step Phase A – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_B.html">xtb_step Phase B – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_C.html">xtb_step Phase C – xTBParameters Fix Drop – File Drop Notes</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">xtb_step Phase D – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_E.html">xtb_step Phase E – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_F.html">xtb_step Phase F – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_G.html">xtb_step Phase G – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_H.html">xtb_step Phase H – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_I.html">xtb_step Phase I – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_Installer.html">xtb_step Installer Drop – File Drop Notes</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Developer Documentation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Campaigns</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">2026-05-02 Initial development campaign</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">xtb_step Phase D – File Drop Notes</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="xtb-step-phase-d-file-drop-notes">
+<h1>xtb_step Phase D – File Drop Notes<a class="headerlink" href="#xtb-step-phase-d-file-drop-notes" title="Link to this heading">#</a></h1>
+<p>This drop addresses the six items from your last review:</p>
+<ol class="arabic simple">
+<li><p>Top-level <code class="docutils literal notranslate"><span class="pre">xtb.py</span></code> no longer sets <code class="docutils literal notranslate"><span class="pre">self._metadata</span></code> – you
+already have that fix in place.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy_parameters.py</span></code> now has <code class="docutils literal notranslate"><span class="pre">&quot;extra</span> <span class="pre">keywords&quot;</span></code> declared –
+you already have that fix; this drop additionally drops <code class="docutils literal notranslate"><span class="pre">charge</span></code>
+and <code class="docutils literal notranslate"><span class="pre">multiplicity</span></code> per items 3 below.</p></li>
+<li><p>Net charge and spin multiplicity moved off the parameters and onto
+the configuration – now read via <code class="docutils literal notranslate"><span class="pre">configuration.charge</span></code> and
+<code class="docutils literal notranslate"><span class="pre">configuration.spin_multiplicity</span></code> in <code class="docutils literal notranslate"><span class="pre">substep.base_xtb_args</span></code>.</p></li>
+<li><p>The Energy dialog now hides the <code class="docutils literal notranslate"><span class="pre">solvent</span></code> widget when
+<code class="docutils literal notranslate"><span class="pre">solvation</span> <span class="pre">model</span> <span class="pre">==</span> <span class="pre">&quot;none&quot;</span></code> and indents it under the solvation
+row when shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.py</span></code> got a <code class="docutils literal notranslate"><span class="pre">console_scripts</span></code> entry for the installer –
+you already added that.</p></li>
+<li><p>Results are now reported as a tabulated summary (Gaussian-style),
+with the table accumulated through the inheritance chain.</p></li>
+</ol>
+<section id="files-in-this-drop">
+<h2>Files in this drop<a class="headerlink" href="#files-in-this-drop" title="Link to this heading">#</a></h2>
+<section id="replace-existing">
+<h3>Replace existing<a class="headerlink" href="#replace-existing" title="Link to this heading">#</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/energy_parameters.py</span></code></dt><dd><p>Drops <code class="docutils literal notranslate"><span class="pre">charge</span></code> and <code class="docutils literal notranslate"><span class="pre">multiplicity</span></code> from the parameter set.
+Keeps <code class="docutils literal notranslate"><span class="pre">extra</span> <span class="pre">keywords</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code>, <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>, <code class="docutils literal notranslate"><span class="pre">solvation</span>
+<span class="pre">model</span></code>, <code class="docutils literal notranslate"><span class="pre">solvent</span></code>, <code class="docutils literal notranslate"><span class="pre">results</span></code>. The class docstring explains
+the convention.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/substep.py</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">base_xtb_args(P,</span> <span class="pre">configuration)</span></code> now reads charge and
+multiplicity from the configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">charge</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
+<span class="n">mult</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">spin_multiplicity</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Same as MOPAC’s <code class="docutils literal notranslate"><span class="pre">mopac.py:run()</span></code>. No other changes to this file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/metadata.py</span></code></dt><dd><p>Adds <code class="docutils literal notranslate"><span class="pre">&quot;format&quot;</span></code> strings to the scalar float results so the
+table can format them sensibly:</p>
+<ul class="simple">
+<li><p>total / electronic / electronic energy and ZPE / G(T): <code class="docutils literal notranslate"><span class="pre">.6f</span></code></p></li>
+<li><p>HOMO / LUMO / gap: <code class="docutils literal notranslate"><span class="pre">.4f</span></code></p></li>
+<li><p>dipole moment: <code class="docutils literal notranslate"><span class="pre">.4f</span></code></p></li>
+<li><p>temperature: <code class="docutils literal notranslate"><span class="pre">.2f</span></code></p></li>
+</ul>
+<p>No structural changes – the same 17 results, same property
+names, same dimensionalities.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/energy.py</span></code></dt><dd><p>Two visible changes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description_text</span></code> no longer mentions charge or multiplicity.
+Otherwise unchanged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">analyze</span></code> now builds a <code class="docutils literal notranslate"><span class="pre">tabulate</span></code>-formatted summary with
+<code class="docutils literal notranslate"><span class="pre">Property</span> <span class="pre">|</span> <span class="pre">Value</span> <span class="pre">|</span> <span class="pre">Units</span></code> columns, takes an optional
+<code class="docutils literal notranslate"><span class="pre">table=</span></code> argument so subclasses can prepend rows, prints the
+result with a centered title, and gracefully handles missing
+results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code> reads <code class="docutils literal notranslate"><span class="pre">extra</span> <span class="pre">keywords</span></code> from <code class="docutils literal notranslate"><span class="pre">P</span></code> and appends them
+after the substep-specific args (so users can override / add
+to xTB’s CLI flags).</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/frequencies.py</span></code></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">analyze</span></code> method replaces the old
+<code class="docutils literal notranslate"><span class="pre">_post_run_thermo_and_freqs</span></code>. It re-parses the JSON / vibspectrum
+/ thermo block, calls <code class="docutils literal notranslate"><span class="pre">store_results</span></code> for the new fields, and
+builds a single ordered table:</p>
+<ol class="arabic simple">
+<li><p>Frequency-count summary rows (“Number of frequencies”,
+“Imaginary frequencies”).</p></li>
+<li><p>Energy / orbital / dipole rows (same set as Energy.analyze).</p></li>
+<li><p>Thermochemistry rows (ZPE, H, T*S, G(T), total free energy,
+temperature).</p></li>
+</ol>
+<p>The table is printed with a “Frequencies / Thermochemistry” title.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/tk_energy.py</span></code></dt><dd><p>Dynamic dialog. The solvation-model widget is bound to a
+<code class="docutils literal notranslate"><span class="pre">reset_energy_frame</span></code> method (modeled on
+<code class="docutils literal notranslate"><span class="pre">mopac_step.tk_energy</span></code>). When the model changes, the frame is
+re-laid out: <code class="docutils literal notranslate"><span class="pre">solvent</span></code> appears in column 1 (indented) only when
+the model is not <code class="docutils literal notranslate"><span class="pre">&quot;none&quot;</span></code>. The labels in each column are
+aligned with <code class="docutils literal notranslate"><span class="pre">sw.align_labels</span></code> separately so they read cleanly.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="not-in-this-drop">
+<h2>Not in this drop<a class="headerlink" href="#not-in-this-drop" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/optimization.py</span></code></dt><dd><p>Unchanged from Phase B. It does not need to override
+<code class="docutils literal notranslate"><span class="pre">analyze</span></code>: when <code class="docutils literal notranslate"><span class="pre">Energy.run()</span></code> calls <code class="docutils literal notranslate"><span class="pre">self.analyze(data,</span> <span class="pre">P=P)</span></code>
+on an <code class="docutils literal notranslate"><span class="pre">Optimization</span></code> instance, Python’s MRO picks up the
+inherited <code class="docutils literal notranslate"><span class="pre">Energy.analyze</span></code> automatically. If you ever want
+optimization-specific rows (“Convergence: …”, “Max gradient:
+…”), the simplest pattern is to override <code class="docutils literal notranslate"><span class="pre">analyze</span></code> to add
+rows then call <code class="docutils literal notranslate"><span class="pre">super().analyze(data=data,</span> <span class="pre">table=table,</span> <span class="pre">P=P)</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/xtb.py</span></code>, <code class="docutils literal notranslate"><span class="pre">xtb_step/__init__.py</span></code>, <code class="docutils literal notranslate"><span class="pre">xtb_step/setup.py</span></code></dt><dd><p>Use the versions you uploaded.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xtb_step/xtb_parameters.py</span></code></dt><dd><p>From the Phase C drop. With the working
+no-<code class="docutils literal notranslate"><span class="pre">self._metadata</span></code>-at-top-level approach you found, this file
+is no longer referenced by <code class="docutils literal notranslate"><span class="pre">xtb.py</span></code> and could be removed. If
+you remove it, also remove the <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">.xtb_parameters</span> <span class="pre">import</span>
+<span class="pre">xTBParameters</span></code> line from <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>. (Leaving it in is
+harmless – the class just sits there unused.)</p>
+</dd>
+</dl>
+</section>
+<section id="open-issues-risk-register-for-this-drop">
+<h2>Open issues / risk register for this drop<a class="headerlink" href="#open-issues-risk-register-for-this-drop" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Configuration attribute names.</strong> I’m assuming
+<code class="docutils literal notranslate"><span class="pre">configuration.charge</span></code> and <code class="docutils literal notranslate"><span class="pre">configuration.spin_multiplicity</span></code>
+are the right attribute names on a molsystem <code class="docutils literal notranslate"><span class="pre">Configuration</span></code>,
+based on the MOPAC code I quoted. If a different attribute name
+is used in the version of molsystem you have, you’ll see an
+<code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> and we’ll need to adjust.</p></li>
+<li><p><strong>Dialog widget API.</strong> <code class="docutils literal notranslate"><span class="pre">self[&quot;solvation</span> <span class="pre">model&quot;].combobox.bind(...)</span></code>
+is the pattern from <code class="docutils literal notranslate"><span class="pre">mopac_step.tk_energy</span></code>. If the seamm-widgets
+version installed in your env exposes the underlying widget
+differently (some plug-ins use <code class="docutils literal notranslate"><span class="pre">self[key].bind(...)</span></code> directly,
+without <code class="docutils literal notranslate"><span class="pre">.combobox</span></code>), the bind will fail at dialog-creation
+time.  If that happens, change <code class="docutils literal notranslate"><span class="pre">smodel.combobox.bind</span></code> to
+<code class="docutils literal notranslate"><span class="pre">smodel.bind</span></code>.</p></li>
+<li><p><strong>store_results called twice in Frequencies.</strong> Energy.run() calls
+<code class="docutils literal notranslate"><span class="pre">store_results</span></code> once with the JSON-derived data, then
+<code class="docutils literal notranslate"><span class="pre">Frequencies.analyze</span></code> calls it again with the freq + thermo
+additions. SEAMM’s <code class="docutils literal notranslate"><span class="pre">store_results</span></code> is idempotent for repeated
+calls with the same property name, but if you see duplicate
+property entries in the database, this is where to look.</p></li>
+<li><p><strong>Frequencies.analyze duplicates the Energy.analyze table-build
+loop.</strong> This is intentional but not pretty: I needed to interleave
+the freq-count rows BEFORE the energy rows but the thermo rows
+AFTER, which the simple “subclass adds then super() prints” pattern
+in Gaussian doesn’t quite handle. If we ever want a cleaner
+factoring, the right move is to add a helper method on Energy
+like <code class="docutils literal notranslate"><span class="pre">_append_energy_rows(table,</span> <span class="pre">data)</span></code> that
+<code class="docutils literal notranslate"><span class="pre">Frequencies.analyze</span></code> can call between its own pre- and post-
+sections.</p></li>
+</ol>
+</section>
+<section id="what-to-test">
+<h2>What to test<a class="headerlink" href="#what-to-test" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">lint</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">install</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">test</span></code> – still passes.</p></li>
+<li><p>Open the Energy substep dialog. The solvent widget should be
+hidden when “Implicit solvation” is “none”. Pick “ALPB” – solvent
+should appear, indented. Pick “none” again – solvent disappears.</p></li>
+<li><p>Run a simple Energy job (e.g. methane). The job.out should
+contain a tabulated summary like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                  xTB (GFN2-xTB) Results
+╭─────────────────────────────────────┬───────────┬───────╮
+│             Property                │   Value   │ Units │
+├─────────────────────────────────────┼───────────┼───────┤
+│           The total energy          │ -4.174678 │  E_h  │
+│       The HOMO orbital energy       │ -13.4827  │   eV  │
+│       The LUMO orbital energy       │   2.4567  │   eV  │
+│         The HOMO-LUMO gap           │  15.9394  │   eV  │
+│  The molecular dipole moment ...    │   0.0000  │ debye │
+╰─────────────────────────────────────┴───────────┴───────╯
+</pre></div>
+</div>
+<p>(Exact wording and number of rows depends on which keys xTB
+actually emitted in xtbout.json.)</p>
+</li>
+<li><p>Run an Optimization job. Same table; geometry updated.</p></li>
+<li><p>Run a Frequencies job on water. Table should now include
+“Number of frequencies”, “Imaginary frequencies”, and the
+thermochemistry rows beneath the energy rows.</p></li>
+<li><p>Run on O2 in its triplet state and on O2- (a stored
+configuration with charge -1, multiplicity 2). xTB should pick
+up the charge and multiplicity from the configuration without
+any per-step parameter editing – demonstrating the SEAMM
+convention for high-throughput.</p></li>
+</ol>
+</section>
+<section id="code-style">
+<h2>Code style<a class="headerlink" href="#code-style" title="Link to this heading">#</a></h2>
+<p>All files compile cleanly. All lines are &lt;= 88 characters. I have
+not been able to run <code class="docutils literal notranslate"><span class="pre">black</span> <span class="pre">--check</span></code> here, so a first
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">format</span></code> may produce small whitespace adjustments – those
+should be one pass and then stable.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="NOTES_C.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">xtb_step Phase C – xTBParameters Fix Drop – File Drop Notes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="NOTES_E.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">xtb_step Phase E – File Drop Notes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-in-this-drop">Files in this drop</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-existing">Replace existing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#not-in-this-drop">Not in this drop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-issues-risk-register-for-this-drop">Open issues / risk register for this drop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-test">What to test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-style">Code style</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/developer_guide/campaigns/2026-05-02/NOTES_D.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

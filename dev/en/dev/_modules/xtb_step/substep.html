@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xtb_step.substep &#8212; SEAMM xTB Plug-in 2026.5.12+1.g472e963 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=c224919a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=4d2f8e61"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/xtb_step/substep';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.5.12+1.g472e963" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/SEAMM logo.png" class="logo__image only-light" alt=""/>
+    <img src="../../_static/SEAMM Inverted 288x181.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">xTB</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../developer_guide/index.html">
+    Developer Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../authors.html">
+    Development Team
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../history.html">
+    History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi-seamm.github.io">
+    Main SEAMM documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi-seamm.github.io">
+    SEAMM Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../developer_guide/index.html">
+    Developer Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../authors.html">
+    Development Team
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../history.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+    Main SEAMM documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+    SEAMM Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">xtb_step.substep</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for xtb_step.substep</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;A base class for substeps of the xTB plug-in.</span>
+
+<span class="sd">All substeps (Energy, Optimization, Frequencies, and any future substeps such</span>
+<span class="sd">as MD or metadynamics) inherit from ``Substep``. This base class holds the</span>
+<span class="sd">machinery that is genuinely common across substeps:</span>
+
+<span class="sd">* Module-level constants for method &lt;-&gt; CLI flag mapping and the supported</span>
+<span class="sd">  solvent list per solvation model.</span>
+<span class="sd">* A periodicity check that refuses periodic input with a clear message.</span>
+<span class="sd">* A writer for the ``coord.xyz`` input file consumed by xtb.</span>
+<span class="sd">* A builder for the common parts of the xtb command line (method, charge,</span>
+<span class="sd">  multiplicity, accuracy, solvation, JSON output).</span>
+<span class="sd">* A wrapper around the SEAMM executor for invoking the xtb binary.</span>
+<span class="sd">* A JSON-output parser for ``xtbout.json``.</span>
+<span class="sd">* A text parser for the few quantities not exposed in the JSON</span>
+<span class="sd">  (notably the thermochemistry block from Hessian runs).</span>
+
+<span class="sd">It deliberately does NOT bake in any assumption that a substep is</span>
+<span class="sd">energy-related, so an MD substep, for example, can inherit directly from</span>
+<span class="sd">``Substep`` without going through ``Energy``.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">configparser</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.resources</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pprint</span>  <span class="c1"># noqa: F401</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">seamm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">seamm_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">Q_</span>  <span class="c1"># noqa: F401</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seamm_util.printing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">printing</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">printing</span><span class="o">.</span><span class="n">getPrinter</span><span class="p">()</span>
+<span class="n">printer</span> <span class="o">=</span> <span class="n">printing</span><span class="o">.</span><span class="n">getPrinter</span><span class="p">(</span><span class="s2">&quot;xTB&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Method / model mapping</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="c1">#: User-facing method label -&gt; list of xtb CLI arguments.</span>
+<span class="n">METHOD_TO_CLI</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;GFN2-xTB&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;--gfn&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;GFN1-xTB&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;--gfn&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;GFN0-xTB&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;--gfn&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;GFN-FF&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;--gfnff&quot;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="c1">#: All methods we expose. Used as the parameter enumeration.</span>
+<span class="n">METHODS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">METHOD_TO_CLI</span><span class="p">)</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Solvation</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="c1">#: Solvation model labels -&gt; CLI flag.</span>
+<span class="n">SOLVATION_MODEL_TO_FLAG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;none&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">&quot;ALPB&quot;</span><span class="p">:</span> <span class="s2">&quot;--alpb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GBSA&quot;</span><span class="p">:</span> <span class="s2">&quot;--gbsa&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CPCM-X&quot;</span><span class="p">:</span> <span class="s2">&quot;--cpcmx&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1">#: Solvation models we expose. ``&quot;none&quot;`` means no implicit solvation.</span>
+<span class="n">SOLVATION_MODELS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">SOLVATION_MODEL_TO_FLAG</span><span class="p">)</span>
+
+<span class="c1"># ALPB and GBSA share the same parametrized solvent list. The list below is</span>
+<span class="c1"># from the xTB documentation as of v6.7. Some solvents are method-specific:</span>
+<span class="c1"># DMF and n-hexane are GFN2-only; benzene is GFN1-only. We expose the union</span>
+<span class="c1"># here and let xtb itself reject mismatches with a clear error.</span>
+<span class="n">SOLVENTS_GBSA_ALPB</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;acetone&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acetonitrile&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;benzene&quot;</span><span class="p">,</span>  <span class="c1"># GFN1 only</span>
+    <span class="s2">&quot;CH2Cl2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CHCl3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CS2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DMF&quot;</span><span class="p">,</span>  <span class="c1"># GFN2 only</span>
+    <span class="s2">&quot;DMSO&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ether&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;H2O&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;methanol&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;n-hexane&quot;</span><span class="p">,</span>  <span class="c1"># GFN2 only</span>
+    <span class="s2">&quot;THF&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;toluene&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># CPCM-X uses the much larger Minnesota Solvation Database. The most common</span>
+<span class="c1"># entries are listed; users can also pass arbitrary strings via the variable</span>
+<span class="c1"># mechanism (the parameter enumeration is not strictly enforced).</span>
+<span class="n">SOLVENTS_CPCMX</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;acetone&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acetonitrile&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aniline&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;benzaldehyde&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;benzene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CH2Cl2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CHCl3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CS2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dioxane&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DMF&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DMSO&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ether&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ethylacetate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;furane&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hexadecane&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hexane&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;methanol&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nitromethane&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;octanol&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;phenol&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;toluene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;water&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;octanol(wet)&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="solvent_choices_for">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.solvent_choices_for">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">solvent_choices_for</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the supported solvent enumeration for a solvation model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model : str</span>
+<span class="sd">        The solvation-model label (one of :data:`SOLVATION_MODELS`).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple of str</span>
+<span class="sd">        The list of solvent names we expose to the user. Empty for &quot;none&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;ALPB&quot;</span> <span class="ow">or</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;GBSA&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SOLVENTS_GBSA_ALPB</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;CPCM-X&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SOLVENTS_CPCMX</span>
+    <span class="k">return</span> <span class="p">()</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Substep base class</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="Substep">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Substep</span><span class="p">(</span><span class="n">seamm</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base class for substeps of the xTB plug-in.</span>
+
+<span class="sd">    Subclasses are expected to:</span>
+
+<span class="sd">    * Set ``self._calculation`` to a short identifier (e.g. ``&quot;Energy&quot;``).</span>
+<span class="sd">    * Set ``self._model`` once the active xTB Hamiltonian is known</span>
+<span class="sd">      (e.g. ``&quot;GFN2-xTB&quot;``).</span>
+<span class="sd">    * Provide their own ``parameters``, ``description_text``, ``run``,</span>
+<span class="sd">      and ``analyze`` methods.</span>
+
+<span class="sd">    The helpers below are available to all subclasses:</span>
+
+<span class="sd">    * :meth:`check_periodicity` -- raise on periodic input.</span>
+<span class="sd">    * :meth:`write_coord_xyz` -- write the molecule to ``coord.xyz``.</span>
+<span class="sd">    * :meth:`base_xtb_args` -- build the common part of the xtb CLI.</span>
+<span class="sd">    * :meth:`run_xtb` -- invoke xtb via the SEAMM executor.</span>
+<span class="sd">    * :meth:`read_xtbout_json` -- parse ``xtbout.json``.</span>
+<span class="sd">    * :meth:`parse_thermo_block` -- pull the thermochemistry table from the</span>
+<span class="sd">      text output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">flowchart</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;no title&quot;</span><span class="p">,</span>
+        <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+        <span class="n">module</span><span class="o">=</span><span class="vm">__name__</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the Substep base class.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        flowchart : seamm.Flowchart</span>
+<span class="sd">            The non-graphical flowchart that contains this step.</span>
+<span class="sd">        title : str</span>
+<span class="sd">            The name displayed in the flowchart.</span>
+<span class="sd">        extension : None</span>
+<span class="sd">            Not yet implemented.</span>
+<span class="sd">        logger : Logger</span>
+<span class="sd">            The logger to use and pass to parent classes.</span>
+<span class="sd">        module : str</span>
+<span class="sd">            The module name, used by the SEAMM Node base.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_only</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calculation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">flowchart</span><span class="o">=</span><span class="n">flowchart</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+            <span class="n">extension</span><span class="o">=</span><span class="n">extension</span><span class="p">,</span>
+            <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A printable header for this section of output.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Step </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">input_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether to write the input only, not run xtb.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_only</span>
+
+    <span class="nd">@input_only</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">input_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_only</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_runable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicate whether this substep runs xtb or just adds input.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">global_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pass-through to the parent (top-level xTB step)&#39;s global options.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">global_options</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pass-through to the parent (top-level xTB step)&#39;s options.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">options</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Periodicity refusal</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Substep.check_periodicity">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.check_periodicity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_periodicity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Refuse periodic input with a clear, user-visible message.</span>
+
+<span class="sd">        xTB&#39;s PBC support is limited and is out of scope for v1 of this</span>
+<span class="sd">        plug-in. If the configuration is periodic, this method prints a</span>
+<span class="sd">        message via the step printer and raises ``RuntimeError`` so the</span>
+<span class="sd">        flowchart stops cleanly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">configuration</span><span class="o">.</span><span class="n">periodicity</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;The xtb_step plug-in does not currently support periodic &quot;</span>
+                <span class="s2">&quot;systems. The configuration has periodicity &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">configuration</span><span class="o">.</span><span class="n">periodicity</span><span class="si">}</span><span class="s2">. Please use a molecular &quot;</span>
+                <span class="s2">&quot;(non-periodic) configuration, or use a different plug-in &quot;</span>
+                <span class="s2">&quot;(e.g. dftbplus_step) for periodic xTB-family calculations.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">printer</span><span class="o">.</span><span class="n">important</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Coordinate writer</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Substep.write_coord_xyz">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.write_coord_xyz">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_coord_xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;coord.xyz&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the configuration to a standard XYZ file for xtb.&quot;&quot;&quot;</span>
+        <span class="n">directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+        <span class="n">directory</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">directory</span> <span class="o">/</span> <span class="n">filename</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="s2">&quot;to_xyz_text&quot;</span><span class="p">):</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">to_xyz_text</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">symbols</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">symbols</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">fractionals</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)),</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">sym</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">coords</span><span class="p">):</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sym</span><span class="si">:</span><span class="s2">&lt;3s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">18.10f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">18.10f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">z</span><span class="si">:</span><span class="s2">18.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">path</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># CLI builders</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Substep.base_xtb_args">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.base_xtb_args">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">base_xtb_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">configuration</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the parts of the xtb CLI common to all substeps.</span>
+
+<span class="sd">        Charge and spin multiplicity are read from the configuration, not</span>
+<span class="sd">        from ``P``. This matches the SEAMM convention (charge and spin are</span>
+<span class="sd">        properties of the chemical system, not of the calculation) and</span>
+<span class="sd">        lets high-throughput flowcharts loop over systems without per-</span>
+<span class="sd">        system parameter editing.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        P : dict</span>
+<span class="sd">            The current parameter values (from</span>
+<span class="sd">            ``parameters.current_values_to_dict()``). Expected keys include</span>
+<span class="sd">            ``method``, ``accuracy``, ``solvation model``, ``solvent``.</span>
+<span class="sd">        configuration : molsystem.Configuration</span>
+<span class="sd">            Provides the net charge and spin multiplicity for the system.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of str</span>
+<span class="sd">            The argument list to prepend to the substep-specific arguments.</span>
+<span class="sd">            Always begins with the coordinate filename (``coord.xyz``).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;coord.xyz&quot;</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="n">METHOD_TO_CLI</span><span class="p">[</span><span class="n">P</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]]</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;--json&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Charge: from the configuration, always.</span>
+        <span class="n">charge</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;--chrg&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">charge</span><span class="p">)]</span>
+
+        <span class="c1"># Multiplicity / unpaired electrons. xtb takes --uhf with the number</span>
+        <span class="c1"># of UNPAIRED electrons (M - 1 for spin multiplicity M).</span>
+        <span class="n">mult</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">spin_multiplicity</span><span class="p">)</span>
+        <span class="n">n_unpaired</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mult</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;--uhf&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_unpaired</span><span class="p">)]</span>
+
+        <span class="c1"># Accuracy</span>
+        <span class="k">if</span> <span class="s2">&quot;accuracy&quot;</span> <span class="ow">in</span> <span class="n">P</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">acc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+                <span class="n">acc</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">if</span> <span class="n">acc</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;--acc&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Solvation</span>
+        <span class="n">smodel</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solvation model&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">smodel</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">SOLVATION_MODEL_TO_FLAG</span><span class="p">[</span><span class="n">smodel</span><span class="p">]</span>
+            <span class="n">solvent</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solvent&quot;</span><span class="p">,</span> <span class="s2">&quot;H2O&quot;</span><span class="p">)</span>
+            <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="n">flag</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">solvent</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="n">smodel</span> <span class="o">!=</span> <span class="s2">&quot;CPCM-X&quot;</span> <span class="ow">and</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;GFN0-xTB&quot;</span><span class="p">:</span>
+                <span class="c1"># ALPB/GBSA are not parametrized for GFN0-xTB.</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;Solvation models ALPB/GBSA are not parametrized for &quot;</span>
+                    <span class="s2">&quot;GFN0-xTB. xtb may emit a warning or refuse to run.&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">args</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Executor wrapper</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Substep.run_xtb">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.run_xtb">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_xtb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">return_files</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run xtb via the SEAMM executor.</span>
+
+<span class="sd">        Reads the per-plug-in ``xtb.ini`` from the SEAMM root directory,</span>
+<span class="sd">        falling back to the bundled ``data/xtb.ini`` template if the user</span>
+<span class="sd">        does not yet have one. Then dispatches the run through the</span>
+<span class="sd">        flowchart&#39;s executor (which handles conda/local/modules/docker</span>
+<span class="sd">        transparently).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">return_files</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">return_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">env</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">env</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OMP_NUM_THREADS&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">}</span>
+
+        <span class="n">executor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">flowchart</span><span class="o">.</span><span class="n">executor</span>
+        <span class="n">executor_type</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="c1"># Locate / bootstrap the xtb.ini configuration</span>
+        <span class="n">seamm_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_options</span>
+        <span class="n">ini_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">seamm_options</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="n">ini_path</span> <span class="o">=</span> <span class="n">ini_dir</span> <span class="o">/</span> <span class="s2">&quot;xtb.ini&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s2">&quot;xtb_step&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span>
+            <span class="n">ini_text</span> <span class="o">=</span> <span class="p">(</span><span class="n">resources</span> <span class="o">/</span> <span class="s2">&quot;xtb.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+            <span class="n">ini_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">ini_text</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bootstrapped default xtb.ini at </span><span class="si">{</span><span class="n">ini_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">full_config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="n">full_config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ini_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">executor_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">full_config</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;xtb&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;No section for &#39;</span><span class="si">{</span><span class="n">executor_type</span><span class="si">}</span><span class="s2">&#39; in the xtb.ini &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">ini_path</span><span class="si">}</span><span class="s2">), no defaults provided, and no &#39;xtb&#39; &quot;</span>
+                    <span class="s2">&quot;executable found on $PATH. Please install xtb (e.g. &quot;</span>
+                    <span class="s2">&quot;via &#39;conda install -c conda-forge xtb&#39;) or edit &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ini_path</span><span class="si">}</span><span class="s2"> to point at an xtb installation.&quot;</span>
+                <span class="p">)</span>
+            <span class="n">full_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">executor_type</span><span class="p">)</span>
+            <span class="n">full_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">executor_type</span><span class="p">,</span> <span class="s2">&quot;installation&quot;</span><span class="p">,</span> <span class="s2">&quot;local&quot;</span><span class="p">)</span>
+            <span class="n">full_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">executor_type</span><span class="p">,</span> <span class="s2">&quot;code&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+            <span class="k">with</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="n">full_config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Added a &#39;</span><span class="si">{</span><span class="n">executor_type</span><span class="si">}</span><span class="s2">&#39; section to </span><span class="si">{</span><span class="n">ini_path</span><span class="si">}</span><span class="s2"> pointing &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">full_config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">executor_type</span><span class="p">))</span>
+
+        <span class="n">code</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">,</span> <span class="s2">&quot;xtb&quot;</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">code</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">]</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+            <span class="n">directory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span>
+            <span class="n">files</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">return_files</span><span class="o">=</span><span class="n">return_files</span><span class="p">,</span>
+            <span class="n">in_situ</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;There was an error running xtb&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;xtb run result:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># JSON parser</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Substep.read_xtbout_json">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.read_xtbout_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_xtbout_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;xtbout.json&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the xtb JSON output produced by ``--json``.</span>
+
+<span class="sd">        xTB writes ``xtbout.json`` in the working directory when invoked with</span>
+<span class="sd">        ``--json``. The schema includes (at least, in recent releases):</span>
+<span class="sd">        ``&quot;total energy&quot;``, ``&quot;HOMO-LUMO gap / eV&quot;``, ``&quot;electronic</span>
+<span class="sd">        energy&quot;``, ``&quot;dipole / a.u.&quot;``, ``&quot;partial charges&quot;``, plus</span>
+<span class="sd">        method-specific fields. The exact set varies between xtb versions;</span>
+<span class="sd">        callers should treat the returned dict as best-effort.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        directory : pathlib.Path, optional</span>
+<span class="sd">            The directory containing the file. Defaults to ``self.directory``.</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            The JSON filename to read. Defaults to ``xtbout.json``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            The parsed JSON data, or an empty dict if the file is missing</span>
+<span class="sd">            or unreadable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">directory</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span> <span class="o">/</span> <span class="n">filename</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;xtb JSON output not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not parse xtb JSON output </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{}</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Text-output parsers</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Substep.parse_thermo_block">
+<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.parse_thermo_block">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_thermo_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stdout</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pull thermochemistry quantities from xtb stdout.</span>
+
+<span class="sd">        xtb&#39;s Hessian runs print a ``:: THERMODYNAMIC ::`` summary block</span>
+<span class="sd">        and a per-temperature table. We extract the key scalars at a single</span>
+<span class="sd">        temperature here. The format is::</span>
+
+<span class="sd">            :: total free energy   -41.971849822766 Eh ::</span>
+<span class="sd">            :: total energy        -42.153937303642 Eh ::</span>
+<span class="sd">            :: zero point energy     0.182087480876 Eh ::</span>
+<span class="sd">            :: G(RRHO) w/o ZPVE      0.000000000000 Eh ::</span>
+<span class="sd">            :: G(RRHO) contrib.      0.182087480876 Eh ::</span>
+
+<span class="sd">        and a temperature line like::</span>
+
+<span class="sd">           T/K   H(0)-H(T)+PV   H(T)/Eh   T*S/Eh   G(T)/Eh</span>
+<span class="sd">           298.15  ...   ...   ...   ...</span>
+
+<span class="sd">        Energies are converted from E_h (xtb&#39;s native unit) to kJ/mol so</span>
+<span class="sd">        the values returned here are chemist-friendly. The entropy</span>
+<span class="sd">        contribution is reported both as ``entropy_term`` (T*S in</span>
+<span class="sd">        kJ/mol, the form xtb prints) and as ``entropy`` (S in J/mol/K,</span>
+<span class="sd">        the form that appears in standard tables and chemistry papers).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        stdout : str</span>
+<span class="sd">            The captured stdout (or contents of an ``xtb.out`` file) from a</span>
+<span class="sd">            Hessian run.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Possibly containing keys: ``total_free_energy``,</span>
+<span class="sd">            ``zero_point_energy``, ``temperature``, ``enthalpy``,</span>
+<span class="sd">            ``entropy_term``, ``entropy``, ``gibbs_free_energy``. All</span>
+<span class="sd">            energies in kJ/mol, ``entropy`` in J/mol/K, ``temperature``</span>
+<span class="sd">            in K. Missing entries indicate parsing failed for that</span>
+<span class="sd">            quantity; callers should handle absence gracefully.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">eh_to_kjmol</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">hartree</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;kJ/mol&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">magnitude</span>
+
+        <span class="c1"># Scalar lines from the THERMODYNAMIC summary block. Values in</span>
+        <span class="c1"># the file are in E_h; convert to kJ/mol on the fly.</span>
+        <span class="n">scalar_patterns</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;total_free_energy&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;:: total free energy\s+(-?\d+\.\d+)\s*Eh&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zero_point_energy&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;:: zero point energy\s+(-?\d+\.\d+)\s*Eh&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">pat</span> <span class="ow">in</span> <span class="n">scalar_patterns</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span> <span class="n">stdout</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">eh_to_kjmol</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+
+        <span class="c1"># The per-temperature table: take the first data row after the</span>
+        <span class="c1"># T/K header line.</span>
+        <span class="c1"># Header looks roughly like:</span>
+        <span class="c1">#   T/K     H(0)-H(T)+PV   H(T)/Eh    T*S/Eh    G(T)/Eh</span>
+        <span class="n">thermo_header</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;T/K\s+H\(0\)-H\(T\)\+PV\s+H\(T\)/Eh\s+T\*S/Eh\s+G\(T\)/Eh&quot;</span><span class="p">,</span>
+            <span class="n">stdout</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">thermo_header</span><span class="p">:</span>
+            <span class="n">tail</span> <span class="o">=</span> <span class="n">stdout</span><span class="p">[</span><span class="n">thermo_header</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="p">:]</span>
+            <span class="c1"># Skip dash-separator lines, find first numeric row of 5 floats.</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tail</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="p">{</span><span class="s2">&quot;-&quot;</span><span class="p">}:</span>
+                    <span class="k">continue</span>
+                <span class="c1"># Numbers may be in 0.123E+02 or plain decimal notation.</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;-?\d+(?:\.\d+)?(?:[Ee][+-]?\d+)?&quot;</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">)\s+(</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">)\s+(</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">)\s+(</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">)\s+(</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">T</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="n">H_eh</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+                        <span class="n">TS_eh</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+                        <span class="n">G_eh</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span>  <span class="c1"># K</span>
+                    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;enthalpy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">H_eh</span> <span class="o">*</span> <span class="n">eh_to_kjmol</span>  <span class="c1"># kJ/mol</span>
+                    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;entropy_term&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TS_eh</span> <span class="o">*</span> <span class="n">eh_to_kjmol</span>  <span class="c1"># T*S as kJ/mol</span>
+                    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;gibbs_free_energy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">G_eh</span> <span class="o">*</span> <span class="n">eh_to_kjmol</span>  <span class="c1"># kJ/mol</span>
+                    <span class="c1"># Derive entropy itself in J/mol/K (chemist&#39;s preferred form).</span>
+                    <span class="k">if</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                        <span class="n">out</span><span class="p">[</span><span class="s2">&quot;entropy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">TS_eh</span> <span class="o">*</span> <span class="n">eh_to_kjmol</span> <span class="o">*</span> <span class="mf">1000.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span>
+                    <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

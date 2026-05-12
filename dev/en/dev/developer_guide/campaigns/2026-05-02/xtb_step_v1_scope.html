@@ -1,0 +1,1015 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>xtb_step v1 – Scope Document &#8212; SEAMM xTB Plug-in 2026.5.12+1.g472e963 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=c224919a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../../_static/documentation_options.js?v=4d2f8e61"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developer_guide/campaigns/2026-05-02/xtb_step_v1_scope';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="xtb_step Phase A – File Drop Notes" href="NOTES_A.html" />
+    <link rel="prev" title="2026-05-02 Initial development campaign" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.5.12+1.g472e963" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/SEAMM logo.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/SEAMM Inverted 288x181.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">xTB</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Developer Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../authors.html">
+    Development Team
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../history.html">
+    History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi-seamm.github.io">
+    Main SEAMM documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi-seamm.github.io">
+    SEAMM Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Developer Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../authors.html">
+    Development Team
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../history.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+    Main SEAMM documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+    SEAMM Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://molssi.org">
+    MolSSI
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Campaigns</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">2026-05-02 Initial development campaign</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">xtb_step v1 – Scope Document</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_A.html">xtb_step Phase A – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_B.html">xtb_step Phase B – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_C.html">xtb_step Phase C – xTBParameters Fix Drop – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_D.html">xtb_step Phase D – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_E.html">xtb_step Phase E – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_F.html">xtb_step Phase F – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_G.html">xtb_step Phase G – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_H.html">xtb_step Phase H – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_I.html">xtb_step Phase I – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_Installer.html">xtb_step Installer Drop – File Drop Notes</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Developer Documentation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Campaigns</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">2026-05-02 Initial development campaign</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">xtb_step v1 – Scope Document</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="xtb-step-v1-scope-document">
+<h1>xtb_step v1 – Scope Document<a class="headerlink" href="#xtb-step-v1-scope-document" title="Link to this heading">#</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Draft, agreed in chat</p>
+</dd>
+<dt class="field-even">Plug-in<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">xtb_step</span></code></p>
+</dd>
+<dt class="field-odd">Top-level class<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">xTB</span></code></p>
+</dd>
+<dt class="field-even">Step display name<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">xTB</span></code></p>
+</dd>
+<dt class="field-odd">Sub-steps<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Energy</span></code>, <code class="docutils literal notranslate"><span class="pre">Optimization</span></code>, <code class="docutils literal notranslate"><span class="pre">Frequencies</span></code></p>
+</dd>
+</dl>
+<section id="goal-of-v1">
+<h2>Goal of v1<a class="headerlink" href="#goal-of-v1" title="Link to this heading">#</a></h2>
+<p>Produce a SEAMM plug-in that lets a flowchart run xTB single-point
+energies, geometry optimizations, and vibrational frequencies (with the
+thermochemistry table that xTB prints alongside a Hessian run), for
+molecular systems, with optional implicit solvation, using xTB’s
+GFN0/GFN1/GFN2/GFN-FF methods.  The plug-in installs xTB automatically
+via conda (<code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code> environment from conda-forge), integrates with
+the SEAMM property database, and fails gracefully on periodic input.</p>
+<p>It is not intended to be production-grade or to expose every xTB
+option; subsequent releases will add MD, metadynamics, reaction-path,
+mode-following, and electronic-property workflows.</p>
+</section>
+<section id="why-this-is-not-redundant-with-the-existing-dftb-xtb-driver">
+<h2>Why this is not redundant with the existing DFTB+ xTB driver<a class="headerlink" href="#why-this-is-not-redundant-with-the-existing-dftb-xtb-driver" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dftbplus_step</span></code> already exposes GFN1-xTB and GFN2-xTB through DFTB+’s
+internal xTB driver, and the SEAMM paper <a class="reference internal" href="#saxe2025" id="id1"><span>[Saxe2025]</span></a> uses that route for
+the methylisocyanide benchmark.  A standalone <code class="docutils literal notranslate"><span class="pre">xtb_step</span></code> adds:</p>
+<ul class="simple">
+<li><p>GFN0-xTB and GFN-FF, neither of which is available via DFTB+</p></li>
+<li><p>Native ALPB and CPCM-X solvation <a class="reference internal" href="#ehlert2021" id="id2"><span>[Ehlert2021]</span></a></p></li>
+<li><p>Native xTB Hessian and the xTB thermochemistry block</p></li>
+<li><p>A direct path to MD, metadynamics, and other xTB drivers in v2+</p></li>
+</ul>
+</section>
+<section id="naming-and-packaging">
+<h2>Naming and Packaging<a class="headerlink" href="#naming-and-packaging" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Repository name: <code class="docutils literal notranslate"><span class="pre">xtb_step</span></code></p></li>
+<li><p>Top-level class: <code class="docutils literal notranslate"><span class="pre">xTB</span></code> (preserving the code’s case)</p></li>
+<li><p>Step display name: <code class="docutils literal notranslate"><span class="pre">xTB</span></code></p></li>
+<li><p>Conda environment: <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code> (deps: <code class="docutils literal notranslate"><span class="pre">python</span></code>, <code class="docutils literal notranslate"><span class="pre">xtb</span></code> from
+conda-forge – requires verification that <code class="docutils literal notranslate"><span class="pre">xtb</span></code> is published on
+conda-forge under that exact name)</p></li>
+<li><p>Group in the menus:</p>
+<ul>
+<li><p>Top-level: <code class="docutils literal notranslate"><span class="pre">Simulations</span></code></p></li>
+<li><p>Sub-steps:  <code class="docutils literal notranslate"><span class="pre">Calculations</span></code></p></li>
+</ul>
+</li>
+<li><p>Stevedore entry points (in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">org.molssi.seamm</span></code> -&gt; top-level <code class="docutils literal notranslate"><span class="pre">xTB</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">org.molssi.seamm.tk</span></code> -&gt; top-level <code class="docutils literal notranslate"><span class="pre">xTB</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">org.molssi.seamm.xtb</span></code> -&gt; three sub-steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">org.molssi.seamm.xtb.tk</span></code> -&gt; three sub-steps</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<p>Subflowchart pattern modeled on <code class="docutils literal notranslate"><span class="pre">fhi_aims_step</span></code>.  The top-level
+<code class="docutils literal notranslate"><span class="pre">xTB</span></code> step contains a subflowchart; the user adds <code class="docutils literal notranslate"><span class="pre">Energy</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Optimization</span></code>, or <code class="docutils literal notranslate"><span class="pre">Frequencies</span></code> sub-step nodes into it.</p>
+<p>Class hierarchy:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Energy</span></code> is the base class with the parameters and machinery shared
+by all sub-steps (method, charge, multiplicity, solvation, accuracy,
+threading, the JSON parser, the executable-finding, the property
+storage).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Optimization</span></code> inherits from <code class="docutils literal notranslate"><span class="pre">Energy</span></code> and adds optimizer
+parameters (level, max iterations) and structure-handling controls.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Frequencies</span></code> inherits from <code class="docutils literal notranslate"><span class="pre">Energy</span></code> and adds the
+optimize-first toggle and thermochemistry temperature/pressure.</p></li>
+</ul>
+<p>Each sub-step invokes the <code class="docutils literal notranslate"><span class="pre">xtb</span></code> binary itself with its own command
+line.  The top-level <code class="docutils literal notranslate"><span class="pre">run()</span></code> method only iterates the subflowchart
+and lets each substep run; it does not build a single combined input
+file (this is the pattern in <code class="docutils literal notranslate"><span class="pre">fhi_aims_step</span></code>, not the pattern in
+<code class="docutils literal notranslate"><span class="pre">mopac_step</span></code> or <code class="docutils literal notranslate"><span class="pre">lammps_step</span></code>).</p>
+<p>The cookiecutter-generated top-level <code class="docutils literal notranslate"><span class="pre">run()</span></code> uses the wrong
+(LAMMPS-style) template and must be replaced before the plug-in will
+run.</p>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<p>Single enumeration parameter, exposed at the <code class="docutils literal notranslate"><span class="pre">Energy</span></code> level so all
+sub-steps inherit it:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Choice</p></th>
+<th class="head"><p>xTB CLI flag</p></th>
+<th class="head"><p>Citation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GFN2-xTB (def)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--gfn</span> <span class="pre">2</span></code></p></td>
+<td><p><a class="reference internal" href="#bannwarth2019" id="id3"><span>[Bannwarth2019]</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN1-xTB</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--gfn</span> <span class="pre">1</span></code></p></td>
+<td><p><a class="reference internal" href="#grimme2017" id="id4"><span>[Grimme2017]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>GFN0-xTB</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--gfn</span> <span class="pre">0</span></code></p></td>
+<td><p><a class="reference internal" href="#pracht2019" id="id5"><span>[Pracht2019]</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN-FF</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--gfnff</span></code></p></td>
+<td><p><a class="reference internal" href="#spicher2020" id="id6"><span>[Spicher2020]</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The general xTB review <a class="reference internal" href="#bannwarth2021" id="id7"><span>[Bannwarth2021]</span></a> is cited at level 1 whenever
+any of these methods is used.</p>
+</section>
+<section id="tasks-and-cli-mapping">
+<h2>Tasks and CLI mapping<a class="headerlink" href="#tasks-and-cli-mapping" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sub-step</p></th>
+<th class="head"><p>xTB invocation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Energy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xtb</span> <span class="pre">coord.xyz</span> <span class="pre">--&lt;method&gt;</span> <span class="pre">--json</span> <span class="pre">[--alpb</span> <span class="pre">solvent]</span> <span class="pre">--chrg</span> <span class="pre">N</span> <span class="pre">--uhf</span> <span class="pre">M</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Optimization</p></td>
+<td><dl class="simple">
+<dt>adds <code class="docutils literal notranslate"><span class="pre">--opt</span> <span class="pre">&lt;level&gt;</span></code> (level in</dt><dd><p>{crude,sloppy,loose,normal,tight,vtight,extreme}; default
+<code class="docutils literal notranslate"><span class="pre">normal</span></code>)</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><p>Frequencies</p></td>
+<td><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">--ohess</span> <span class="pre">&lt;level&gt;</span></code> (optimize-then-Hessian) by default;</dt><dd><p><code class="docutils literal notranslate"><span class="pre">--hess</span></code> if user disables initial optimization</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Frequencies</span></code> sub-step harvests xTB’s thermochemistry block
+(ZPE, S, Cv, H, G at a chosen temperature/pressure) directly from the
+xTB output.  No separate Thermochemistry sub-step in v1.  The standalone
+<code class="docutils literal notranslate"><span class="pre">thermochemistry_step</span></code> plug-in remains usable downstream for users who
+want finite-difference verification, per <a class="reference internal" href="#saxe2025" id="id8"><span>[Saxe2025]</span></a> Section 3.</p>
+</section>
+<section id="solvation">
+<h2>Solvation<a class="headerlink" href="#solvation" title="Link to this heading">#</a></h2>
+<p>Two parameters at the <code class="docutils literal notranslate"><span class="pre">Energy</span></code> level:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">solvation</span> <span class="pre">model</span></code>: enumeration <code class="docutils literal notranslate"><span class="pre">none</span></code> (default), <code class="docutils literal notranslate"><span class="pre">ALPB</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GBSA</span></code>, <code class="docutils literal notranslate"><span class="pre">CPCM-X</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solvent</span></code>: enumeration of xTB’s supported solvent list (water,
+methanol, DMSO, acetone, acetonitrile, chloroform, dichloromethane,
+DMF, ether, hexane, octanol, THF, toluene, …).  The exact list
+depends on the xTB version and on the solvation model; we will pull
+the canonical list from the xTB documentation
+(<a class="reference external" href="https://xtb-docs.readthedocs.io/">https://xtb-docs.readthedocs.io/</a>) at implementation time.</p></li>
+</ul>
+<p>CLI mapping:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ALPB</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">--alpb</span> <span class="pre">&lt;solvent&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GBSA</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">--gbsa</span> <span class="pre">&lt;solvent&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CPCM-X</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">--cpcmx</span> <span class="pre">&lt;solvent&gt;</span></code></p></li>
+</ul>
+</section>
+<section id="periodic-systems">
+<h2>Periodic Systems<a class="headerlink" href="#periodic-systems" title="Link to this heading">#</a></h2>
+<p>xTB’s PBC support is limited and not part of v1.  Behavior on periodic
+input:</p>
+<ol class="arabic simple">
+<li><p>At the start of every sub-step’s <code class="docutils literal notranslate"><span class="pre">run()</span></code>, check
+<code class="docutils literal notranslate"><span class="pre">configuration.periodicity</span></code>.</p></li>
+<li><p>If non-zero, <code class="docutils literal notranslate"><span class="pre">printer.important()</span></code> an explanatory message.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">RuntimeError</span></code> so the flowchart stops with a clear error.</p></li>
+</ol>
+<p>This matches the convention used elsewhere in the SEAMM plug-in
+ecosystem.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Default <code class="docutils literal notranslate"><span class="pre">installation</span> <span class="pre">=</span> <span class="pre">conda</span></code>, conda environment <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code> from
+<code class="docutils literal notranslate"><span class="pre">data/seamm-xtb.yml</span></code>.  The <code class="docutils literal notranslate"><span class="pre">.ini</span></code> follows the
+<code class="docutils literal notranslate"><span class="pre">dftbplus.ini</span></code> template (DFTB+ is also conda-default since it’s on
+conda-forge).  Sections: <code class="docutils literal notranslate"><span class="pre">[docker]</span></code> and <code class="docutils literal notranslate"><span class="pre">[local]</span></code>, with <code class="docutils literal notranslate"><span class="pre">[local]</span></code>
+supporting installation modes <code class="docutils literal notranslate"><span class="pre">conda</span></code>, <code class="docutils literal notranslate"><span class="pre">modules</span></code>, <code class="docutils literal notranslate"><span class="pre">local</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">docker</span></code>.</p>
+<p>Following the <code class="docutils literal notranslate"><span class="pre">mopac_step</span></code> pattern, the plug-in provides an
+<code class="docutils literal notranslate"><span class="pre">installer.py</span></code> that knows how to:</p>
+<ul class="simple">
+<li><p>create the conda environment</p></li>
+<li><p>check whether xTB is callable</p></li>
+<li><p>report the installed xTB version</p></li>
+</ul>
+</section>
+<section id="input-output-strategy">
+<h2>Input / Output Strategy<a class="headerlink" href="#input-output-strategy" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt>Input:</dt><dd><p>Write <code class="docutils literal notranslate"><span class="pre">coord.xyz</span></code> (XYZ format).  All other options are passed on
+the xtb command line; no input deck file is needed.  Charge and
+multiplicity go through <code class="docutils literal notranslate"><span class="pre">--chrg</span> <span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">--uhf</span> <span class="pre">M</span></code> (where M is
+the number of unpaired electrons; xTB convention).</p>
+</dd>
+<dt>Output:</dt><dd><p>Primary parser uses the JSON output produced by <code class="docutils literal notranslate"><span class="pre">--json</span></code> (file
+<code class="docutils literal notranslate"><span class="pre">xtbout.json</span></code>).  Energies, gradients, dipole, Mulliken/CM5
+charges, HOMO/LUMO are pulled from there.  The thermochemistry block
+(ZPE, entropy, Cp, Gibbs free energy) is parsed from the text
+<code class="docutils literal notranslate"><span class="pre">xtb.out</span></code> because, as of recent xTB versions, the thermo block is
+not part of the JSON output.  This needs verification at
+implementation time against a current xtb release.</p>
+</dd>
+<dt>Working directory layout:</dt><dd><p>Each sub-step gets its own directory under the SEAMM job tree
+(handled automatically by <code class="docutils literal notranslate"><span class="pre">seamm.Node</span></code>).  The directory contains
+<code class="docutils literal notranslate"><span class="pre">coord.xyz</span></code>, <code class="docutils literal notranslate"><span class="pre">xtbout.json</span></code>, <code class="docutils literal notranslate"><span class="pre">xtb.out</span></code>, <code class="docutils literal notranslate"><span class="pre">stdout.txt</span></code>,
+<code class="docutils literal notranslate"><span class="pre">stderr.txt</span></code>, and (for optimization) <code class="docutils literal notranslate"><span class="pre">xtbopt.xyz</span></code> and
+<code class="docutils literal notranslate"><span class="pre">xtbopt.log</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="properties-seed">
+<h2>Properties Seed<a class="headerlink" href="#properties-seed" title="Link to this heading">#</a></h2>
+<p>Initial <code class="docutils literal notranslate"><span class="pre">data/properties.csv</span></code> entries, using the
+<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;#xTB#{model}</span></code> convention from <code class="docutils literal notranslate"><span class="pre">mopac_step</span></code>.  <code class="docutils literal notranslate"><span class="pre">{model}</span></code> is
+filled with the active method (<code class="docutils literal notranslate"><span class="pre">GFN2-xTB</span></code> etc.) at runtime.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">energy#xTB#{model}</span></code>  (float, E_h)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">electronic</span> <span class="pre">energy#xTB#{model}</span></code>  (float, E_h)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HOMO</span> <span class="pre">energy#xTB#{model}</span></code>  (float, eV)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LUMO</span> <span class="pre">energy#xTB#{model}</span></code>  (float, eV)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">band</span> <span class="pre">gap#xTB#{model}</span></code>  (float, eV)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dipole</span> <span class="pre">moment#xTB#{model}</span></code>  (float, D)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gradients#xTB#{model}</span></code>  (json, E_h/Bohr)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force</span> <span class="pre">constants#xTB#{model}</span></code>  (json, E_h/Bohr^2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enthalpy</span> <span class="pre">of</span> <span class="pre">formation#xTB#{model}</span></code>  (float, kJ/mol)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zero</span> <span class="pre">point</span> <span class="pre">energy#xTB#{model}</span></code>  (float, kJ/mol)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entropy#xTB#{model}</span></code>  (float, J/mol/K)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant</span> <span class="pre">pressure</span> <span class="pre">heat</span> <span class="pre">capacity#xTB#{model}</span></code>  (float, J/mol/K)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Gibbs</span> <span class="pre">free</span> <span class="pre">energy#xTB#{model}</span></code>  (float, kJ/mol)</p></li>
+</ul>
+</section>
+<section id="out-of-scope-for-v1">
+<h2>Out of Scope for v1<a class="headerlink" href="#out-of-scope-for-v1" title="Link to this heading">#</a></h2>
+<p>The following xTB capabilities are deliberately deferred:</p>
+<ul class="simple">
+<li><p>Molecular dynamics (<code class="docutils literal notranslate"><span class="pre">--md</span></code>)</p></li>
+<li><p>Metadynamics (<code class="docutils literal notranslate"><span class="pre">--metadyn</span></code>)</p></li>
+<li><p>Nudged elastic band / reaction path (<code class="docutils literal notranslate"><span class="pre">--path</span></code>)</p></li>
+<li><p>Mode-following (<code class="docutils literal notranslate"><span class="pre">--modef</span></code>)</p></li>
+<li><p>Vertical IP/EA, Fukui (<code class="docutils literal notranslate"><span class="pre">--vipea</span></code>, <code class="docutils literal notranslate"><span class="pre">--vfukui</span></code>)</p></li>
+<li><p>Custom xcontrol files</p></li>
+<li><p>Periodic systems</p></li>
+<li><p>ONIOM / QM-MM via wrappers</p></li>
+</ul>
+</section>
+<section id="open-items-to-verify-at-implementation-time">
+<h2>Open Items to Verify at Implementation Time<a class="headerlink" href="#open-items-to-verify-at-implementation-time" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Exact <code class="docutils literal notranslate"><span class="pre">xtbout.json</span></code> schema in the current xTB release.  Will
+verify against <a class="reference external" href="https://xtb-docs.readthedocs.io/">https://xtb-docs.readthedocs.io/</a> before writing the
+parser.  Fall back to text scraping if needed.</p></li>
+<li><p>Whether <code class="docutils literal notranslate"><span class="pre">xtb</span></code> is actually published on conda-forge under the
+package name <code class="docutils literal notranslate"><span class="pre">xtb</span></code>.  Will check with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">-c</span>
+<span class="pre">conda-forge</span> <span class="pre">xtb</span></code>.</p></li>
+<li><p>Whether to expose <code class="docutils literal notranslate"><span class="pre">--acc</span> <span class="pre">N</span></code> (accuracy multiplier, default 1.0).
+Recommend yes, since it’s the main quality knob users actually turn.</p></li>
+<li><p>Whether to expose OMP thread count as a parameter.  Recommend yes,
+mirroring <code class="docutils literal notranslate"><span class="pre">mopac_step</span></code> and <code class="docutils literal notranslate"><span class="pre">dftbplus_step</span></code>.</p></li>
+<li><p>Whether <code class="docutils literal notranslate"><span class="pre">--bhess</span></code> (biased single-point Hessian) is worth
+exposing alongside <code class="docutils literal notranslate"><span class="pre">--hess</span></code> / <code class="docutils literal notranslate"><span class="pre">--ohess</span></code>.  Recommend no for v1.</p></li>
+</ol>
+</section>
+<section id="skeleton-issues-to-fix-before-first-useful-build">
+<h2>Skeleton Issues to Fix Before First Useful Build<a class="headerlink" href="#skeleton-issues-to-fix-before-first-useful-build" title="Link to this heading">#</a></h2>
+<p>The cookiecutter-generated skeleton has two issues that need to be
+addressed before any code-fill-in:</p>
+<ol class="arabic simple">
+<li><p><strong>Top-level ``run()`` template is wrong.</strong>  <code class="docutils literal notranslate"><span class="pre">xtb_step/xtb.py</span></code>
+uses the LAMMPS-style “build single <code class="docutils literal notranslate"><span class="pre">molssi.dat</span></code> from
+<code class="docutils literal notranslate"><span class="pre">node.get_input()</span></code> and run the binary once” template.  This is
+not the right pattern for xTB.  Replace with the
+<code class="docutils literal notranslate"><span class="pre">fhi_aims_step</span></code>-style iterate-and-let-substeps-run pattern.</p></li>
+<li><p><strong>``pkg_resources`` is deprecated.</strong>  Replace <code class="docutils literal notranslate"><span class="pre">pkg_resources</span></code>
+imports with <code class="docutils literal notranslate"><span class="pre">importlib.resources</span></code> in <code class="docutils literal notranslate"><span class="pre">xtb.py</span></code>,
+<code class="docutils literal notranslate"><span class="pre">energy.py</span></code>, <code class="docutils literal notranslate"><span class="pre">optimization.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">frequencies.py</span></code>.</p></li>
+</ol>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div role="list" class="citation-list">
+<div class="citation" id="saxe2025" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Saxe2025<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
+<p>Saxe, P.; et al.  <em>SEAMM: A Simulation Environment for
+Atomistic and Molecular Modeling.</em>  J. Phys. Chem. A
+<strong>2025</strong>, 129, 6973-6993.
+<a class="reference external" href="https://doi.org/10.1021/acs.jpca.5c03164">https://doi.org/10.1021/acs.jpca.5c03164</a></p>
+</div>
+<div class="citation" id="bannwarth2021" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">Bannwarth2021</a><span class="fn-bracket">]</span></span>
+<p>Bannwarth, C.; Caldeweyher, E.; Ehlert, S.; Hansen,
+A.; Pracht, P.; Seibert, J.; Spicher, S.; Grimme, S.
+<em>Extended tight-binding quantum chemistry methods.</em>
+WIREs Comput. Mol. Sci. <strong>2021</strong>, 11, e1493.
+<a class="reference external" href="https://doi.org/10.1002/wcms.1493">https://doi.org/10.1002/wcms.1493</a></p>
+</div>
+<div class="citation" id="bannwarth2019" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">Bannwarth2019</a><span class="fn-bracket">]</span></span>
+<p>Bannwarth, C.; Ehlert, S.; Grimme, S.  <em>GFN2-xTB –
+An Accurate and Broadly Parametrized Self-Consistent
+Tight-Binding Quantum Chemical Method with Multipole
+Electrostatics and Density-Dependent Dispersion
+Contributions.</em>  J. Chem. Theory Comput.  <strong>2019</strong>,
+15, 1652-1671.
+<a class="reference external" href="https://doi.org/10.1021/acs.jctc.8b01176">https://doi.org/10.1021/acs.jctc.8b01176</a></p>
+</div>
+<div class="citation" id="grimme2017" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">Grimme2017</a><span class="fn-bracket">]</span></span>
+<p>Grimme, S.; Bannwarth, C.; Shushkov, P.  <em>A Robust
+and Accurate Tight-Binding Quantum Chemical Method for
+Structures, Vibrational Frequencies, and Noncovalent
+Interactions of Large Molecular Systems Parametrized
+for All spd-Block Elements (Z = 1-86).</em>  J. Chem.
+Theory Comput.  <strong>2017</strong>, 13, 1989-2009.
+<a class="reference external" href="https://doi.org/10.1021/acs.jctc.7b00118">https://doi.org/10.1021/acs.jctc.7b00118</a></p>
+</div>
+<div class="citation" id="pracht2019" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">Pracht2019</a><span class="fn-bracket">]</span></span>
+<p>Pracht, P.; Caldeweyher, E.; Ehlert, S.; Grimme, S.
+<em>A Robust Non-Self-Consistent Tight-Binding Quantum
+Chemistry Method for Large Molecules.</em>  ChemRxiv,
+<strong>2019</strong>.  <a class="reference external" href="https://doi.org/10.26434/chemrxiv.8326202.v1">https://doi.org/10.26434/chemrxiv.8326202.v1</a>
+(Note: GFN0-xTB has no formal journal paper as of last
+check; verify the citation status at implementation
+time.)</p>
+</div>
+<div class="citation" id="spicher2020" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">Spicher2020</a><span class="fn-bracket">]</span></span>
+<p>Spicher, S.; Grimme, S.  <em>Robust Atomistic Modeling of
+Materials, Organometallic, and Biochemical Systems.</em>
+Angew. Chem. Int. Ed.  <strong>2020</strong>, 59, 15665-15673.
+<a class="reference external" href="https://doi.org/10.1002/anie.202004239">https://doi.org/10.1002/anie.202004239</a></p>
+</div>
+<div class="citation" id="ehlert2021" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Ehlert2021</a><span class="fn-bracket">]</span></span>
+<p>Ehlert, S.; Stahn, M.; Spicher, S.; Grimme, S.  <em>Robust
+and Efficient Implicit Solvation Model for Fast
+Semiempirical Methods.</em>  J. Chem. Theory Comput.
+<strong>2021</strong>, 17, 4250-4261.
+<a class="reference external" href="https://doi.org/10.1021/acs.jctc.1c00471">https://doi.org/10.1021/acs.jctc.1c00471</a></p>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2026-05-02 Initial development campaign</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="NOTES_A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">xtb_step Phase A – File Drop Notes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-of-v1">Goal of v1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-is-not-redundant-with-the-existing-dftb-xtb-driver">Why this is not redundant with the existing DFTB+ xTB driver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-and-packaging">Naming and Packaging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-and-cli-mapping">Tasks and CLI mapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solvation">Solvation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-systems">Periodic Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output-strategy">Input / Output Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-seed">Properties Seed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-scope-for-v1">Out of Scope for v1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-items-to-verify-at-implementation-time">Open Items to Verify at Implementation Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skeleton-issues-to-fix-before-first-useful-build">Skeleton Issues to Fix Before First Useful Build</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/developer_guide/campaigns/2026-05-02/xtb_step_v1_scope.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
