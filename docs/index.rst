@@ -1,7 +1,11 @@
 Welcome to the documentation for the xTB SEAMM plug-in
 ======================================================
 
-xTB <does what? replace this text>
+xTB is a family of fast, robust extended tight-binding methods from
+the Grimme group. This plug-in lets a SEAMM flowchart drive xTB
+calculations: single-point energies, geometry optimizations, and
+harmonic vibrational frequencies on molecular systems, with optional
+implicit solvation.
 
 .. grid:: 1 1 2 2
 
@@ -41,7 +45,7 @@ xTB <does what? replace this text>
    .. grid-item-card:: API Reference
       :margin: 0 3 0 0
 
-      The API for the Geometry Analysis Step
+      The API for the xTB Step
 
       .. button-link:: ./api/index.html
 	 :color: primary
