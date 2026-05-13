@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xtb_step.substep &#8212; SEAMM xTB Plug-in 2026.5.12+2.ga073d3d documentation</title>
+    <title>xtb_step.substep &#8212; SEAMM xTB Plug-in 2026.5.13 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../_static/documentation_options.js?v=30e2d5dc"></script>
+    <script src="../../_static/documentation_options.js?v=85cba88a"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -52,7 +52,7 @@
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.5.12+2.ga073d3d" />
+  <meta name="docsearch:version" content="2026.5.13" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -606,7 +606,7 @@
 
 
 <div class="viewcode-block" id="solvent_choices_for">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.solvent_choices_for">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.solvent_choices_for">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">solvent_choices_for</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the supported solvent enumeration for a solvation model.</span>
 
@@ -634,7 +634,7 @@
 
 
 <div class="viewcode-block" id="Substep">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.Substep">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Substep</span><span class="p">(</span><span class="n">seamm</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base class for substeps of the xTB plug-in.</span>
 
@@ -725,7 +725,7 @@
     <span class="c1"># ------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="Substep.check_periodicity">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.check_periodicity">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.Substep.check_periodicity">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_periodicity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Refuse periodic input with a clear, user-visible message.</span>
 
@@ -751,7 +751,7 @@
     <span class="c1"># ------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="Substep.write_coord_xyz">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.write_coord_xyz">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.Substep.write_coord_xyz">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">write_coord_xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;coord.xyz&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the configuration to a standard XYZ file for xtb.&quot;&quot;&quot;</span>
         <span class="n">directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
@@ -776,7 +776,7 @@
     <span class="c1"># ------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="Substep.base_xtb_args">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.base_xtb_args">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.Substep.base_xtb_args">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">base_xtb_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">configuration</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the parts of the xtb CLI common to all substeps.</span>
 
@@ -845,7 +845,7 @@
     <span class="c1"># ------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="Substep.run_xtb">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.run_xtb">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.Substep.run_xtb">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run_xtb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">return_files</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run xtb via the SEAMM executor.</span>
 
@@ -927,7 +927,7 @@
     <span class="c1"># ------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="Substep.read_xtbout_json">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.read_xtbout_json">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.Substep.read_xtbout_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_xtbout_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;xtbout.json&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the xtb JSON output produced by ``--json``.</span>
 
@@ -972,7 +972,7 @@
     <span class="c1"># ------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="Substep.parse_thermo_block">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.substep.Substep.parse_thermo_block">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.substep.Substep.parse_thermo_block">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">parse_thermo_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stdout</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Pull thermochemistry quantities from xtb stdout.</span>
 

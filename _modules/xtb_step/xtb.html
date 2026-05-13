@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xtb_step.xtb &#8212; SEAMM xTB Plug-in 2026.5.12+2.ga073d3d documentation</title>
+    <title>xtb_step.xtb &#8212; SEAMM xTB Plug-in 2026.5.13 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../_static/documentation_options.js?v=30e2d5dc"></script>
+    <script src="../../_static/documentation_options.js?v=85cba88a"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -52,7 +52,7 @@
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.5.12+2.ga073d3d" />
+  <meta name="docsearch:version" content="2026.5.13" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -517,7 +517,7 @@
 
 
 <div class="viewcode-block" id="xTB">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.xtb.xTB">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb.xTB">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">xTB</span><span class="p">(</span><span class="n">seamm</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The non-graphical part of a xTB step in a flowchart.</span>
@@ -598,7 +598,7 @@
         <span class="k">return</span> <span class="n">xtb_step</span><span class="o">.</span><span class="n">__git_revision__</span>
 
 <div class="viewcode-block" id="xTB.set_id">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.xtb.xTB.set_id">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb.xTB.set_id">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the id for node to a given tuple&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">node_id</span>
@@ -610,7 +610,7 @@
 
 
 <div class="viewcode-block" id="xTB.description_text">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.xtb.xTB.description_text">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb.xTB.description_text">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">description_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the text description of what this step will do.</span>
 <span class="sd">        The dictionary of control values is passed in as P so that</span>
@@ -658,7 +658,7 @@
 
 
 <div class="viewcode-block" id="xTB.run">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.xtb.xTB.run">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb.xTB.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the xTB step.</span>
 
@@ -693,7 +693,7 @@
 
 
 <div class="viewcode-block" id="xTB.analyze">
-<a class="viewcode-back" href="../../developer/xtb_step.html#xtb_step.xtb.xTB.analyze">[docs]</a>
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb.xTB.analyze">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Do any analysis of the output from this step.</span>
 
