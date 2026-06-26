@@ -2,5 +2,8 @@ name: seamm-xtb
 channels:
   - conda-forge
 dependencies:
-  - python
+  - python=3.12
   - xtb
+  # For the tblite MDI engine (data/tblite_mdi.py), driven by LAMMPS via MDI:
+  - tblite-python   # provides `from tblite.interface import Calculator`
+  - pymdi           # provides `import mdi`
