@@ -26,6 +26,7 @@ import configparser
 import importlib.resources
 import json
 import logging
+import os
 from pathlib import Path
 import pprint  # noqa: F401
 import re
@@ -38,6 +39,49 @@ import seamm_util.printing as printing
 logger = logging.getLogger(__name__)
 job = printing.getPrinter()
 printer = printing.getPrinter("xTB")
+
+
+def seamm_ini_path():
+    """Path to the global ``seamm.ini``.
+
+    Defaults to ``~/.seamm.d/seamm.ini``; override with the ``$SEAMM_INI``
+    environment variable (handy for testing against an alternate config).
+    """
+    override = os.environ.get("SEAMM_INI")
+    if override:
+        return Path(override).expanduser()
+    return Path.home() / ".seamm.d" / "seamm.ini"
+
+
+def xtb_thread_count(n_atoms, default_atoms_per_core=25):
+    """OpenMP threads for xTB / tblite, sized from the ``[xtb-step]`` section
+    of ``seamm.ini``.
+
+    ``n_threads = clamp(round(n_atoms / atoms-per-core), 1, ncores)`` -- the
+    same atoms-per-core / max-cores scheme the LAMMPS and DFTB+ steps use. xTB
+    and tblite honor both ``OMP_NUM_THREADS`` and ``MKL_NUM_THREADS``. If the
+    section or keys are missing, falls back to ``default_atoms_per_core`` and
+    no core cap.
+    """
+    atoms_per_core = default_atoms_per_core
+    ncores = None
+    try:
+        cfg = configparser.ConfigParser(interpolation=None)
+        cfg.read(seamm_ini_path())
+        if cfg.has_section("xtb-step"):
+            sect = cfg["xtb-step"]
+            atoms_per_core = int(sect.get("atoms-per-core", atoms_per_core))
+            nc = sect.get("ncores", "available")
+            if nc not in (None, "", "available"):
+                ncores = int(nc)
+    except Exception as e:  # never let config parsing break a run
+        logger.warning("Could not read [xtb-step] from seamm.ini: %s", e)
+
+    atoms_per_core = max(1, atoms_per_core)
+    n_threads = max(1, round(n_atoms / atoms_per_core))
+    if ncores is not None:
+        n_threads = min(n_threads, ncores)
+    return n_threads
 
 
 # ---------------------------------------------------------------------------
@@ -359,7 +403,21 @@ class Substep(seamm.Node):
         if return_files is None:
             return_files = []
         if env is None:
-            env = {"OMP_NUM_THREADS": "1"}
+            # Size OpenMP/MKL threads from the [xtb-step] config (atoms-per-core
+            # / ncores), the same scheme as the MDI engine and the DFTB+ step.
+            try:
+                _, configuration = self.get_system_configuration(None)
+                n_threads = xtb_thread_count(configuration.n_atoms)
+                printer.important(
+                    f"        xTB using {n_threads} OpenMP thread(s) for "
+                    f"{configuration.n_atoms} atoms.\n"
+                )
+            except Exception:
+                n_threads = 1
+            env = {
+                "OMP_NUM_THREADS": str(n_threads),
+                "MKL_NUM_THREADS": str(n_threads),
+            }
 
         executor = self.parent.flowchart.executor
         executor_type = executor.name

@@ -187,6 +187,7 @@ class xTBStep(object):
         hostname="localhost",
         charge=0,
         multiplicity=1,
+        n_atoms=None,
         engine_name="TBLITE",
         extra_args=None,
     ):
@@ -217,6 +218,11 @@ class xTBStep(object):
         charge, multiplicity : int
             Total charge and 2S+1 multiplicity (from the configuration object).
             tblite counts *unpaired electrons*, so ``--uhf`` = multiplicity - 1.
+        n_atoms : int, optional
+            Number of atoms, used to size the engine's OpenMP/MKL threads from
+            the ``[xtb-step]`` section of ``seamm.ini`` (atoms-per-core /
+            ncores). If given, ``OMP_NUM_THREADS`` / ``MKL_NUM_THREADS`` are set
+            on the engine's command line, overriding any inherited cap.
         engine_name : str
             The MDI ``-name`` for the engine (default "TBLITE").
         extra_args : list of str, optional
@@ -272,6 +278,16 @@ class xTBStep(object):
         ]
         if extra_args:
             argv.extend(extra_args)
+
+        # Size the engine's OpenMP/MKL threads from the [xtb-step] config and
+        # set them on the engine's command line (an env-var prefix), overriding
+        # any cap the launch script inherits (the driver pins OMP=1 for itself).
+        if n_atoms is not None:
+            from .substep import xtb_thread_count
+
+            n = xtb_thread_count(n_atoms)
+            argv = [f"OMP_NUM_THREADS={n}", f"MKL_NUM_THREADS={n}", *argv]
+
         return argv
 
     def __init__(self, flowchart=None, gui=None):
