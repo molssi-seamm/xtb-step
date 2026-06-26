@@ -91,11 +91,26 @@ def symbol_to_z(sym):
 
 
 # ---------------------------------------------------------------------------
-# LAMMPS data-file parser (atom_style full)
+# LAMMPS data-file parser
 # ---------------------------------------------------------------------------
-def parse_lammps_data(path):
+# Column index of the atom-type and of the first coordinate in an Atoms row,
+# per atom_style. Any image flags (ix iy iz) after z are ignored.
+_ATOMS_LAYOUT = {
+    "atomic": (1, 2),  # id type x y z
+    "charge": (1, 3),  # id type q x y z
+    "full": (2, 4),  # id mol type charge x y z
+}
+
+
+def parse_lammps_data(path, atom_style="full"):
     """
-    Parse a LAMMPS data file (atom_style full).
+    Parse a LAMMPS data file's Atoms section for the given ``atom_style``.
+
+    SEAMM writes ``atom_style atomic`` for the MDI/QM path (the molecule id is
+    carried separately via ``fix property/atom``), so the Atoms columns are
+    ``id type x y z`` -- not the ``id mol type charge x y z`` of ``full``. The
+    column layout is selected from ``atom_style`` (``atomic`` / ``charge`` /
+    ``full``); unknown styles fall back to ``full``.
 
     Returns
     -------
@@ -105,6 +120,9 @@ def parse_lammps_data(path):
     cell        : np.ndarray((3,3))          Angstroms, diagonal for ortho box
     is_periodic : bool
     """
+    type_col, x_col = _ATOMS_LAYOUT.get(atom_style, _ATOMS_LAYOUT["full"])
+    min_cols = x_col + 3
+
     natoms = 0
     cell = np.zeros((3, 3))
     is_periodic = False
@@ -144,13 +162,15 @@ def parse_lammps_data(path):
                     continue
 
             else:
-                # atom_style full:
-                # atom-ID  mol-ID  atom-type  charge  x  y  z  [ix iy iz]
                 toks = line.split()
-                if len(toks) >= 7 and toks[0].isdigit():
+                if len(toks) >= min_cols and toks[0].isdigit():
                     aid = int(toks[0])
-                    atype = int(toks[2])
-                    x, y, z = float(toks[4]), float(toks[5]), float(toks[6])
+                    atype = int(toks[type_col])
+                    x, y, z = (
+                        float(toks[x_col]),
+                        float(toks[x_col + 1]),
+                        float(toks[x_col + 2]),
+                    )
                     atom_rows[aid] = (atype, x, y, z)
 
     # Build sorted arrays (atom-IDs may not be contiguous in file order)
@@ -161,6 +181,15 @@ def parse_lammps_data(path):
         atype, x, y, z = atom_rows[aid]
         atom_types[idx] = atype
         positions[idx] = [x, y, z]
+
+    # Catch a column-layout mismatch loudly rather than as a later KeyError.
+    if natoms and (atom_types == 0).any():
+        n0 = int((atom_types == 0).sum())
+        raise ValueError(
+            f"{n0} of {natoms} atoms in {path!r} had no type parsed with "
+            f"atom_style={atom_style!r}; the Atoms-section columns do not match "
+            "that style. Check the LAMMPS atom_style or pass --atom-style."
+        )
 
     return natoms, atom_types, positions, cell, is_periodic
 
@@ -199,6 +228,24 @@ def elements_from_input(path):
     )
 
 
+def atom_style_from_input(path):
+    """Return the ``atom_style`` declared in a LAMMPS input deck, or None.
+
+    Lets the engine parse ``structure.dat`` with the right columns without
+    being told the style on the command line. Returns None if the file is
+    missing or declares no atom_style.
+    """
+    try:
+        with open(path) as fh:
+            for raw in fh:
+                toks = raw.split()
+                if len(toks) >= 2 and toks[0] == "atom_style":
+                    return toks[1]
+    except OSError:
+        pass
+    return None
+
+
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
@@ -219,9 +266,16 @@ def parse_args():
         "--input",
         default="input.dat",
         metavar="FILE",
-        help="LAMMPS input deck to read the type->element map from, via its "
-        '"fix ... mdi/qm ... elements ..." line (default: input.dat). '
-        "Used only when --elements is not given.",
+        help="LAMMPS input deck to read the type->element map and atom_style "
+        'from (the "fix ... mdi/qm ... elements ..." and "atom_style" lines; '
+        "default: input.dat). Used when --elements / --atom-style are absent.",
+    )
+    p.add_argument(
+        "--atom-style",
+        default=None,
+        metavar="STYLE",
+        help="LAMMPS atom_style of --structure (atomic/charge/full). If "
+        "omitted, read from --input, else assumed 'full'.",
     )
     p.add_argument(
         "--elements",
@@ -298,10 +352,17 @@ def main():
     # Build LAMMPS-type → atomic-number map
     type_to_z = {i + 1: symbol_to_z(sym) for i, sym in enumerate(elements)}
 
+    # atom_style of structure.dat: explicit --atom-style, else read it from the
+    # input deck (SEAMM writes "atom_style atomic"), else assume "full".
+    atom_style = args.atom_style or atom_style_from_input(args.input) or "full"
+
     # Parse structure file
-    print(f"[tblite-mdi] Reading structure: {args.structure}", flush=True)
+    print(
+        f"[tblite-mdi] Reading structure: {args.structure} (atom_style={atom_style})",
+        flush=True,
+    )
     natoms, atom_types_arr, positions_ang, cell_ang, is_periodic = parse_lammps_data(
-        args.structure
+        args.structure, atom_style
     )
     print(f"[tblite-mdi] {natoms} atoms, periodic={is_periodic}", flush=True)
 
