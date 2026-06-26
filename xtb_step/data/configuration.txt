@@ -1,0 +1,18 @@
+[xtb-step]
+# How many cores to use for xTB.  Set to 1 to use only the serial
+# version of xTB. xTB will try to choose a reasonable number of
+# cores based on the size of the system and other parameters. The
+# option 'lammps-atoms-per-core' can be used to tune this estimate.
+#
+# The default is 'available', meaning use all the cores available to
+# the calculation if that makes sense based on the type of
+# calculation. Otherwise you can give a number here. Note that the
+# [DEFAULT] section may override the default.
+
+ncores = 4
+
+# The optimal number of atoms per core. You may wish to change this if
+# you consistently use expensive potentials, or have e.g. GPUs. The
+# default is 25.
+
+atoms-per-core = 25
