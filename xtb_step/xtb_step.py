@@ -269,8 +269,6 @@ class xTBStep(object):
             str(charge),
             "--uhf",
             str(uhf),
-            "--verbosity",
-            "1",
         ]
         if extra_args:
             argv.extend(extra_args)

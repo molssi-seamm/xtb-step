@@ -25,6 +25,7 @@ Usage — MPI mode (one mpirun, both in same universe):
 """
 
 import argparse
+import logging
 import sys
 import numpy as np
 
@@ -36,6 +37,8 @@ try:
     _mpi_available = True
 except ImportError:
     _mpi_available = False
+
+logger = logging.getLogger("tblite-mdi")
 
 # ---------------------------------------------------------------------------
 # Atomic number lookup
@@ -306,7 +309,16 @@ def parse_args():
         "--verbosity",
         type=int,
         default=0,
-        help="tblite output verbosity: 0=silent, 1=minimal, 2=full (default: 0)",
+        help="tblite's own internal output verbosity: 0=silent, 1=minimal, "
+        "2=full (default: 0). Separate from --log-level below.",
+    )
+    p.add_argument(
+        "--log-level",
+        default="INFO",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        help="Engine logging. INFO (default): lifecycle + one energy line per "
+        "step (terse). DEBUG: every MDI command and handshake detail too. "
+        "WARNING: warnings/errors only (quietest).",
     )
     return p.parse_args()
 
@@ -314,9 +326,7 @@ def parse_args():
 # ---------------------------------------------------------------------------
 # Internal: run tblite singlepoint and cache result
 # ---------------------------------------------------------------------------
-def _run_singlepoint(
-    calc, coords_bohr, cell_flat, is_periodic, verbosity, prev_result=None
-):
+def _run_singlepoint(calc, coords_bohr, cell_flat, is_periodic, prev_result=None):
     """Update geometry and run tblite singlepoint. Returns result object.
 
     Pass prev_result to warm-start the SCF from the previous step's
@@ -329,8 +339,7 @@ def _run_singlepoint(
     # res=prev_result: restart from previous density (None → cold SAD start)
     # copy=False:      update result in-place rather than allocating a copy
     result = calc.singlepoint(res=prev_result, copy=False)
-    if verbosity >= 0:
-        print(f"[tblite-mdi]   energy = {result.get('energy'):.10f} Ha", flush=True)
+    logger.info("energy = %.10f Ha", result.get("energy"))
     return result
 
 
@@ -340,14 +349,18 @@ def _run_singlepoint(
 def main():
     args = parse_args()
 
+    logging.basicConfig(
+        level=getattr(logging, args.log_level),
+        format="%(levelname)s: %(message)s",
+        stream=sys.stdout,
+    )
+
     # Per-type element symbols: from --elements if given, otherwise read the
     # fix mdi/qm "elements" line out of the LAMMPS input deck.
     elements = args.elements
     if elements is None:
         elements = elements_from_input(args.input)
-        print(
-            f"[tblite-mdi] elements from {args.input}: {' '.join(elements)}", flush=True
-        )
+        logger.info("elements from %s: %s", args.input, " ".join(elements))
 
     # Build LAMMPS-type → atomic-number map
     type_to_z = {i + 1: symbol_to_z(sym) for i, sym in enumerate(elements)}
@@ -357,14 +370,11 @@ def main():
     atom_style = args.atom_style or atom_style_from_input(args.input) or "full"
 
     # Parse structure file
-    print(
-        f"[tblite-mdi] Reading structure: {args.structure} (atom_style={atom_style})",
-        flush=True,
-    )
+    logger.info("Reading structure %s (atom_style=%s)", args.structure, atom_style)
     natoms, atom_types_arr, positions_ang, cell_ang, is_periodic = parse_lammps_data(
         args.structure, atom_style
     )
-    print(f"[tblite-mdi] {natoms} atoms, periodic={is_periodic}", flush=True)
+    logger.info("%d atoms, periodic=%s", natoms, is_periodic)
 
     # Per-atom atomic numbers (from LAMMPS type → element symbol → Z)
     atomic_numbers = np.array([type_to_z[t] for t in atom_types_arr], dtype=int)
@@ -420,11 +430,7 @@ def main():
     ]:
         mdi.MDI_Register_command("@DEFAULT", _cmd)
 
-    print(
-        f"[tblite-mdi] MDI connection established. "
-        f"method={args.method}, natoms={natoms}",
-        flush=True,
-    )
+    logger.info("MDI connection established. method=%s, natoms=%d", args.method, natoms)
 
     # ----------------------------------------------------------------
     # Create tblite Calculator
@@ -454,11 +460,11 @@ def main():
     # ----------------------------------------------------------------
     # MDI event loop
     # ----------------------------------------------------------------
-    print("[tblite-mdi] Entering MDI event loop ...", flush=True)
+    logger.info("Entering MDI event loop ...")
 
     while True:
         command = mdi.MDI_Recv_Command(comm)
-        print(f"[tblite-mdi] command: {command!r}", flush=True)
+        logger.debug("command: %r", command)
 
         # ---- Metadata -----------------------------------------------
         if command == "<NATOMS":
@@ -477,7 +483,7 @@ def main():
                     f">NATOMS mismatch: LAMMPS has {lammps_natoms} atoms, "
                     f"engine has {natoms} atoms"
                 )
-            print(f"[tblite-mdi]   >NATOMS verified: {lammps_natoms}", flush=True)
+            logger.debug(">NATOMS verified: %d", lammps_natoms)
 
         elif command == "<NAME":
             mdi.MDI_Send("TBLITE", mdi.MDI_NAME_LENGTH, mdi.MDI_CHAR, comm)
@@ -499,10 +505,7 @@ def main():
             # LAMMPS may send one int per atom (atomic number) for
             # verification; receive and discard (we already have from file)
             mdi.MDI_Recv(natoms, mdi.MDI_INT, comm)
-            print(
-                "[tblite-mdi]   >ELEMENTS received (using file-based elements)",
-                flush=True,
-            )
+            logger.debug(">ELEMENTS received (using file-based elements)")
 
         # ---- SCF trigger --------------------------------------------
         elif command == "SCF":
@@ -513,7 +516,6 @@ def main():
                     coords_bohr,
                     cell_flat,
                     is_periodic,
-                    args.verbosity,
                     prev_result=result,
                 )
                 recompute = False
@@ -527,7 +529,6 @@ def main():
                     coords_bohr,
                     cell_flat,
                     is_periodic,
-                    args.verbosity,
                     prev_result=result,
                 )
                 recompute = False
@@ -565,13 +566,13 @@ def main():
 
         # ---- Shutdown -----------------------------------------------
         elif command == "EXIT":
-            print("[tblite-mdi] EXIT — shutting down.", flush=True)
+            logger.info("EXIT -- shutting down.")
             break
 
         else:
-            print(f"[tblite-mdi] WARNING: unrecognised command {command!r}", flush=True)
+            logger.warning("unrecognised command %r", command)
 
-    print("[tblite-mdi] Done.", flush=True)
+    logger.info("Done.")
 
 
 if __name__ == "__main__":
