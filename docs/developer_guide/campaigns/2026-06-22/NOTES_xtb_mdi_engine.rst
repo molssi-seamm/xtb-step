@@ -60,8 +60,11 @@ them). The composed result label a LAMMPS MD run records is therefore
 How it differs from the MOPAC engine
 ====================================
 
-The contract is identical, but the tblite engine differs from ``mopac_mdi.py``
-in a few concrete ways, all handled here:
+Like MOPAC, the engine needs **no input file** -- atom count, atomic numbers,
+coordinates and cell all arrive over the MDI handshake (``>NATOMS``,
+``>ELEMENTS``, ``>COORDS``, ``>CELL``), and the tblite ``Calculator`` is built
+lazily on the first energy/force request. The remaining differences from
+``mopac_mdi.py`` are small and all handled here:
 
 .. list-table::
    :header-rows: 1
@@ -70,13 +73,6 @@ in a few concrete ways, all handled here:
    * - Aspect
      - MOPAC (mopac_mdi.py)
      - xTB (tblite_mdi.py)
-   * - Bootstrap
-     - no input file; structure comes entirely from the MDI handshake
-     - reads ``structure.dat`` (the LAMMPS data file) up front to build the
-       Calculator
-   * - Element map
-     - ``>ELEMENTS`` over MDI (or ``--elements`` fallback)
-     - from the ``fix ... mdi/qm ... elements`` line in ``input.dat``
    * - Spin input
      - ``--multiplicity`` (2S+1)
      - ``--uhf`` (unpaired electrons = multiplicity - 1)
@@ -87,16 +83,16 @@ in a few concrete ways, all handled here:
      - engine == advertised set
      - engine also accepts ``IPEA1-xTB`` (not advertised)
 
-**Why a structure file.** tblite's ``Calculator`` needs the atomic numbers and
-initial geometry at construction, before the MDI loop. Rather than defer
-construction until the handshake (as MOPAC does), the engine reads the
-``structure.dat`` the driver already writes, and derives the per-type element
-symbols from the ``elements`` keyword on the ``fix mdi/qm`` line in
-``input.dat``. Both files already exist in the run directory, so **no element
-list is threaded through** ``get_mdi_engine_command`` -- keeping the contract
-identical to MOPAC's and avoiding any ripple into ``mopac_step`` or Phase C.
-(A future refactor could defer Calculator construction and drop the file
-dependence entirely, matching MOPAC; not needed for the thin line.)
+.. note::
+
+   The engine originally bootstrapped from ``structure.dat`` (parsing the
+   LAMMPS data file) and the ``elements`` line in ``input.dat``, because
+   tblite's ``Calculator`` wants numbers/positions/lattice at construction.
+   That was refactored away (2026-06-26): the driver already sends all of it
+   over MDI to *any* engine, so the wrapper now defers construction to the
+   first compute and reads the handshake -- matching MOPAC, and removing the
+   data-file parser, the ``--structure/--elements/--atom-style`` flags, and a
+   whole class of ``atom_style``-mismatch bugs.
 
 
 Engine launch
@@ -105,10 +101,10 @@ Engine launch
 ``get_mdi_engine_command`` builds (rendered into the driver's launch script
 with ``shlex.join``)::
 
+    OMP_NUM_THREADS=<n> MKL_NUM_THREADS=<n> \
     <conda> run --live-stream -n seamm-xtb python <abs>/tblite_mdi.py
         -mdi "-role ENGINE -name TBLITE -method TCP -port <port> -hostname <host>"
-        --structure structure.dat --method GFN2-xTB --charge <q> --uhf <2S>
-        --verbosity 1
+        --method GFN2-xTB --charge <q> --uhf <2S>
 
 The engine runs in **seamm-xtb** (``tblite-python`` + ``pymdi`` added to
 ``seamm-xtb.yml``); ``conda run`` keeps it in its own environment while the

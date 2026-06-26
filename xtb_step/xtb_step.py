@@ -199,10 +199,9 @@ class xTBStep(object):
         and the method / charge / spin flags -- is supplied here, so the driver
         hardwires no xTB knowledge.
 
-        The engine bootstraps its structure from ``structure.dat`` (the LAMMPS
-        data file the driver writes) and derives the per-type element symbols
-        from the ``fix ... mdi/qm ... elements`` line in ``input.dat`` itself,
-        so no element list need be threaded through this contract.
+        The engine needs no input file: atom count, atomic numbers,
+        coordinates and cell all arrive over the MDI handshake from the driver
+        (LAMMPS), exactly as for the MOPAC engine.
 
         Parameters
         ----------
@@ -267,8 +266,6 @@ class xTBStep(object):
             config["mdi_script"],
             "-mdi",
             mdi_init,
-            "--structure",
-            "structure.dat",
             "--method",
             method,
             "--charge",
