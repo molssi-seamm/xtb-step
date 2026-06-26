@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>History &#8212; SEAMM xTB Plug-in 2026.6.26 documentation</title>
+    <title>LAMMPS + MOPAC/xTB QM-MD via MDI (xTB engine side) &#8212; SEAMM xTB Plug-in 2026.6.26 documentation</title>
   
   
   
@@ -27,39 +27,40 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c224919a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=c224919a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
-    <script src="_static/documentation_options.js?v=47d802d6"></script>
-    <script src="_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'history';</script>
+    <script src="../../../_static/documentation_options.js?v=47d802d6"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developer_guide/campaigns/2026-06-22/index';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Development Team" href="authors.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="xTB MDI engine – drive LAMMPS MD with tblite over MDI" href="NOTES_xtb_mdi_engine.html" />
+    <link rel="prev" title="xtb_step Installer Drop – File Drop Notes" href="../2026-05-02/NOTES_Installer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="2026.6.26" />
   
     
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script src="searchindex.js"></script>
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
   
   </head>
   <body data-default-mode="">
@@ -79,7 +80,7 @@
   <dialog id="pst-search-dialog">
     
 <form class="bd-search d-flex align-items-center"
-      action="search.html"
+      action="../../../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -115,7 +116,7 @@
     
   
 
-<a class="navbar-brand logo" href="index.html">
+<a class="navbar-brand logo" href="../../../index.html">
   
   
   
@@ -126,8 +127,8 @@
       
     
     
-    <img src="_static/SEAMM logo.png" class="logo__image only-light" alt=""/>
-    <img src="_static/SEAMM Inverted 288x181.png" class="logo__image only-dark pst-js-only" alt=""/>
+    <img src="../../../_static/SEAMM logo.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/SEAMM Inverted 288x181.png" class="logo__image only-dark pst-js-only" alt=""/>
   
   
     <p class="title logo__title">xTB</p>
@@ -145,28 +146,28 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="getting_started/index.html">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting Started
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="user_guide/index.html">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
     User Guide
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="developer_guide/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
     Developer Documentation
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="api/index.html">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
     API Documentation
   </a>
 </li>
@@ -180,14 +181,14 @@
                 <ul id="pst-nav-more-links" class="dropdown-menu">
                     
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="authors.html">
+  <a class="nav-link dropdown-item nav-internal" href="../../../authors.html">
     Development Team
   </a>
 </li>
 
 
-<li class=" current active">
-  <a class="nav-link dropdown-item nav-internal" href="#">
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../history.html">
     History
   </a>
 </li>
@@ -323,42 +324,42 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="getting_started/index.html">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting Started
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="user_guide/index.html">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
     User Guide
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="developer_guide/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
     Developer Documentation
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="api/index.html">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
     API Documentation
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="authors.html">
+  <a class="nav-link nav-internal" href="../../../authors.html">
     Development Team
   </a>
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../history.html">
     History
   </a>
 </li>
@@ -451,7 +452,35 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"></div>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Campaigns</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../2026-05-02/index.html">2026-05-02 Initial development campaign</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/xtb_step_v1_scope.html">xtb_step v1 – Scope Document</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_A.html">xtb_step Phase A – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_B.html">xtb_step Phase B – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_C.html">xtb_step Phase C – xTBParameters Fix Drop – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_D.html">xtb_step Phase D – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_E.html">xtb_step Phase E – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_F.html">xtb_step Phase F – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_G.html">xtb_step Phase G – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_H.html">xtb_step Phase H – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_I.html">xtb_step Phase I – File Drop Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2026-05-02/NOTES_Installer.html">xtb_step Installer Drop – File Drop Notes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">LAMMPS + MOPAC/xTB QM-MD via MDI (xTB engine side)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="NOTES_xtb_mdi_engine.html">xTB MDI engine – drive LAMMPS MD with tblite over MDI</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
 </nav></div>
     </div>
   
@@ -486,11 +515,17 @@
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
-      <a href="index.html" class="nav-link" aria-label="Home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">History</span></li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Developer Documentation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Campaigns</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LAMMPS + MOPAC/xTB QM-MD via MDI (xTB engine side)</span></li>
   </ul>
 </nav>
 </div>
@@ -507,17 +542,25 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="history">
-<h1>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h1>
-<p>2026.5.2: Plug-in created using the SEAMM plug-in cookiecutter.</p>
-<dl class="simple">
-<dt>2026.5.12: Initial working version</dt><dd><ul class="simple">
-<li><p>Support for Energy, Optimization, and Frequencies</p></li>
-<li><p>GFN0-xTB, GFN1-xTB, GFN2-xTB (the default), and GFN-FF supported</p></li>
-<li><p>ALPB, GBSA, or CPCM-X implicit solvation</p></li>
+  <section id="lammps-mopac-xtb-qm-md-via-mdi-xtb-engine-side">
+<h1>LAMMPS + MOPAC/xTB QM-MD via MDI (xTB engine side)<a class="headerlink" href="#lammps-mopac-xtb-qm-md-via-mdi-xtb-engine-side" title="Link to this heading">#</a></h1>
+<p>Engine-side (<code class="docutils literal notranslate"><span class="pre">xtb_step</span></code>) notes for the campaign that lets LAMMPS run MD with
+forces from a QM engine over the MDI protocol. This drop adds the xTB/tblite
+engine, mirroring the MOPAC engine.</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="NOTES_xtb_mdi_engine.html">xTB MDI engine – drive LAMMPS MD with tblite over MDI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="NOTES_xtb_mdi_engine.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NOTES_xtb_mdi_engine.html#what-xtb-advertises">What xTB advertises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NOTES_xtb_mdi_engine.html#how-it-differs-from-the-mopac-engine">How it differs from the MOPAC engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NOTES_xtb_mdi_engine.html#engine-launch">Engine launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NOTES_xtb_mdi_engine.html#open-to-verify">Open / to verify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NOTES_xtb_mdi_engine.html#references">References</a></li>
 </ul>
-</dd>
-</dl>
+</li>
+</ul>
+</div>
 </section>
 
 
@@ -531,13 +574,22 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="authors.html"
+       href="../2026-05-02/NOTES_Installer.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Development Team</p>
+        <p class="prev-next-title">xtb_step Installer Drop – File Drop Notes</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="NOTES_xtb_mdi_engine.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">xTB MDI engine – drive LAMMPS MD with tblite over MDI</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -553,7 +605,7 @@
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="_sources/history.rst.txt">
+    <a href="../../../_sources/developer_guide/campaigns/2026-06-22/index.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
@@ -572,8 +624,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">

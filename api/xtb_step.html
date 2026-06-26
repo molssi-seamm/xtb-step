@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>xtb_step package &#8212; SEAMM xTB Plug-in 2026.5.13 documentation</title>
+    <title>xtb_step package &#8212; SEAMM xTB Plug-in 2026.6.26 documentation</title>
   
   
   
@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -36,12 +36,12 @@
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c224919a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
-    <script src="../_static/documentation_options.js?v=85cba88a"></script>
+    <script src="../_static/documentation_options.js?v=47d802d6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -55,7 +55,7 @@
     <link rel="prev" title="xtb_step" href="modules.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.5.13" />
+  <meta name="docsearch:version" content="2026.6.26" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -238,11 +238,18 @@
       
         <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
       
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -255,8 +262,7 @@
           
           
           
-          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -267,8 +273,7 @@
           
           
           
-          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">Twitter</span></a>
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i><span class="visually-hidden">Twitter</span></a>
         </li>
 </ul></div>
       
@@ -392,11 +397,18 @@
         
           <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -409,8 +421,7 @@
           
           
           
-          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/molssi-seamm/xtb_step" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -421,8 +432,7 @@
           
           
           
-          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">Twitter</span></a>
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i><span class="visually-hidden">Twitter</span></a>
         </li>
 </ul></div>
         
@@ -1265,6 +1275,14 @@ transparently).</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="xtb_step.substep.seamm_ini_path">
+<span class="sig-prename descclassname"><span class="pre">xtb_step.substep.</span></span><span class="sig-name descname"><span class="pre">seamm_ini_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/substep.html#seamm_ini_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.substep.seamm_ini_path" title="Link to this definition">#</a></dt>
+<dd><p>Path to the global <code class="docutils literal notranslate"><span class="pre">seamm.ini</span></code>.</p>
+<p>Defaults to <code class="docutils literal notranslate"><span class="pre">~/.seamm.d/seamm.ini</span></code>; override with the <code class="docutils literal notranslate"><span class="pre">$SEAMM_INI</span></code>
+environment variable (handy for testing against an alternate config).</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="xtb_step.substep.solvent_choices_for">
 <span class="sig-prename descclassname"><span class="pre">xtb_step.substep.</span></span><span class="sig-name descname"><span class="pre">solvent_choices_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/substep.html#solvent_choices_for"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.substep.solvent_choices_for" title="Link to this definition">#</a></dt>
 <dd><p>Return the supported solvent enumeration for a solvation model.</p>
@@ -1279,6 +1297,18 @@ transparently).</p>
 <dd class="field-odd"><p>tuple of str</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="xtb_step.substep.xtb_thread_count">
+<span class="sig-prename descclassname"><span class="pre">xtb_step.substep.</span></span><span class="sig-name descname"><span class="pre">xtb_thread_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_atoms_per_core</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/substep.html#xtb_thread_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.substep.xtb_thread_count" title="Link to this definition">#</a></dt>
+<dd><p>OpenMP threads for xTB / tblite, sized from the <code class="docutils literal notranslate"><span class="pre">[xtb-step]</span></code> section
+of <code class="docutils literal notranslate"><span class="pre">seamm.ini</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">n_threads</span> <span class="pre">=</span> <span class="pre">clamp(round(n_atoms</span> <span class="pre">/</span> <span class="pre">atoms-per-core),</span> <span class="pre">1,</span> <span class="pre">ncores)</span></code> – the
+same atoms-per-core / max-cores scheme the LAMMPS and DFTB+ steps use. xTB
+and tblite honor both <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code> and <code class="docutils literal notranslate"><span class="pre">MKL_NUM_THREADS</span></code>. If the
+section or keys are missing, falls back to <code class="docutils literal notranslate"><span class="pre">default_atoms_per_core</span></code> and
+no core cap.</p>
 </dd></dl>
 
 </section>
@@ -1789,6 +1819,109 @@ a step, and dimensions of the graphical node.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="xtb_step.xtb_step.xTBStep.get_executor_config">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_executor_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seamm_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/xtb_step.html#xTBStep.get_executor_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.xtb_step.xTBStep.get_executor_config" title="Link to this definition">#</a></dt>
+<dd><p>Return how to launch the xTB MDI engine on this machine.</p>
+<p>Reads the per-plug-in <code class="docutils literal notranslate"><span class="pre">xtb.ini</span></code> for the current executor type, so the
+tblite MDI engine runs in the same conda environment (<code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code>) as
+ordinary xTB jobs, and adds <code class="docutils literal notranslate"><span class="pre">mdi_script</span></code> – the absolute path to the
+bundled <code class="docutils literal notranslate"><span class="pre">data/tblite_mdi.py</span></code> engine (Option C: shipped in the wheel,
+refreshed by <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">xtb-step</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">tblite_mdi.py</span></code> imports only packages present in <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code>
+(<code class="docutils literal notranslate"><span class="pre">tblite</span></code>, <code class="docutils literal notranslate"><span class="pre">pymdi</span></code>/<code class="docutils literal notranslate"><span class="pre">mdi</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>) and nothing from <code class="docutils literal notranslate"><span class="pre">xtb_step</span></code>
+or <code class="docutils literal notranslate"><span class="pre">seamm</span></code>, so it runs under that environment’s Python even though the
+file lives in the <code class="docutils literal notranslate"><span class="pre">seamm</span></code> environment’s site-packages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>executor</strong> (<em>seamm.ExecutorBase</em>) – The flowchart executor (<code class="docutils literal notranslate"><span class="pre">self.flowchart.executor</span></code> in the driver);
+<code class="docutils literal notranslate"><span class="pre">executor.name</span></code> selects the ini section.</p></li>
+<li><p><strong>seamm_options</strong> (<em>dict</em>) – The global SEAMM options (<code class="docutils literal notranslate"><span class="pre">self.global_options</span></code>);
+<code class="docutils literal notranslate"><span class="pre">seamm_options[&quot;root&quot;]</span></code> locates the ini.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The ini section for the current executor, plus <code class="docutils literal notranslate"><span class="pre">version</span></code> (the
+plug-in version) and <code class="docutils literal notranslate"><span class="pre">mdi_script</span></code> (absolute path to
+data/tblite_mdi.py).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xtb_step.xtb_step.xTBStep.get_mdi_engine_command">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_mdi_engine_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seamm_options</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'localhost'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplicity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TBLITE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/xtb_step.html#xTBStep.get_mdi_engine_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.xtb_step.xTBStep.get_mdi_engine_command" title="Link to this definition">#</a></dt>
+<dd><p>Build the argv that launches the tblite MDI <em>engine</em> over TCP.</p>
+<p>The driver (e.g. lammps_step) owns the rendezvous (TCP, <code class="docutils literal notranslate"><span class="pre">port</span></code>,
+<code class="docutils literal notranslate"><span class="pre">hostname</span></code>) and passes it in; everything xTB-specific – the conda
+environment, the bundled <code class="docutils literal notranslate"><span class="pre">tblite_mdi.py</span></code> path, the engine’s MDI name,
+and the method / charge / spin flags – is supplied here, so the driver
+hardwires no xTB knowledge.</p>
+<p>The engine needs no input file: atom count, atomic numbers,
+coordinates and cell all arrive over the MDI handshake from the driver
+(LAMMPS), exactly as for the MOPAC engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>executor</strong> – Passed straight to <code class="docutils literal notranslate"><span class="pre">get_executor_config</span></code>.</p></li>
+<li><p><strong>seamm_options</strong> – Passed straight to <code class="docutils literal notranslate"><span class="pre">get_executor_config</span></code>.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – xTB Hamiltonian, e.g. “GFN2-xTB”; must be in
+<code class="docutils literal notranslate"><span class="pre">cls._MDI_CAPABLE_METHODS</span></code>.</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – TCP port the engine binds; chosen by the driver.</p></li>
+<li><p><strong>hostname</strong> (<em>str</em>) – Host the engine binds / the driver connects to.</p></li>
+<li><p><strong>charge</strong> (<em>int</em>) – Total charge and 2S+1 multiplicity (from the configuration object).
+tblite counts <em>unpaired electrons</em>, so <code class="docutils literal notranslate"><span class="pre">--uhf</span></code> = multiplicity - 1.</p></li>
+<li><p><strong>multiplicity</strong> (<em>int</em>) – Total charge and 2S+1 multiplicity (from the configuration object).
+tblite counts <em>unpaired electrons</em>, so <code class="docutils literal notranslate"><span class="pre">--uhf</span></code> = multiplicity - 1.</p></li>
+<li><p><strong>n_atoms</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of atoms, used to size the engine’s OpenMP/MKL threads from
+the <code class="docutils literal notranslate"><span class="pre">[xtb-step]</span></code> section of <code class="docutils literal notranslate"><span class="pre">seamm.ini</span></code> (atoms-per-core /
+ncores). If given, <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code> / <code class="docutils literal notranslate"><span class="pre">MKL_NUM_THREADS</span></code> are set
+on the engine’s command line, overriding any inherited cap.</p></li>
+<li><p><strong>engine_name</strong> (<em>str</em>) – The MDI <code class="docutils literal notranslate"><span class="pre">-name</span></code> for the engine (default “TBLITE”).</p></li>
+<li><p><strong>extra_args</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Extra engine flags appended verbatim.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A ready-to-run argv; render into the launch script with
+<code class="docutils literal notranslate"><span class="pre">shlex.join(argv)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xtb_step.xtb_step.xTBStep.get_model_chemistry_options">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_model_chemistry_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">periodic_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdi_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/xtb_step.html#xTBStep.get_model_chemistry_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.xtb_step.xTBStep.get_model_chemistry_options" title="Link to this definition">#</a></dt>
+<dd><p>Return the model chemistries (level specs) xTB can provide.</p>
+<p>Advertises bare <code class="docutils literal notranslate"><span class="pre">[owner:]type&#64;method</span></code> level specs (the consumer
+supplies the driver and task), keyed by bare method name, exactly as
+<code class="docutils literal notranslate"><span class="pre">MOPACStep</span></code> does. xTB is semiempirical QM, so the type is <code class="docutils literal notranslate"><span class="pre">SQM</span></code> and
+the owner is <code class="docutils literal notranslate"><span class="pre">xTB</span></code> – e.g. <code class="docutils literal notranslate"><span class="pre">xTB:SQM&#64;GFN2-xTB</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>periodic_only</strong> (<em>bool</em>) – Only return methods validated for periodic systems via MDI.</p></li>
+<li><p><strong>mdi_only</strong> (<em>bool</em>) – Only return methods launchable via the tblite MDI engine.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Keyed by bare method name (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;GFN2-xTB&quot;</span></code>); see the field set
+below. <code class="docutils literal notranslate"><span class="pre">periodic_native</span></code> is the method’s own metadata flag (the
+xtb-binary path refuses periodic input in v1); <code class="docutils literal notranslate"><span class="pre">periodic_mdi</span></code> is
+whether it is validated periodic through the tblite MDI engine.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="xtb_step.xtb_step.xTBStep.my_description">
 <span class="sig-name descname"><span class="pre">my_description</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">'An</span> <span class="pre">interface</span> <span class="pre">for</span> <span class="pre">xTB',</span> <span class="pre">'group':</span> <span class="pre">'Simulations',</span> <span class="pre">'name':</span> <span class="pre">'xTB'}</span></span><a class="headerlink" href="#xtb_step.xtb_step.xTBStep.my_description" title="Link to this definition">#</a></dt>
@@ -1953,7 +2086,9 @@ A SEAMM plug-in for xTB</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.substep.Substep.write_coord_xyz"><code class="docutils literal notranslate"><span class="pre">Substep.write_coord_xyz()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.substep.seamm_ini_path"><code class="docutils literal notranslate"><span class="pre">seamm_ini_path()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.substep.solvent_choices_for"><code class="docutils literal notranslate"><span class="pre">solvent_choices_for()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.substep.xtb_thread_count"><code class="docutils literal notranslate"><span class="pre">xtb_thread_count()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-xtb_step.tk_energy">xtb_step.tk_energy module</a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -2022,6 +2157,9 @@ A SEAMM plug-in for xTB</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.create_node"><code class="docutils literal notranslate"><span class="pre">xTBStep.create_node()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.create_tk_node"><code class="docutils literal notranslate"><span class="pre">xTBStep.create_tk_node()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.description"><code class="docutils literal notranslate"><span class="pre">xTBStep.description()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.get_executor_config"><code class="docutils literal notranslate"><span class="pre">xTBStep.get_executor_config()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.get_mdi_engine_command"><code class="docutils literal notranslate"><span class="pre">xTBStep.get_mdi_engine_command()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.get_model_chemistry_options"><code class="docutils literal notranslate"><span class="pre">xTBStep.get_model_chemistry_options()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.my_description"><code class="docutils literal notranslate"><span class="pre">xTBStep.my_description</span></code></a></li>
 </ul>
 </li>
@@ -2053,8 +2191,8 @@ A SEAMM plug-in for xTB</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2066,7 +2204,7 @@ A SEAMM plug-in for xTB</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>
