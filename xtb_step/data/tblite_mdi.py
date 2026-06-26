@@ -188,7 +188,7 @@ def main():
         # res=result warm-starts the SCF from the previous step's density;
         # copy=False updates the result in place.
         result = calc.singlepoint(res=result, copy=False)
-        logger.info("energy = %.10f Ha", result.get("energy"))
+        logger.debug("energy = %.10f Ha", result.get("energy"))
 
     # ----------------------------------------------------------------
     # MDI event loop
