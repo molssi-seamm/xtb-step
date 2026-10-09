@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 
@@ -7,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xtb_step.xtb_step &#8212; SEAMM xTB Plug-in 2026.6.26.1 documentation</title>
+    <title>xtb_step.xtb_step &#8212; SEAMM xTB Plug-in 2026.10.9 documentation</title>
   
   
   
@@ -26,8 +25,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -35,12 +34,12 @@
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=c224919a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
 
-    <script src="../../_static/documentation_options.js?v=188ee956"></script>
+    <script src="../../_static/documentation_options.js?v=465c9eed"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,8 +50,9 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.6.26.1" />
+  <meta name="docsearch:version" content="2026.10.9" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -100,7 +100,7 @@
   
     <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
   </button>
   
@@ -225,7 +225,7 @@
         <div class="navbar-item navbar-persistent--container">
           
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -236,15 +236,15 @@
         <div class="navbar-item">
 
 <div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
     <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
     <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
     <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
   </ul>
 </div></div>
       
@@ -281,7 +281,7 @@
   
     <div class="navbar-persistent--mobile">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -393,15 +393,15 @@
           <div class="navbar-item">
 
 <div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
     <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
     <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
     <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
   </ul>
 </div></div>
         
@@ -505,7 +505,7 @@
 <div class="viewcode-block" id="xTBStep">
 <a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.xTBStep">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">xTBStep</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper class needed for the stevedore integration.</span>
+<span class="w">    </span><span class="sd">"""Helper class needed for the stevedore integration.</span>
 
 <span class="sd">    This must provide a `description()` method that returns a dict containing a</span>
 <span class="sd">    description of this node, and `create_node()` and `create_tk_node()` methods</span>
@@ -519,23 +519,23 @@
 <span class="sd">            several lines long, and needs to be clear to non-expert users.</span>
 <span class="sd">            It contains the following keys: description, group, name.</span>
 
-<span class="sd">        my_description[&quot;description&quot;] : tuple</span>
+<span class="sd">        my_description["description"] : tuple</span>
 <span class="sd">            A description of the xTB step. It must be</span>
 <span class="sd">            clear to non-experts.</span>
 
-<span class="sd">        my_description[&quot;group&quot;] : str</span>
+<span class="sd">        my_description["group"] : str</span>
 <span class="sd">            Which group in the menus to put this step. If the group does</span>
-<span class="sd">            not exist it will be created. Common groups are &quot;Building&quot;,</span>
-<span class="sd">            &quot;Control&quot;, &quot;Custom&quot;, &quot;Data&quot;, and &quot;Simulations&quot;.</span>
+<span class="sd">            not exist it will be created. Common groups are "Building",</span>
+<span class="sd">            "Control", "Custom", "Data", and "Simulations".</span>
 
-<span class="sd">        my_description[&quot;name&quot;] : str</span>
+<span class="sd">        my_description["name"] : str</span>
 <span class="sd">            The name of this step, to be displayed in the menus.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">my_description</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;An interface for xTB&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="s2">&quot;Simulations&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;xTB&quot;</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"An interface for xTB"</span><span class="p">,</span>
+        <span class="s2">"group"</span><span class="p">:</span> <span class="s2">"Simulations"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"xTB"</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="c1"># ----------------------------------------------------------------------</span>
@@ -547,14 +547,14 @@
     <span class="c1"># the ordinary xtb-binary path, not via MDI. Both MDI-capable methods are</span>
     <span class="c1"># validated for periodic systems (tblite returns the virial -&gt; stress).</span>
     <span class="c1"># ----------------------------------------------------------------------</span>
-    <span class="n">_MDI_CAPABLE_METHODS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;GFN1-xTB&quot;</span><span class="p">,</span> <span class="s2">&quot;GFN2-xTB&quot;</span><span class="p">}</span>
-    <span class="n">_MDI_PERIODIC_VALIDATED</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;GFN1-xTB&quot;</span><span class="p">,</span> <span class="s2">&quot;GFN2-xTB&quot;</span><span class="p">}</span>
+    <span class="n">_MDI_CAPABLE_METHODS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"GFN1-xTB"</span><span class="p">,</span> <span class="s2">"GFN2-xTB"</span><span class="p">}</span>
+    <span class="n">_MDI_PERIODIC_VALIDATED</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"GFN1-xTB"</span><span class="p">,</span> <span class="s2">"GFN2-xTB"</span><span class="p">}</span>
 
 <div class="viewcode-block" id="xTBStep.get_model_chemistry_options">
 <a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.xTBStep.get_model_chemistry_options">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_model_chemistry_options</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">periodic_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mdi_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the model chemistries (level specs) xTB can provide.</span>
+<span class="w">        </span><span class="sd">"""Return the model chemistries (level specs) xTB can provide.</span>
 
 <span class="sd">        Advertises bare ``[owner:]type@method`` level specs (the consumer</span>
 <span class="sd">        supplies the driver and task), keyed by bare method name, exactly as</span>
@@ -571,17 +571,17 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            Keyed by bare method name (e.g. ``&quot;GFN2-xTB&quot;``); see the field set</span>
-<span class="sd">            below. ``periodic_native`` is the method&#39;s own metadata flag (the</span>
+<span class="sd">            Keyed by bare method name (e.g. ``"GFN2-xTB"``); see the field set</span>
+<span class="sd">            below. ``periodic_native`` is the method's own metadata flag (the</span>
 <span class="sd">            xtb-binary path refuses periodic input in v1); ``periodic_mdi`` is</span>
 <span class="sd">            whether it is validated periodic through the tblite MDI engine.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">theory_class</span><span class="p">,</span> <span class="n">class_data</span> <span class="ow">in</span> <span class="n">xtb_step</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span>
-            <span class="s2">&quot;computational models&quot;</span>
+            <span class="s2">"computational models"</span>
         <span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">family</span><span class="p">,</span> <span class="n">family_data</span> <span class="ow">in</span> <span class="n">class_data</span><span class="p">[</span><span class="s2">&quot;models&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">family_data</span><span class="p">[</span><span class="s2">&quot;parameterizations&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">family</span><span class="p">,</span> <span class="n">family_data</span> <span class="ow">in</span> <span class="n">class_data</span><span class="p">[</span><span class="s2">"models"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">family_data</span><span class="p">[</span><span class="s2">"parameterizations"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">mdi_capable</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_MDI_CAPABLE_METHODS</span>
                     <span class="n">periodic_mdi</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_MDI_PERIODIC_VALIDATED</span>
 
@@ -591,14 +591,14 @@
                         <span class="k">continue</span>
 
                     <span class="n">options</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                        <span class="s2">&quot;model_chemistry&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;xTB:SQM@</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;SQM&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span>
-                        <span class="s2">&quot;periodic_native&quot;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-                        <span class="s2">&quot;periodic_mdi&quot;</span><span class="p">:</span> <span class="n">periodic_mdi</span><span class="p">,</span>
-                        <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;elements&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-                        <span class="s2">&quot;mdi_capable&quot;</span><span class="p">:</span> <span class="n">mdi_capable</span><span class="p">,</span>
-                        <span class="s2">&quot;mdi_method_arg&quot;</span><span class="p">:</span> <span class="n">name</span> <span class="k">if</span> <span class="n">mdi_capable</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="s2">"model_chemistry"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"xTB:SQM@</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"SQM"</span><span class="p">,</span>
+                        <span class="s2">"description"</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span>
+                        <span class="s2">"periodic_native"</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"periodic"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                        <span class="s2">"periodic_mdi"</span><span class="p">:</span> <span class="n">periodic_mdi</span><span class="p">,</span>
+                        <span class="s2">"elements"</span><span class="p">:</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"elements"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span>
+                        <span class="s2">"mdi_capable"</span><span class="p">:</span> <span class="n">mdi_capable</span><span class="p">,</span>
+                        <span class="s2">"mdi_method_arg"</span><span class="p">:</span> <span class="n">name</span> <span class="k">if</span> <span class="n">mdi_capable</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="p">}</span>
         <span class="k">return</span> <span class="n">options</span></div>
 
@@ -607,7 +607,7 @@
 <a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.xTBStep.get_executor_config">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_executor_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">executor</span><span class="p">,</span> <span class="n">seamm_options</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return how to launch the xTB MDI engine on this machine.</span>
+<span class="w">        </span><span class="sd">"""Return how to launch the xTB MDI engine on this machine.</span>
 
 <span class="sd">        Reads the per-plug-in ``xtb.ini`` for the current executor type, so the</span>
 <span class="sd">        tblite MDI engine runs in the same conda environment (``seamm-xtb``) as</span>
@@ -617,8 +617,8 @@
 
 <span class="sd">        ``tblite_mdi.py`` imports only packages present in ``seamm-xtb``</span>
 <span class="sd">        (``tblite``, ``pymdi``/``mdi``, ``numpy``) and nothing from ``xtb_step``</span>
-<span class="sd">        or ``seamm``, so it runs under that environment&#39;s Python even though the</span>
-<span class="sd">        file lives in the ``seamm`` environment&#39;s site-packages.</span>
+<span class="sd">        or ``seamm``, so it runs under that environment's Python even though the</span>
+<span class="sd">        file lives in the ``seamm`` environment's site-packages.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -627,31 +627,30 @@
 <span class="sd">            ``executor.name`` selects the ini section.</span>
 <span class="sd">        seamm_options : dict</span>
 <span class="sd">            The global SEAMM options (``self.global_options``);</span>
-<span class="sd">            ``seamm_options[&quot;root&quot;]`` locates the ini.</span>
+<span class="sd">            ``seamm_options["root"]`` locates the ini.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            The ini section for the current executor, plus ``version`` (the</span>
-<span class="sd">            plug-in version) and ``mdi_script`` (absolute path to</span>
-<span class="sd">            data/tblite_mdi.py).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            The ini section for the current executor, plus ``mdi_script``</span>
+<span class="sd">            (absolute path to data/tblite_mdi.py).</span>
+<span class="sd">        """</span>
         <span class="n">executor_type</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">ini_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">seamm_options</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
-        <span class="n">ini_path</span> <span class="o">=</span> <span class="n">ini_dir</span> <span class="o">/</span> <span class="s2">&quot;xtb.ini&quot;</span>
-        <span class="n">resources</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s2">&quot;xtb_step&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span>
+        <span class="n">ini_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">seamm_options</span><span class="p">[</span><span class="s2">"root"</span><span class="p">])</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="n">ini_path</span> <span class="o">=</span> <span class="n">ini_dir</span> <span class="o">/</span> <span class="s2">"xtb.ini"</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s2">"xtb_step"</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"data"</span>
 
         <span class="c1"># Bootstrap a default xtb.ini if the user has none yet, defaulting the</span>
         <span class="c1"># [local] section to the seamm-xtb conda environment.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="n">boot</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
-            <span class="n">boot</span><span class="o">.</span><span class="n">read_string</span><span class="p">((</span><span class="n">resources</span> <span class="o">/</span> <span class="s2">&quot;xtb.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
-            <span class="k">if</span> <span class="s2">&quot;local&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">boot</span><span class="p">:</span>
-                <span class="n">boot</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">)</span>
-            <span class="n">boot</span><span class="p">[</span><span class="s2">&quot;local&quot;</span><span class="p">][</span><span class="s2">&quot;installation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;conda&quot;</span>
-            <span class="n">boot</span><span class="p">[</span><span class="s2">&quot;local&quot;</span><span class="p">][</span><span class="s2">&quot;conda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CONDA_EXE&quot;</span><span class="p">]</span>
-            <span class="n">boot</span><span class="p">[</span><span class="s2">&quot;local&quot;</span><span class="p">][</span><span class="s2">&quot;conda-environment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;seamm-xtb&quot;</span>
-            <span class="k">with</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">boot</span><span class="o">.</span><span class="n">read_string</span><span class="p">((</span><span class="n">resources</span> <span class="o">/</span> <span class="s2">"xtb.ini"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+            <span class="k">if</span> <span class="s2">"local"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">boot</span><span class="p">:</span>
+                <span class="n">boot</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s2">"local"</span><span class="p">)</span>
+            <span class="n">boot</span><span class="p">[</span><span class="s2">"local"</span><span class="p">][</span><span class="s2">"installation"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"conda"</span>
+            <span class="n">boot</span><span class="p">[</span><span class="s2">"local"</span><span class="p">][</span><span class="s2">"conda"</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"CONDA_EXE"</span><span class="p">]</span>
+            <span class="n">boot</span><span class="p">[</span><span class="s2">"local"</span><span class="p">][</span><span class="s2">"conda-environment"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"seamm-xtb"</span>
+            <span class="k">with</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
                 <span class="n">boot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
 
         <span class="n">full_config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
@@ -659,21 +658,20 @@
 
         <span class="c1"># Last-ditch: fall back to an xtb executable on $PATH (a local install).</span>
         <span class="k">if</span> <span class="n">executor_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">full_config</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;xtb&quot;</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">"xtb"</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;No section for &#39;</span><span class="si">{</span><span class="n">executor_type</span><span class="si">}</span><span class="s2">&#39; in the xTB ini file &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">ini_path</span><span class="si">}</span><span class="s2">), nor in the defaults, nor on $PATH.&quot;</span>
+                    <span class="sa">f</span><span class="s2">"No section for '</span><span class="si">{</span><span class="n">executor_type</span><span class="si">}</span><span class="s2">' in the xTB ini file "</span>
+                    <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">ini_path</span><span class="si">}</span><span class="s2">), nor in the defaults, nor on $PATH."</span>
                 <span class="p">)</span>
             <span class="n">full_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">executor_type</span><span class="p">)</span>
-            <span class="n">full_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">executor_type</span><span class="p">,</span> <span class="s2">&quot;installation&quot;</span><span class="p">,</span> <span class="s2">&quot;local&quot;</span><span class="p">)</span>
-            <span class="n">full_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">executor_type</span><span class="p">,</span> <span class="s2">&quot;code&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-            <span class="k">with</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">full_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">executor_type</span><span class="p">,</span> <span class="s2">"installation"</span><span class="p">,</span> <span class="s2">"local"</span><span class="p">)</span>
+            <span class="n">full_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">executor_type</span><span class="p">,</span> <span class="s2">"code"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+            <span class="k">with</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
                 <span class="n">full_config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
 
         <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">full_config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">executor_type</span><span class="p">))</span>
-        <span class="n">config</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xtb_step</span><span class="o">.</span><span class="n">__version__</span>
-        <span class="n">config</span><span class="p">[</span><span class="s2">&quot;mdi_script&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">resources</span> <span class="o">/</span> <span class="s2">&quot;tblite_mdi.py&quot;</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">[</span><span class="s2">"mdi_script"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">resources</span> <span class="o">/</span> <span class="s2">"tblite_mdi.py"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">config</span></div>
 
 
@@ -687,18 +685,18 @@
         <span class="o">*</span><span class="p">,</span>
         <span class="n">method</span><span class="p">,</span>
         <span class="n">port</span><span class="p">,</span>
-        <span class="n">hostname</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+        <span class="n">hostname</span><span class="o">=</span><span class="s2">"localhost"</span><span class="p">,</span>
         <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">multiplicity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">n_atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">engine_name</span><span class="o">=</span><span class="s2">&quot;TBLITE&quot;</span><span class="p">,</span>
+        <span class="n">engine_name</span><span class="o">=</span><span class="s2">"TBLITE"</span><span class="p">,</span>
         <span class="n">extra_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the argv that launches the tblite MDI *engine* over TCP.</span>
+<span class="w">        </span><span class="sd">"""Build the argv that launches the tblite MDI *engine* over TCP.</span>
 
 <span class="sd">        The driver (e.g. lammps_step) owns the rendezvous (TCP, ``port``,</span>
 <span class="sd">        ``hostname``) and passes it in; everything xTB-specific -- the conda</span>
-<span class="sd">        environment, the bundled ``tblite_mdi.py`` path, the engine&#39;s MDI name,</span>
+<span class="sd">        environment, the bundled ``tblite_mdi.py`` path, the engine's MDI name,</span>
 <span class="sd">        and the method / charge / spin flags -- is supplied here, so the driver</span>
 <span class="sd">        hardwires no xTB knowledge.</span>
 
@@ -711,7 +709,7 @@
 <span class="sd">        executor, seamm_options</span>
 <span class="sd">            Passed straight to ``get_executor_config``.</span>
 <span class="sd">        method : str</span>
-<span class="sd">            xTB Hamiltonian, e.g. &quot;GFN2-xTB&quot;; must be in</span>
+<span class="sd">            xTB Hamiltonian, e.g. "GFN2-xTB"; must be in</span>
 <span class="sd">            ``cls._MDI_CAPABLE_METHODS``.</span>
 <span class="sd">        port : int</span>
 <span class="sd">            TCP port the engine binds; chosen by the driver.</span>
@@ -721,12 +719,12 @@
 <span class="sd">            Total charge and 2S+1 multiplicity (from the configuration object).</span>
 <span class="sd">            tblite counts *unpaired electrons*, so ``--uhf`` = multiplicity - 1.</span>
 <span class="sd">        n_atoms : int, optional</span>
-<span class="sd">            Number of atoms, used to size the engine&#39;s OpenMP/MKL threads from</span>
+<span class="sd">            Number of atoms, used to size the engine's OpenMP/MKL threads from</span>
 <span class="sd">            the ``[xtb-step]`` section of ``seamm.ini`` (atoms-per-core /</span>
 <span class="sd">            ncores). If given, ``OMP_NUM_THREADS`` / ``MKL_NUM_THREADS`` are set</span>
-<span class="sd">            on the engine&#39;s command line, overriding any inherited cap.</span>
+<span class="sd">            on the engine's command line, overriding any inherited cap.</span>
 <span class="sd">        engine_name : str</span>
-<span class="sd">            The MDI ``-name`` for the engine (default &quot;TBLITE&quot;).</span>
+<span class="sd">            The MDI ``-name`` for the engine (default "TBLITE").</span>
 <span class="sd">        extra_args : list of str, optional</span>
 <span class="sd">            Extra engine flags appended verbatim.</span>
 
@@ -735,73 +733,73 @@
 <span class="sd">        list of str</span>
 <span class="sd">            A ready-to-run argv; render into the launch script with</span>
 <span class="sd">            ``shlex.join(argv)``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_MDI_CAPABLE_METHODS</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&#39; is not an MDI-capable xTB method; expected &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_MDI_CAPABLE_METHODS</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">' is not an MDI-capable xTB method; expected "</span>
+                <span class="sa">f</span><span class="s2">"one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_MDI_CAPABLE_METHODS</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
 
         <span class="n">config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_executor_config</span><span class="p">(</span><span class="n">executor</span><span class="p">,</span> <span class="n">seamm_options</span><span class="p">)</span>
 
-        <span class="n">installation</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;installation&quot;</span><span class="p">,</span> <span class="s2">&quot;conda&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">installation</span> <span class="o">!=</span> <span class="s2">&quot;conda&quot;</span><span class="p">:</span>
+        <span class="n">installation</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"installation"</span><span class="p">,</span> <span class="s2">"conda"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">installation</span> <span class="o">!=</span> <span class="s2">"conda"</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;The tblite MDI engine is currently wired up only for a conda &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;installation; xtb.ini selects &#39;</span><span class="si">{</span><span class="n">installation</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
-                <span class="s2">&quot;TODO: local / modules / docker launches.&quot;</span>
+                <span class="s2">"The tblite MDI engine is currently wired up only for a conda "</span>
+                <span class="sa">f</span><span class="s2">"installation; xtb.ini selects '</span><span class="si">{</span><span class="n">installation</span><span class="si">}</span><span class="s2">'. "</span>
+                <span class="s2">"TODO: local / modules launches."</span>
             <span class="p">)</span>
 
         <span class="n">mdi_init</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;-role ENGINE -name </span><span class="si">{</span><span class="n">engine_name</span><span class="si">}</span><span class="s2"> -method TCP &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;-port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2"> -hostname </span><span class="si">{</span><span class="n">hostname</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"-role ENGINE -name </span><span class="si">{</span><span class="n">engine_name</span><span class="si">}</span><span class="s2"> -method TCP "</span>
+            <span class="sa">f</span><span class="s2">"-port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2"> -hostname </span><span class="si">{</span><span class="n">hostname</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
         <span class="c1"># tblite uses the number of unpaired electrons, not 2S+1.</span>
         <span class="n">uhf</span> <span class="o">=</span> <span class="n">multiplicity</span> <span class="o">-</span> <span class="mi">1</span>
 
         <span class="n">argv</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;conda&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;run&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;--live-stream&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
-            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;conda-environment&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;python&quot;</span><span class="p">,</span>
-            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;mdi_script&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;-mdi&quot;</span><span class="p">,</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">"conda"</span><span class="p">],</span>
+            <span class="s2">"run"</span><span class="p">,</span>
+            <span class="s2">"--live-stream"</span><span class="p">,</span>
+            <span class="s2">"-n"</span><span class="p">,</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">"conda-environment"</span><span class="p">],</span>
+            <span class="s2">"python"</span><span class="p">,</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">"mdi_script"</span><span class="p">],</span>
+            <span class="s2">"-mdi"</span><span class="p">,</span>
             <span class="n">mdi_init</span><span class="p">,</span>
-            <span class="s2">&quot;--method&quot;</span><span class="p">,</span>
+            <span class="s2">"--method"</span><span class="p">,</span>
             <span class="n">method</span><span class="p">,</span>
-            <span class="s2">&quot;--charge&quot;</span><span class="p">,</span>
+            <span class="s2">"--charge"</span><span class="p">,</span>
             <span class="nb">str</span><span class="p">(</span><span class="n">charge</span><span class="p">),</span>
-            <span class="s2">&quot;--uhf&quot;</span><span class="p">,</span>
+            <span class="s2">"--uhf"</span><span class="p">,</span>
             <span class="nb">str</span><span class="p">(</span><span class="n">uhf</span><span class="p">),</span>
         <span class="p">]</span>
         <span class="k">if</span> <span class="n">extra_args</span><span class="p">:</span>
             <span class="n">argv</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">extra_args</span><span class="p">)</span>
 
-        <span class="c1"># Size the engine&#39;s OpenMP/MKL threads from the [xtb-step] config and</span>
-        <span class="c1"># set them on the engine&#39;s command line (an env-var prefix), overriding</span>
+        <span class="c1"># Size the engine's OpenMP/MKL threads from the [xtb-step] config and</span>
+        <span class="c1"># set them on the engine's command line (an env-var prefix), overriding</span>
         <span class="c1"># any cap the launch script inherits (the driver pins OMP=1 for itself).</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">.substep</span><span class="w"> </span><span class="kn">import</span> <span class="n">xtb_thread_count</span>
 
             <span class="n">n</span> <span class="o">=</span> <span class="n">xtb_thread_count</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span>
-            <span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;OMP_NUM_THREADS=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;MKL_NUM_THREADS=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">argv</span><span class="p">]</span>
+            <span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"OMP_NUM_THREADS=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"MKL_NUM_THREADS=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="o">*</span><span class="n">argv</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">argv</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flowchart</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize this helper class, which is used by</span>
+<span class="w">        </span><span class="sd">"""Initialize this helper class, which is used by</span>
 <span class="sd">        the application via stevedore to get information about</span>
 <span class="sd">        and create node objects for the flowchart</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">pass</span>
 
 <div class="viewcode-block" id="xTBStep.create_node">
 <a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.xTBStep.create_node">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flowchart</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create and return the new node object.</span>
+<span class="w">        </span><span class="sd">"""Create and return the new node object.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -817,7 +815,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        xTB</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">return</span> <span class="n">xtb_step</span><span class="o">.</span><span class="n">xTB</span><span class="p">(</span><span class="n">flowchart</span><span class="o">=</span><span class="n">flowchart</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -825,7 +823,7 @@
 <div class="viewcode-block" id="xTBStep.create_tk_node">
 <a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.xTBStep.create_tk_node">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_tk_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">canvas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create and return the graphical Tk node object.</span>
+<span class="w">        </span><span class="sd">"""Create and return the graphical Tk node object.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -840,7 +838,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TkxTB</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">return</span> <span class="n">xtb_step</span><span class="o">.</span><span class="n">TkxTB</span><span class="p">(</span><span class="n">canvas</span><span class="o">=</span><span class="n">canvas</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -848,12 +846,12 @@
 <div class="viewcode-block" id="xTBStep.description">
 <a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.xTBStep.description">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a description of what this step does.</span>
+<span class="w">        </span><span class="sd">"""Return a description of what this step does.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        description : dict(str, str)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">xTBStep</span><span class="o">.</span><span class="n">my_description</span></div>
 </div>
 
@@ -886,8 +884,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -899,7 +897,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
 </p></div>
       
     </div>
