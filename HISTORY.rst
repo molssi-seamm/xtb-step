@@ -8,6 +8,8 @@ History
       and that combination fails in dftd4's polarizabilities. The environment now pins
       tblite-python 0.5.0 (dftd4 3.7), which works; with it the xtb program is 6.4.1.
       GFN1-xTB was not affected.
+    * Internal: requires Python 3.12; CI installs with uv from PyPI (no conda test
+      environment); the unused Docker installation option was removed.
 
 2026.5.2: Plug-in created using the SEAMM plug-in cookiecutter.
 
