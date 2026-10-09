@@ -397,7 +397,7 @@ class Substep(seamm.Node):
         Reads the per-plug-in ``xtb.ini`` from the SEAMM root directory,
         falling back to the bundled ``data/xtb.ini`` template if the user
         does not yet have one. Then dispatches the run through the
-        flowchart's executor (which handles conda/local/modules/docker
+        flowchart's executor (which handles conda/local/modules
         transparently).
         """
         if return_files is None:

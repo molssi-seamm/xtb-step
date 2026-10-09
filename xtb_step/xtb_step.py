@@ -132,9 +132,8 @@ class xTBStep(object):
         Returns
         -------
         dict
-            The ini section for the current executor, plus ``version`` (the
-            plug-in version) and ``mdi_script`` (absolute path to
-            data/tblite_mdi.py).
+            The ini section for the current executor, plus ``mdi_script``
+            (absolute path to data/tblite_mdi.py).
         """
         executor_type = executor.name
         ini_dir = Path(seamm_options["root"]).expanduser()
@@ -172,7 +171,6 @@ class xTBStep(object):
                 full_config.write(fd)
 
         config = dict(full_config.items(executor_type))
-        config["version"] = xtb_step.__version__
         config["mdi_script"] = str(resources / "tblite_mdi.py")
         return config
 
@@ -246,7 +244,7 @@ class xTBStep(object):
             raise NotImplementedError(
                 "The tblite MDI engine is currently wired up only for a conda "
                 f"installation; xtb.ini selects '{installation}'. "
-                "TODO: local / modules / docker launches."
+                "TODO: local / modules launches."
             )
 
         mdi_init = (
