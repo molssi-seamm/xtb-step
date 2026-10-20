@@ -95,6 +95,68 @@ def parse_args():
     return p.parse_args()
 
 
+#: Further attempts when the SCF does not converge, each from the superposition of
+#: atomic densities rather than the previous geometry's: (max-iter, mixer-damping,
+#: guess). None of them changes the converged energy, unlike a higher electronic
+#: temperature would. The defaults are 250, 0.4 and 0 (SAD); 1 is the EEQ guess.
+RETRIES = (
+    (250, 0.4, 0),
+    (1000, 0.1, 0),
+    (1000, 0.1, 1),
+)
+DEFAULTS = (250, 0.4, 0)
+
+
+def singlepoint(calc, previous):
+    """Run the SCF, retrying one that does not converge.
+
+    Parameters
+    ----------
+    calc : tblite.interface.Calculator
+        The calculator, at the geometry to compute.
+    previous : tblite.interface.Result or None
+        The previous geometry's result, to start from.
+
+    Returns
+    -------
+    tblite.interface.Result or None
+        The result, or None if no attempt converged.
+    """
+    try:
+        return calc.singlepoint(res=previous, copy=False)
+    except RuntimeError as e:  # TBLiteRuntimeError, e.g. "SCF not converged"
+        logger.warning("SCF failed (%s); retrying from a fresh start.", e)
+    result = None
+    try:
+        for max_iter, damping, guess in RETRIES:
+            calc.set("max-iter", max_iter)
+            calc.set("mixer-damping", damping)
+            calc.set("guess", guess)
+            try:
+                result = calc.singlepoint()
+                logger.info(
+                    "SCF converged on retry (max-iter %d, damping %g, guess %d).",
+                    max_iter,
+                    damping,
+                    guess,
+                )
+                break
+            except RuntimeError as e:
+                logger.warning(
+                    "SCF retry failed (max-iter %d, damping %g, guess %d): %s",
+                    max_iter,
+                    damping,
+                    guess,
+                    e,
+                )
+    finally:
+        max_iter, damping, guess = DEFAULTS
+        calc.set("max-iter", max_iter)
+        calc.set("mixer-damping", damping)
+        calc.set("guess", guess)
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -151,6 +213,7 @@ def main():
     calc = None
     result = None
     recompute = True
+    n_failed = 0
 
     def build_calculator():
         """Construct the tblite Calculator from the handshake data (once)."""
@@ -173,7 +236,7 @@ def main():
 
     def compute():
         """Build the calculator if needed, push the current geometry, run SCF."""
-        nonlocal result
+        nonlocal result, n_failed
         if not (have_elements and have_coords):
             raise RuntimeError(
                 "energy/forces requested before >ELEMENTS and >COORDS were "
@@ -186,9 +249,20 @@ def main():
             lattice = cell_flat.reshape(3, 3) if is_periodic else None
             calc.update(positions=coords_bohr.reshape(-1, 3), lattice=lattice)
         # res=result warm-starts the SCF from the previous step's density;
-        # copy=False updates the result in place.
-        result = calc.singlepoint(res=result, copy=False)
-        logger.debug("energy = %.10f Ha", result.get("energy"))
+        # copy=False updates the result in place. A failed SCF is retried in ways
+        # that do not change the converged energy; if none converges, the result
+        # is None and the driver gets NaN, so one point cannot end the engine.
+        result = singlepoint(calc, result)
+        if result is None:
+            n_failed += 1
+            logger.warning(
+                "SCF did not converge for this geometry after %d attempts; "
+                "sending NaN (%d failed so far).",
+                len(RETRIES) + 1,
+                n_failed,
+            )
+        else:
+            logger.debug("energy = %.10f Ha", result.get("energy"))
 
     # ----------------------------------------------------------------
     # MDI event loop
@@ -239,21 +313,28 @@ def main():
 
             if command == "<ENERGY":
                 # tblite Hartree -> MDI Hartree: no conversion
-                mdi.MDI_Send(result.get("energy"), 1, mdi.MDI_DOUBLE, comm)
+                energy = np.nan if result is None else result.get("energy")
+                mdi.MDI_Send(energy, 1, mdi.MDI_DOUBLE, comm)
             elif command == "<FORCES":
                 # gradient (dE/dx, Hartree/Bohr); MDI force = -dE/dx -> negate
-                forces = -result.get("gradient").ravel()
+                if result is None:
+                    forces = np.full(3 * natoms, np.nan)
+                else:
+                    forces = -result.get("gradient").ravel()
                 mdi.MDI_Send(forces, 3 * natoms, mdi.MDI_DOUBLE, comm)
             elif command == "<STRESS":
                 if not is_periodic:
                     raise RuntimeError("<STRESS requested for a non-periodic system")
-                # virial W (Hartree, 3x3); intensive Cauchy stress sigma = -W/V
-                # (tensile positive, Ha/Bohr^3). Sign verified empirically via
-                # the compress/expand test.
-                virial = result.get("virial")
-                volume = abs(np.linalg.det(cell_flat.reshape(3, 3)))  # Bohr^3
-                stress = -virial / volume
-                mdi.MDI_Send(stress.ravel(), 9, mdi.MDI_DOUBLE, comm)
+                if result is None:
+                    stress = np.full(9, np.nan)
+                else:
+                    # virial W (Hartree, 3x3); intensive Cauchy stress sigma =
+                    # -W/V (tensile positive, Ha/Bohr^3). Sign verified
+                    # empirically via the compress/expand test.
+                    virial = result.get("virial")
+                    volume = abs(np.linalg.det(cell_flat.reshape(3, 3)))  # Bohr^3
+                    stress = -virial / volume
+                mdi.MDI_Send(np.ravel(stress), 9, mdi.MDI_DOUBLE, comm)
 
         elif command == "EXIT":
             logger.info("EXIT -- shutting down.")

@@ -1,6 +1,16 @@
 =======
 History
 =======
+2026.10.20 -- Bugfix: an SCF that did not converge ended the MDI engine
+    * In the tblite MDI engine (used e.g. by the Dimer Builder), one structure whose
+      SCF did not converge ended the engine, and with it the whole step. A failed SCF
+      is now retried from a fresh start, then with more iterations and stronger
+      damping, then from another starting guess -- none of which changes the
+      converged energy. If none converges, the engine returns NaN for that structure
+      and carries on, so the step can leave the point out. For Li+ with ethylene
+      carbonate the failures were at large separations, 7-9 Å, and the retries
+      converged them.
+
 
 2026.10.9 -- Bugfix: GFN2-xTB through tblite crashed
     * Any GFN2-xTB calculation through tblite (the MDI engine, as used by the Dimer
