@@ -188,6 +188,7 @@ class xTBStep(object):
         n_atoms=None,
         engine_name="TBLITE",
         extra_args=None,
+        precision=None,
     ):
         """Build the argv that launches the tblite MDI *engine* over TCP.
 
@@ -224,6 +225,10 @@ class xTBStep(object):
             The MDI ``-name`` for the engine (default "TBLITE").
         extra_args : list of str, optional
             Extra engine flags appended verbatim.
+        precision : str, optional
+            "tight" converges each SCF tightly (tblite accuracy 1e-4), for
+            finite differences of gradients: the warm-started SCF otherwise
+            leaves noise that depends on the previous geometry (2026-11-05).
 
         Returns
         -------
@@ -271,6 +276,8 @@ class xTBStep(object):
             "--uhf",
             str(uhf),
         ]
+        if precision == "tight":
+            argv.extend(["--accuracy", "1e-4"])
         if extra_args:
             argv.extend(extra_args)
 
