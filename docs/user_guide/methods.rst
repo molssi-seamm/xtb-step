@@ -106,3 +106,12 @@ tightening it helps is when you are about to do a
 :doc:`Frequencies <frequencies>` calculation and want a tightly
 converged starting geometry; the ``tight``/``vtight``/``extreme``
 optimization levels already arrange for this.
+
+The same accuracy applies when another step uses xTB through a **Model
+Chemistry** (e.g. ``xTB:SQM@GFN2-xTB``) and its MDI engine. Steps that take
+finite differences of the gradients, such as **Vibrational Analysis**, ask that
+engine for tight convergence, which runs every calculation at accuracy 1e-4.
+The engine starts each SCF from the previous structure's, and at the default
+accuracy that leaves small errors that depend on which structure came before;
+finite differences magnify them (for water's anharmonic force constants, from
+92 to 0.12 cm\ :sup:`-1` with the tighter accuracy).

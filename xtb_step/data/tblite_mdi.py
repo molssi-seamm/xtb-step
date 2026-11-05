@@ -79,6 +79,14 @@ def parse_args():
         help="Number of unpaired electrons (default: 0)",
     )
     p.add_argument(
+        "--accuracy",
+        type=float,
+        default=1.0,
+        help="tblite's numerical accuracy: the SCF and integral thresholds scale "
+        "with it (default 1.0; smaller is tighter, e.g. 1e-4 for finite "
+        "differences of gradients).",
+    )
+    p.add_argument(
         "--verbosity",
         type=int,
         default=0,
@@ -230,8 +238,12 @@ def main():
             uhf=args.uhf,
         )
         calc.set("verbosity", args.verbosity)
+        calc.set("accuracy", args.accuracy)
         logger.info(
-            "tblite Calculator built: natoms=%d, periodic=%s", natoms, is_periodic
+            "tblite Calculator built: natoms=%d, periodic=%s, accuracy=%g",
+            natoms,
+            is_periodic,
+            args.accuracy,
         )
 
     def compute():
