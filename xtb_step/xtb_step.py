@@ -8,6 +8,24 @@ import shutil
 
 import xtb_step
 
+_tblite_settings = None
+
+
+def tblite_settings():
+    """The engine's settings module (``data/tblite_settings.py``), loaded by its
+    path: it is also imported by the engine in the seamm-xtb environment."""
+    global _tblite_settings
+    if _tblite_settings is None:
+        import importlib.resources
+        import importlib.util
+
+        path = importlib.resources.files("xtb_step") / "data" / "tblite_settings.py"
+        spec = importlib.util.spec_from_file_location("_tblite_settings", str(path))
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _tblite_settings = module
+    return _tblite_settings
+
 
 class xTBStep(object):
     """Helper class needed for the stevedore integration.
@@ -173,6 +191,44 @@ class xTBStep(object):
         config = dict(full_config.items(executor_type))
         config["mdi_script"] = str(resources / "tblite_mdi.py")
         return config
+
+    @classmethod
+    def expected_fingerprints(
+        cls,
+        configuration,
+        model_chemistry,
+        *,
+        kind="energy",
+        properties=("energy",),
+        options=None,
+        version=None,
+    ):
+        """The settings fingerprints the tblite MDI engine would record for a
+        structure, without running it (see ``data/tblite_settings.py``).
+
+        The settings do not depend on the structure (the charge and spin belong
+        to the species), only on the method, the accuracy (1e-4 for
+        ``precision="tight"``, else tblite's 1.0) and tblite's version, which is
+        hashed: take it from a record of the same run. The engine has no
+        analytic Hessian, so a Hessian (finite differences of its gradients) has
+        the energy's fingerprint.
+        """
+        from seamm_util.fingerprint import calculation_record
+
+        if kind not in ("energy", "hessian"):
+            raise ValueError(f"kind must be 'energy' or 'hessian', not '{kind}'")
+        settings = tblite_settings()
+        method = (model_chemistry.get("options") or {}).get(
+            "mdi_method_arg"
+        ) or model_chemistry.get("method")
+        options = dict(options or {})
+        accuracy = 1e-4 if options.get("precision") == "tight" else 1.0
+        record = calculation_record(
+            settings.PROGRAM,
+            version,
+            {settings.SETTINGS_FILE: settings.settings_text(method, accuracy)},
+        )
+        return [record["fingerprint"]]
 
     @classmethod
     def get_mdi_engine_command(
