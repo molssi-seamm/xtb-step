@@ -1,6 +1,16 @@
 =======
 History
 =======
+
+2026.11.11 -- Settings fingerprints for xTB's model-chemistry calculations
+    * Calculations through an xTB **Model Chemistry** (e.g. ``xTB:SQM@GFN2-xTB``) now
+      carry a fingerprint of their settings -- the program and its version, the method
+      and the accuracy -- like the other codes' calculations. Steps that reuse results,
+      such as **Thermochemistry** with its fragment store, can then tell which stored
+      xTB results match the calculation they need.
+    * Needs seamm-mdi 2026.11.11 or later for the fingerprints; with an older
+      seamm-mdi, xTB calculations work as before, without them.
+
 2026.11.5 -- Tight convergence on request for finite differences
     * Steps that take finite differences of xTB's gradients over its MDI engine, such
       as the new Vibrational Analysis step, can now ask for tight convergence: every

@@ -34,9 +34,15 @@ separately by --verbosity (default silent).
 """
 
 import argparse
+import json
 import logging
+from pathlib import Path
 import sys
 import numpy as np
+
+# The settings record (data/tblite_settings.py, beside this script)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tblite_settings import settings_record  # noqa: E402
 
 # mpi4py must be imported before mdi in MPI mode so that MPI_Init has
 # already been called when MDI_Init splits the communicator.
@@ -188,6 +194,8 @@ def main():
 
     mdi.MDI_Init(args.mdi)
     comm = mdi.MDI_Accept_Communicator()
+    # The settings of the last energy/gradient run (no analytic Hessian here)
+    records = {"energy": None, "hessian": None}
 
     mdi.MDI_Register_node("@DEFAULT")
     for _cmd in [
@@ -201,6 +209,8 @@ def main():
         "<ENERGY",  # driver requests energy (Hartree)
         "<FORCES",  # driver requests forces (Hartree/Bohr)
         "<STRESS",  # driver requests stress (Hartree/Bohr^3)
+        "<FINGERPRINT_LENGTH",  # the settings record's length (seamm_mdi)
+        "<FINGERPRINT",  # the settings record, JSON
         "EXIT",  # driver signals end of simulation
     ]:
         mdi.MDI_Register_command("@DEFAULT", _cmd)
@@ -275,6 +285,7 @@ def main():
             )
         else:
             logger.debug("energy = %.10f Ha", result.get("energy"))
+            records["energy"] = settings_record(args.method, args.accuracy)
 
     # ----------------------------------------------------------------
     # MDI event loop
@@ -347,6 +358,15 @@ def main():
                     volume = abs(np.linalg.det(cell_flat.reshape(3, 3)))  # Bohr^3
                     stress = -virial / volume
                 mdi.MDI_Send(np.ravel(stress), 9, mdi.MDI_DOUBLE, comm)
+
+        elif command in ("<FINGERPRINT_LENGTH", "<FINGERPRINT"):
+            # The settings of the last calculation, as JSON {"energy": record,
+            # "hessian": None}: the length first, then that many characters.
+            text = json.dumps(records, sort_keys=True)
+            if command == "<FINGERPRINT_LENGTH":
+                mdi.MDI_Send(len(text), 1, mdi.MDI_INT, comm)
+            else:
+                mdi.MDI_Send(text, len(text), mdi.MDI_CHAR, comm)
 
         elif command == "EXIT":
             logger.info("EXIT -- shutting down.")
