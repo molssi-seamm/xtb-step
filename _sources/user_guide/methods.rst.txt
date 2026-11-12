@@ -115,3 +115,10 @@ The engine starts each SCF from the previous structure's, and at the default
 accuracy that leaves small errors that depend on which structure came before;
 finite differences magnify them (for water's anharmonic force constants, from
 92 to 0.12 cm\ :sup:`-1` with the tighter accuracy).
+
+Each calculation through the Model Chemistry carries a fingerprint of its
+settings: the program (tblite) and its version, the method and the accuracy.
+The charge and spin multiplicity belong to the structure and are not part of
+it. Steps that reuse results, such as **Thermochemistry** with its fragment
+store, use the fingerprint to tell whether a stored xTB result came from the
+same calculation they need.
