@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>xtb_step package &#8212; SEAMM xTB Plug-in 2026.11.11 documentation</title>
+    <title>xtb_step package &#8212; SEAMM xTB Plug-in 2026.11.21 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../_static/documentation_options.js?v=83e1bca7"></script>
+    <script src="../_static/documentation_options.js?v=2eb1cc6b"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.11.11" />
+  <meta name="docsearch:version" content="2026.11.21" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -1741,10 +1741,19 @@ file and invoking the binary once.</p>
 <section id="module-xtb_step.xtb_step">
 <span id="xtb-step-xtb-step-module"></span><h2>xtb_step.xtb_step module<a class="headerlink" href="#module-xtb_step.xtb_step" title="Link to this heading">#</a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="xtb_step.xtb_step.tblite_environment">
+<span class="sig-prename descclassname"><span class="pre">xtb_step.xtb_step.</span></span><span class="sig-name descname"><span class="pre">tblite_environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/xtb_step.html#tblite_environment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.xtb_step.tblite_environment" title="Link to this definition">#</a></dt>
+<dd><p>The conda environment for the tblite MDI engine.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tblite-environment</span></code> in xtb.ini (<code class="docutils literal notranslate"><span class="pre">seamm-tblite</span></code> since 2026.11.21, apart from
+the xtb executable’s <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code>); installations from before then have only
+<code class="docutils literal notranslate"><span class="pre">conda-environment</span></code>, which held both.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="xtb_step.xtb_step.tblite_settings">
 <span class="sig-prename descclassname"><span class="pre">xtb_step.xtb_step.</span></span><span class="sig-name descname"><span class="pre">tblite_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/xtb_step.html#tblite_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.xtb_step.tblite_settings" title="Link to this definition">#</a></dt>
 <dd><p>The engine’s settings module (<code class="docutils literal notranslate"><span class="pre">data/tblite_settings.py</span></code>), loaded by its
-path: it is also imported by the engine in the seamm-xtb environment.</p>
+path: it is also imported by the engine in the seamm-tblite environment.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -1845,11 +1854,12 @@ the energy’s fingerprint.</p>
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_executor_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seamm_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xtb_step/xtb_step.html#xTBStep.get_executor_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xtb_step.xtb_step.xTBStep.get_executor_config" title="Link to this definition">#</a></dt>
 <dd><p>Return how to launch the xTB MDI engine on this machine.</p>
 <p>Reads the per-plug-in <code class="docutils literal notranslate"><span class="pre">xtb.ini</span></code> for the current executor type, so the
-tblite MDI engine runs in the same conda environment (<code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code>) as
-ordinary xTB jobs, and adds <code class="docutils literal notranslate"><span class="pre">mdi_script</span></code> – the absolute path to the
+tblite MDI engine runs in the conda environment named by
+<code class="docutils literal notranslate"><span class="pre">tblite-environment</span></code> (<code class="docutils literal notranslate"><span class="pre">seamm-tblite</span></code>; see <a class="reference internal" href="#xtb_step.xtb_step.tblite_environment" title="xtb_step.xtb_step.tblite_environment"><code class="xref py py-func docutils literal notranslate"><span class="pre">tblite_environment()</span></code></a>),
+and adds <code class="docutils literal notranslate"><span class="pre">mdi_script</span></code> – the absolute path to the
 bundled <code class="docutils literal notranslate"><span class="pre">data/tblite_mdi.py</span></code> engine (Option C: shipped in the wheel,
 refreshed by <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">xtb-step</span></code>).</p>
-<p><code class="docutils literal notranslate"><span class="pre">tblite_mdi.py</span></code> imports only packages present in <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code>
+<p><code class="docutils literal notranslate"><span class="pre">tblite_mdi.py</span></code> imports only packages present in <code class="docutils literal notranslate"><span class="pre">seamm-tblite</span></code>
 (<code class="docutils literal notranslate"><span class="pre">tblite</span></code>, <code class="docutils literal notranslate"><span class="pre">pymdi</span></code>/<code class="docutils literal notranslate"><span class="pre">mdi</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>) and nothing from <code class="docutils literal notranslate"><span class="pre">xtb_step</span></code>
 or <code class="docutils literal notranslate"><span class="pre">seamm</span></code>, so it runs under that environment’s Python even though the
 file lives in the <code class="docutils literal notranslate"><span class="pre">seamm</span></code> environment’s site-packages.</p>
@@ -2176,6 +2186,7 @@ A SEAMM plug-in for xTB</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-xtb_step.xtb_step">xtb_step.xtb_step module</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.tblite_environment"><code class="docutils literal notranslate"><span class="pre">tblite_environment()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.tblite_settings"><code class="docutils literal notranslate"><span class="pre">tblite_settings()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep"><code class="docutils literal notranslate"><span class="pre">xTBStep</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#xtb_step.xtb_step.xTBStep.create_node"><code class="docutils literal notranslate"><span class="pre">xTBStep.create_node()</span></code></a></li>

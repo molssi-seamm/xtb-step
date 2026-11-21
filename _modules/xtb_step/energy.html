@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xtb_step.energy &#8212; SEAMM xTB Plug-in 2026.11.11 documentation</title>
+    <title>xtb_step.energy &#8212; SEAMM xTB Plug-in 2026.11.21 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../../_static/documentation_options.js?v=83e1bca7"></script>
+    <script src="../../_static/documentation_options.js?v=2eb1cc6b"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -52,7 +52,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.11.11" />
+  <meta name="docsearch:version" content="2026.11.21" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -710,6 +710,10 @@
         <span class="c1"># Harvest results</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_results</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 
+        <span class="c1"># Fail loudly if xtb failed, so a Loop counts it as an error rather than</span>
+        <span class="c1"># carrying on with no results.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_xtb_run</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
         <span class="c1"># Store in the SEAMM property database / variables / tables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">store_results</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
@@ -722,6 +726,53 @@
     <span class="c1"># ------------------------------------------------------------------</span>
     <span class="c1"># Result collection</span>
     <span class="c1"># ------------------------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_xtb_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">n_lines</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Raise RuntimeError if the xtb run failed.</span>
+
+<span class="sd">        The run failed if the executor returned nothing, xtb exited with a</span>
+<span class="sd">        non-zero return code, it wrote no ``xtbout.json``, or no total energy</span>
+<span class="sd">        could be read. The message names the directory and quotes the end of</span>
+<span class="sd">        ``xtb.err`` (or of the standard output when there is no error output),</span>
+<span class="sd">        so the error is visible in job.out and counted by a Loop.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        directory : pathlib.Path</span>
+<span class="sd">            The directory of the run.</span>
+<span class="sd">        result : dict or None</span>
+<span class="sd">            What the executor returned (``stdout``, ``stderr``, ``returncode``).</span>
+<span class="sd">        data : dict</span>
+<span class="sd">            The results collected from the run.</span>
+<span class="sd">        n_lines : int</span>
+<span class="sd">            How many lines of the error output to quote.</span>
+<span class="sd">        """</span>
+        <span class="n">directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+        <span class="n">problems</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">problems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"xtb could not be run"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">returncode</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"returncode"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">returncode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">problems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"xtb exited with return code </span><span class="si">{</span><span class="n">returncode</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="s2">"xtbout.json"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">problems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"it wrote no xtbout.json"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"total_energy"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">problems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"no total energy could be read"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">problems</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"stderr"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"stdout"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="o">-</span><span class="n">n_lines</span><span class="p">:])</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"The xTB calculation in </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2"> failed: "</span> <span class="o">+</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">problems</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"."</span>
+        <span class="k">if</span> <span class="n">tail</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The last lines of its output:</span><span class="se">\n</span><span class="si">{</span><span class="n">tail</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">printer</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dedent</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_collect_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">run_result</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Pull values from xtbout.json (and stdout if needed) into a dict.</span>

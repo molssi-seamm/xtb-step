@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xtb_step.xtb_step &#8212; SEAMM xTB Plug-in 2026.11.11 documentation</title>
+    <title>xtb_step.xtb_step &#8212; SEAMM xTB Plug-in 2026.11.21 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../../_static/documentation_options.js?v=83e1bca7"></script>
+    <script src="../../_static/documentation_options.js?v=2eb1cc6b"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -52,7 +52,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.11.11" />
+  <meta name="docsearch:version" content="2026.11.21" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -508,7 +508,7 @@
 <a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.tblite_settings">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tblite_settings</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">"""The engine's settings module (``data/tblite_settings.py``), loaded by its</span>
-<span class="sd">    path: it is also imported by the engine in the seamm-xtb environment."""</span>
+<span class="sd">    path: it is also imported by the engine in the seamm-tblite environment."""</span>
     <span class="k">global</span> <span class="n">_tblite_settings</span>
     <span class="k">if</span> <span class="n">_tblite_settings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">importlib.resources</span>
@@ -520,6 +520,19 @@
         <span class="n">spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
         <span class="n">_tblite_settings</span> <span class="o">=</span> <span class="n">module</span>
     <span class="k">return</span> <span class="n">_tblite_settings</span></div>
+
+
+
+<div class="viewcode-block" id="tblite_environment">
+<a class="viewcode-back" href="../../api/xtb_step.html#xtb_step.xtb_step.tblite_environment">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tblite_environment</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""The conda environment for the tblite MDI engine.</span>
+
+<span class="sd">    ``tblite-environment`` in xtb.ini (``seamm-tblite`` since 2026.11.21, apart from</span>
+<span class="sd">    the xtb executable's ``seamm-xtb``); installations from before then have only</span>
+<span class="sd">    ``conda-environment``, which held both.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tblite-environment"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">config</span><span class="p">[</span><span class="s2">"conda-environment"</span><span class="p">]</span></div>
 
 
 
@@ -631,12 +644,13 @@
 <span class="w">        </span><span class="sd">"""Return how to launch the xTB MDI engine on this machine.</span>
 
 <span class="sd">        Reads the per-plug-in ``xtb.ini`` for the current executor type, so the</span>
-<span class="sd">        tblite MDI engine runs in the same conda environment (``seamm-xtb``) as</span>
-<span class="sd">        ordinary xTB jobs, and adds ``mdi_script`` -- the absolute path to the</span>
+<span class="sd">        tblite MDI engine runs in the conda environment named by</span>
+<span class="sd">        ``tblite-environment`` (``seamm-tblite``; see :func:`tblite_environment`),</span>
+<span class="sd">        and adds ``mdi_script`` -- the absolute path to the</span>
 <span class="sd">        bundled ``data/tblite_mdi.py`` engine (Option C: shipped in the wheel,</span>
 <span class="sd">        refreshed by ``pip install -U xtb-step``).</span>
 
-<span class="sd">        ``tblite_mdi.py`` imports only packages present in ``seamm-xtb``</span>
+<span class="sd">        ``tblite_mdi.py`` imports only packages present in ``seamm-tblite``</span>
 <span class="sd">        (``tblite``, ``pymdi``/``mdi``, ``numpy``) and nothing from ``xtb_step``</span>
 <span class="sd">        or ``seamm``, so it runs under that environment's Python even though the</span>
 <span class="sd">        file lives in the ``seamm`` environment's site-packages.</span>
@@ -671,6 +685,7 @@
             <span class="n">boot</span><span class="p">[</span><span class="s2">"local"</span><span class="p">][</span><span class="s2">"installation"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"conda"</span>
             <span class="n">boot</span><span class="p">[</span><span class="s2">"local"</span><span class="p">][</span><span class="s2">"conda"</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"CONDA_EXE"</span><span class="p">]</span>
             <span class="n">boot</span><span class="p">[</span><span class="s2">"local"</span><span class="p">][</span><span class="s2">"conda-environment"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"seamm-xtb"</span>
+            <span class="n">boot</span><span class="p">[</span><span class="s2">"local"</span><span class="p">][</span><span class="s2">"tblite-environment"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"seamm-tblite"</span>
             <span class="k">with</span> <span class="n">ini_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
                 <span class="n">boot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
 
@@ -829,7 +844,7 @@
             <span class="s2">"run"</span><span class="p">,</span>
             <span class="s2">"--live-stream"</span><span class="p">,</span>
             <span class="s2">"-n"</span><span class="p">,</span>
-            <span class="n">config</span><span class="p">[</span><span class="s2">"conda-environment"</span><span class="p">],</span>
+            <span class="n">tblite_environment</span><span class="p">(</span><span class="n">config</span><span class="p">),</span>
             <span class="s2">"python"</span><span class="p">,</span>
             <span class="n">config</span><span class="p">[</span><span class="s2">"mdi_script"</span><span class="p">],</span>
             <span class="s2">"-mdi"</span><span class="p">,</span>

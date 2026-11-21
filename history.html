@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>History &#8212; SEAMM xTB Plug-in 2026.11.11 documentation</title>
+    <title>History &#8212; SEAMM xTB Plug-in 2026.11.21 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="_static/documentation_options.js?v=83e1bca7"></script>
+    <script src="_static/documentation_options.js?v=2eb1cc6b"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.11.11" />
+  <meta name="docsearch:version" content="2026.11.21" />
   
     
     <script src="_static/searchtools.js"></script>
@@ -511,6 +511,22 @@
   <section id="history">
 <h1>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h1>
 <dl class="simple">
+<dt>2026.11.21 – Bugfix: xTB optimisations crashed, and failures went unnoticed</dt><dd><ul class="simple">
+<li><p>Geometry optimisations failed after the first cycle with the conda-forge
+environment as it now resolves: xtb 6.4.1, which the tblite 0.5.0 pin forced
+into the environment, stops with “Fortran runtime error: Missing comma between
+descriptors” under the gfortran 16 runtime. The xtb executable now has its own
+environment, <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code>, with xtb 6.7.1, and the tblite MDI engine has
+<code class="docutils literal notranslate"><span class="pre">seamm-tblite</span></code> with tblite 0.5.0 (tblite 0.6 with dftd4 4.2 still crashes
+for GFN2). Updating the plug-in’s installation recreates <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code> and
+creates <code class="docutils literal notranslate"><span class="pre">seamm-tblite</span></code>, and records it as <code class="docutils literal notranslate"><span class="pre">tblite-environment</span></code> in xtb.ini;
+until then the engine keeps using <code class="docutils literal notranslate"><span class="pre">conda-environment</span></code>.</p></li>
+<li><p>When xtb fails – a non-zero exit, no <code class="docutils literal notranslate"><span class="pre">xtbout.json</span></code>, or no energy – the step
+now stops with an error naming the directory and quoting the end of xtb’s error
+output. Before, it printed “No results were collected” and carried on, so a Loop
+of failed calculations finished with no errors counted.</p></li>
+</ul>
+</dd>
 <dt>2026.11.11 – Settings fingerprints for xTB’s model-chemistry calculations</dt><dd><ul class="simple">
 <li><p>Calculations through an xTB <strong>Model Chemistry</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">xTB:SQM&#64;GFN2-xTB</span></code>) now
 carry a fingerprint of their settings – the program and its version, the method

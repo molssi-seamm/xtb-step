@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Getting Started &#8212; SEAMM xTB Plug-in 2026.11.11 documentation</title>
+    <title>Getting Started &#8212; SEAMM xTB Plug-in 2026.11.21 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../_static/documentation_options.js?v=83e1bca7"></script>
+    <script src="../_static/documentation_options.js?v=2eb1cc6b"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.11.11" />
+  <meta name="docsearch:version" content="2026.11.21" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -530,10 +530,22 @@ or can be updated, check the box next to it and click
 </div>
 <p>will ensure both that the SEAMM plug-in itself and the underlying
 <code class="docutils literal notranslate"><span class="pre">xtb</span></code> executable are installed and up-to-date. By default the
-installer creates a dedicated <code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code> conda environment from
-<code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> containing <code class="docutils literal notranslate"><span class="pre">xtb</span></code>; on first use the plug-in writes
-the environment location into <code class="docutils literal notranslate"><span class="pre">~/SEAMM/xtb.ini</span></code> so subsequent
-runs can find it.</p>
+installer creates two conda environments from <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">seamm-xtb</span></code> with the <code class="docutils literal notranslate"><span class="pre">xtb</span></code> executable (6.7.1), used by the xTB
+step’s Energy, Optimization and Frequencies sub-steps;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seamm-tblite</span></code> with the tblite library (0.5.0) and MDI, used by the
+xTB engine for QM-MD with LAMMPS and by steps that run xTB through a
+Model Chemistry.</p></li>
+</ul>
+<p>They are kept apart because the tblite that works pins an old xtb, whose
+geometry optimiser crashes with the current gfortran runtime. The
+environments are recorded in <code class="docutils literal notranslate"><span class="pre">~/SEAMM/xtb.ini</span></code> (<code class="docutils literal notranslate"><span class="pre">conda-environment</span></code>
+and <code class="docutils literal notranslate"><span class="pre">tblite-environment</span></code>) so subsequent runs can find them.</p>
+<p>If xtb fails – a non-zero exit, no <code class="docutils literal notranslate"><span class="pre">xtbout.json</span></code>, or no energy – the
+step stops with an error that names the directory and quotes the end of
+xtb’s error output. Inside a Loop, the iteration is then counted as a
+failure rather than finishing with no results.</p>
 </section>
 <section id="a-first-calculation">
 <h2>A first calculation<a class="headerlink" href="#a-first-calculation" title="Link to this heading">#</a></h2>
