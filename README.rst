@@ -85,7 +85,8 @@ Features
   to the run's reference list automatically.
 
 * Automatic installation of the xtb executable into a dedicated
-  ``seamm-xtb`` conda environment via the standard SEAMM Installer.
+  ``seamm-xtb`` conda environment, and of tblite (for the MDI engine) into
+  ``seamm-tblite``, via the standard SEAMM Installer.
 
 Acknowledgements
 ----------------

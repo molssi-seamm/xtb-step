@@ -13,7 +13,7 @@ _tblite_settings = None
 
 def tblite_settings():
     """The engine's settings module (``data/tblite_settings.py``), loaded by its
-    path: it is also imported by the engine in the seamm-xtb environment."""
+    path: it is also imported by the engine in the seamm-tblite environment."""
     global _tblite_settings
     if _tblite_settings is None:
         import importlib.resources
@@ -25,6 +25,16 @@ def tblite_settings():
         spec.loader.exec_module(module)
         _tblite_settings = module
     return _tblite_settings
+
+
+def tblite_environment(config):
+    """The conda environment for the tblite MDI engine.
+
+    ``tblite-environment`` in xtb.ini (``seamm-tblite`` since 2026.11.21, apart from
+    the xtb executable's ``seamm-xtb``); installations from before then have only
+    ``conda-environment``, which held both.
+    """
+    return config.get("tblite-environment") or config["conda-environment"]
 
 
 class xTBStep(object):
@@ -128,12 +138,13 @@ class xTBStep(object):
         """Return how to launch the xTB MDI engine on this machine.
 
         Reads the per-plug-in ``xtb.ini`` for the current executor type, so the
-        tblite MDI engine runs in the same conda environment (``seamm-xtb``) as
-        ordinary xTB jobs, and adds ``mdi_script`` -- the absolute path to the
+        tblite MDI engine runs in the conda environment named by
+        ``tblite-environment`` (``seamm-tblite``; see :func:`tblite_environment`),
+        and adds ``mdi_script`` -- the absolute path to the
         bundled ``data/tblite_mdi.py`` engine (Option C: shipped in the wheel,
         refreshed by ``pip install -U xtb-step``).
 
-        ``tblite_mdi.py`` imports only packages present in ``seamm-xtb``
+        ``tblite_mdi.py`` imports only packages present in ``seamm-tblite``
         (``tblite``, ``pymdi``/``mdi``, ``numpy``) and nothing from ``xtb_step``
         or ``seamm``, so it runs under that environment's Python even though the
         file lives in the ``seamm`` environment's site-packages.
@@ -168,6 +179,7 @@ class xTBStep(object):
             boot["local"]["installation"] = "conda"
             boot["local"]["conda"] = os.environ["CONDA_EXE"]
             boot["local"]["conda-environment"] = "seamm-xtb"
+            boot["local"]["tblite-environment"] = "seamm-tblite"
             with ini_path.open("w") as fd:
                 boot.write(fd)
 
@@ -320,7 +332,7 @@ class xTBStep(object):
             "run",
             "--live-stream",
             "-n",
-            config["conda-environment"],
+            tblite_environment(config),
             "python",
             config["mdi_script"],
             "-mdi",

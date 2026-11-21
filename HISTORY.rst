@@ -2,6 +2,21 @@
 History
 =======
 
+2026.11.21 -- Bugfix: xTB optimisations crashed, and failures went unnoticed
+    * Geometry optimisations failed after the first cycle with the conda-forge
+      environment as it now resolves: xtb 6.4.1, which the tblite 0.5.0 pin forced
+      into the environment, stops with "Fortran runtime error: Missing comma between
+      descriptors" under the gfortran 16 runtime. The xtb executable now has its own
+      environment, ``seamm-xtb``, with xtb 6.7.1, and the tblite MDI engine has
+      ``seamm-tblite`` with tblite 0.5.0 (tblite 0.6 with dftd4 4.2 still crashes
+      for GFN2). Updating the plug-in's installation recreates ``seamm-xtb`` and
+      creates ``seamm-tblite``, and records it as ``tblite-environment`` in xtb.ini;
+      until then the engine keeps using ``conda-environment``.
+    * When xtb fails -- a non-zero exit, no ``xtbout.json``, or no energy -- the step
+      now stops with an error naming the directory and quoting the end of xtb's error
+      output. Before, it printed "No results were collected" and carried on, so a Loop
+      of failed calculations finished with no errors counted.
+
 2026.11.11 -- Settings fingerprints for xTB's model-chemistry calculations
     * Calculations through an xTB **Model Chemistry** (e.g. ``xTB:SQM@GFN2-xTB``) now
       carry a fingerprint of their settings -- the program and its version, the method

@@ -1,0 +1,12 @@
+name: seamm-tblite
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  # For the tblite MDI engine (data/tblite_mdi.py), driven by LAMMPS via MDI. Kept
+  # apart from seamm-xtb because the working tblite pins an old xtb.
+  # Pinned 2026-10-09 and re-checked 2026-11-21: tblite 0.6 (with dftd4 4.2, as
+  # conda-forge resolves it today) segfaults for any GFN2 calculation; 0.5.0 (dftd4
+  # 3.7) works.
+  - tblite-python=0.5.0   # provides `from tblite.interface import Calculator`
+  - pymdi                 # provides `import mdi`

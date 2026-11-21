@@ -3,10 +3,8 @@ channels:
   - conda-forge
 dependencies:
   - python=3.12
-  - xtb
-  # For the tblite MDI engine (data/tblite_mdi.py), driven by LAMMPS via MDI:
-  # Pinned 2026-10-09: tblite 0.6 and 0.7 (which need dftd4 4.2) segfault in dftd4's
-  # get_polarizabilities for any GFN2 calculation; 0.5.0 (dftd4 3.7) works. With it
-  # the solver takes xtb 6.4.1.
-  - tblite-python=0.5.0   # provides `from tblite.interface import Calculator`
-  - pymdi           # provides `import mdi`
+  # The xtb executable for the xTB step. Pinned 2026-11-21: xtb 6.4.1 (which the
+  # tblite 0.5.0 pin used to force into this environment) crashes in every geometry
+  # optimisation with the gfortran 16 runtime ("Missing comma between descriptors",
+  # optimizer.f90:624). 6.7.1 optimises correctly (ChemAI test, 2026-11-21).
+  - xtb=6.7.1

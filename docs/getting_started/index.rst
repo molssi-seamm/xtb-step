@@ -23,10 +23,23 @@ The non-graphical installer is also straightforward::
 
 will ensure both that the SEAMM plug-in itself and the underlying
 ``xtb`` executable are installed and up-to-date. By default the
-installer creates a dedicated ``seamm-xtb`` conda environment from
-``conda-forge`` containing ``xtb``; on first use the plug-in writes
-the environment location into ``~/SEAMM/xtb.ini`` so subsequent
-runs can find it.
+installer creates two conda environments from ``conda-forge``:
+
+* ``seamm-xtb`` with the ``xtb`` executable (6.7.1), used by the xTB
+  step's Energy, Optimization and Frequencies sub-steps;
+* ``seamm-tblite`` with the tblite library (0.5.0) and MDI, used by the
+  xTB engine for QM-MD with LAMMPS and by steps that run xTB through a
+  Model Chemistry.
+
+They are kept apart because the tblite that works pins an old xtb, whose
+geometry optimiser crashes with the current gfortran runtime. The
+environments are recorded in ``~/SEAMM/xtb.ini`` (``conda-environment``
+and ``tblite-environment``) so subsequent runs can find them.
+
+If xtb fails -- a non-zero exit, no ``xtbout.json``, or no energy -- the
+step stops with an error that names the directory and quotes the end of
+xtb's error output. Inside a Loop, the iteration is then counted as a
+failure rather than finishing with no results.
 
 .. _SEAMM Installer: https://molssi-seamm.github.io/installation/index.html
 
