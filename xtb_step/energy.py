@@ -210,6 +210,10 @@ class Energy(Substep):
         # Harvest results
         data = self._collect_results(directory, configuration, result)
 
+        # Fail loudly if xtb failed, so a Loop counts it as an error rather than
+        # carrying on with no results.
+        self._check_xtb_run(directory, result, data)
+
         # Store in the SEAMM property database / variables / tables
         self.store_results(configuration=configuration, data=data)
 
@@ -221,6 +225,53 @@ class Energy(Substep):
     # ------------------------------------------------------------------
     # Result collection
     # ------------------------------------------------------------------
+
+    def _check_xtb_run(self, directory, result, data, n_lines=20):
+        """Raise RuntimeError if the xtb run failed.
+
+        The run failed if the executor returned nothing, xtb exited with a
+        non-zero return code, it wrote no ``xtbout.json``, or no total energy
+        could be read. The message names the directory and quotes the end of
+        ``xtb.err`` (or of the standard output when there is no error output),
+        so the error is visible in job.out and counted by a Loop.
+
+        Parameters
+        ----------
+        directory : pathlib.Path
+            The directory of the run.
+        result : dict or None
+            What the executor returned (``stdout``, ``stderr``, ``returncode``).
+        data : dict
+            The results collected from the run.
+        n_lines : int
+            How many lines of the error output to quote.
+        """
+        directory = Path(directory)
+        problems = []
+        if result is None:
+            problems.append("xtb could not be run")
+        else:
+            returncode = result.get("returncode")
+            if returncode not in (None, 0):
+                problems.append(f"xtb exited with return code {returncode}")
+        if not (directory / "xtbout.json").exists():
+            problems.append("it wrote no xtbout.json")
+        if "total_energy" not in data:
+            problems.append("no total energy could be read")
+        if not problems:
+            return
+
+        text = ""
+        if result is not None:
+            text = result.get("stderr", "") or ""
+            if not text.strip():
+                text = result.get("stdout", "") or ""
+        tail = "\n".join(text.rstrip().splitlines()[-n_lines:])
+        msg = f"The xTB calculation in {directory} failed: " + "; ".join(problems) + "."
+        if tail:
+            msg += f"\nThe last lines of its output:\n{tail}"
+        printer.normal(__(msg, indent=4 * " ", wrap=False, dedent=False))
+        raise RuntimeError(msg)
 
     def _collect_results(self, directory, configuration, run_result):
         """Pull values from xtbout.json (and stdout if needed) into a dict.

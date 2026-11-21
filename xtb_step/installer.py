@@ -50,6 +50,11 @@ class Installer(seamm_installer.InstallerBase):
         #. It can be installed in a separate environment, ``seamm-xtb`` by
            default, using the ``seamm-xtb.yml`` environment file shipped in
            ``xtb_step/data/``.
+
+    The tblite MDI engine (QM-MD with LAMMPS) has its own environment,
+    ``seamm-tblite`` (``seamm-tblite.yml``), recorded as ``tblite-environment``
+    in xtb.ini. The two are apart since 2026.11.21: the tblite that works pins
+    xtb 6.4.1, whose optimiser crashes with the current gfortran runtime.
     """
 
     def __init__(self, logger=logger):
@@ -69,6 +74,60 @@ class Installer(seamm_installer.InstallerBase):
         # The environment.yaml file for Conda installations.
         logger.debug(f"data directory: {self.resource_path}")
         self.environment_file = self.resource_path / "seamm-xtb.yml"
+
+        # The tblite MDI engine's environment, apart from xtb's
+        self.tblite_environment = "seamm-tblite"
+        self.tblite_environment_file = self.resource_path / "seamm-tblite.yml"
+
+    def install(self):
+        """Install xtb's environment and the tblite engine's environment."""
+        super().install()
+        self.install_tblite()
+
+    def update(self):
+        """Update both environments.
+
+        seamm-xtb is recreated from its file rather than updated: before
+        2026.11.21 it also held tblite 0.5.0, which pins xtb 6.4.1, and
+        ``conda env update`` does not remove packages, so it could not move to
+        the current xtb.
+        """
+        data = self.exe_config.get_values("local")
+        if data.get("installation") == "conda":
+            environment = data.get("conda-environment") or self.environment
+            print(
+                f"    Recreating Conda environment '{environment}' from "
+                f"{self.environment_file.name}. This may take a minute or two."
+            )
+            if self.conda.exists(environment):
+                self.conda.delete_environment(environment)
+            self.conda.create_environment(self.environment_file, name=environment)
+            self.exe_config.set_value("local", "conda-environment", environment)
+            self.exe_config.save()
+            self.install_tblite()
+            print("    Done!\n")
+        else:
+            super().update()
+
+    def install_tblite(self):
+        """Create or update the tblite MDI engine's environment and record it
+        as ``tblite-environment`` in xtb.ini (conda installations only)."""
+        data = self.exe_config.get_values("local")
+        if data.get("installation") != "conda":
+            return
+        environment = data.get("tblite-environment") or self.tblite_environment
+        if self.conda.exists(environment):
+            print(f"    Updating Conda environment '{environment}' for tblite.")
+            self.conda.update_environment(
+                self.tblite_environment_file, name=environment
+            )
+        else:
+            print(f"    Installing Conda environment '{environment}' for tblite.")
+            self.conda.create_environment(
+                self.tblite_environment_file, name=environment
+            )
+        self.exe_config.set_value("local", "tblite-environment", environment)
+        self.exe_config.save()
 
     def exe_version(self, config):
         """Get the version of the xtb executable.
