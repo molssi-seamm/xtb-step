@@ -2,6 +2,16 @@
 History
 =======
 
+2026.11.21.1 -- Bugfix: the installer bypassed SEAMM's environment policies
+    * 2026.11.21's installer made the two conda environments itself, which skipped the
+      installation's policies: shared or prefixed code environments, environments kept
+      as archives (as on clusters with slow shared file systems), and the guard against
+      replacing an environment SEAMM did not make. It now leaves ``seamm-xtb`` to the
+      standard installer and makes ``seamm-tblite`` the same way, as a directory or an
+      archive as the installation keeps them. A ``seamm-xtb`` directory that still holds
+      tblite from before 2026.11.21 is removed first, so it is made again from the new
+      environment file.
+
 2026.11.21 -- Bugfix: xTB optimisations crashed, and failures went unnoticed
     * Geometry optimisations failed after the first cycle with the conda-forge
       environment as it now resolves: xtb 6.4.1, which the tblite 0.5.0 pin forced

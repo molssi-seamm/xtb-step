@@ -80,52 +80,110 @@ class Installer(seamm_installer.InstallerBase):
         self.tblite_environment_file = self.resource_path / "seamm-tblite.yml"
 
     def install(self):
-        """Install xtb's environment and the tblite engine's environment."""
+        """Install xtb's environment (the base installer: its policies, archive
+        storage, ...) and then the tblite engine's environment the same way."""
         super().install()
-        self.install_tblite()
+        self._install_tblite()
 
     def update(self):
         """Update both environments.
 
-        seamm-xtb is recreated from its file rather than updated: before
-        2026.11.21 it also held tblite 0.5.0, which pins xtb 6.4.1, and
-        ``conda env update`` does not remove packages, so it could not move to
-        the current xtb.
+        A ``seamm-xtb`` directory made before 2026.11.21 also holds tblite 0.5.0,
+        which pins xtb 6.4.1, and ``conda env update`` does not remove packages,
+        so it could not move to the current xtb: such an environment is removed
+        first and the base installer makes it again from the new file. Archives
+        are always built afresh, so archive storage needs nothing extra.
         """
-        data = self.exe_config.get_values("local")
-        if data.get("installation") == "conda":
-            environment = data.get("conda-environment") or self.environment
-            print(
-                f"    Recreating Conda environment '{environment}' from "
-                f"{self.environment_file.name}. This may take a minute or two."
-            )
-            if self.conda.exists(environment):
-                self.conda.delete_environment(environment)
-            self.conda.create_environment(self.environment_file, name=environment)
-            self.exe_config.set_value("local", "conda-environment", environment)
-            self.exe_config.save()
-            self.install_tblite()
-            print("    Done!\n")
-        else:
-            super().update()
+        self._drop_stale_xtb_environment()
+        super().update()
+        self._install_tblite()
 
-    def install_tblite(self):
-        """Create or update the tblite MDI engine's environment and record it
-        as ``tblite-environment`` in xtb.ini (conda installations only)."""
+    def _conda_installation(self):
+        """The [local] section of xtb.ini if this is a conda installation SEAMM
+        manages here (not shared, not a manual code), else None."""
+        if self.shared_codes or self.manual_code:
+            return None
         data = self.exe_config.get_values("local")
         if data.get("installation") != "conda":
+            return None
+        return data
+
+    def _drop_stale_xtb_environment(self):
+        """Remove a pre-2026.11.21 ``seamm-xtb`` directory that still holds
+        tblite (directory storage only)."""
+        data = self._conda_installation()
+        if data is None or self.archive_storage:
             return
-        environment = data.get("tblite-environment") or self.tblite_environment
-        if self.conda.exists(environment):
-            print(f"    Updating Conda environment '{environment}' for tblite.")
-            self.conda.update_environment(
-                self.tblite_environment_file, name=environment
+        environment = data.get("conda-environment") or self.environment
+        try:
+            if not self.conda.exists(environment) or self._not_ours(environment):
+                return
+            meta = Path(self.conda.path(environment)) / "conda-meta"
+            stale = any(meta.glob("tblite-python-*.json"))
+        except Exception:
+            return
+        if stale:
+            print(
+                f"    The Conda environment '{environment}' still holds tblite, which "
+                "pins an old xtb; removing it so it is made again from "
+                f"{Path(self.environment_file).name}."
             )
-        else:
-            print(f"    Installing Conda environment '{environment}' for tblite.")
-            self.conda.create_environment(
-                self.tblite_environment_file, name=environment
-            )
+            self.conda.delete_environment(environment)
+
+    def _tblite_environment_name(self, data):
+        """The tblite environment's name: the .ini's, else the default (prefixed
+        if this installation prefixes its code environments)."""
+        if data.get("tblite-environment"):
+            return data["tblite-environment"]
+        name = self.tblite_environment
+        if self.code_environments == "prefixed":
+            from seamm_manager.naming import compute_tag
+            from seamm_manager.policy import prefixed_environment
+
+            name = prefixed_environment(name, compute_tag(self.root))
+        return name
+
+    def _install_tblite(self):
+        """Create or update the tblite MDI engine's environment, in the
+        installation's storage (directory or archive), and record it as
+        ``tblite-environment`` in xtb.ini."""
+        data = self._conda_installation()
+        if data is None:
+            return
+        environment = self._tblite_environment_name(data)
+        saved = self.environment_file
+        self.environment_file = self.tblite_environment_file
+        try:
+            if self.archive_storage:
+                from seamm_manager import archives
+
+                if archives.current_archive(
+                    self.root, environment
+                ) is not None and self._archive_up_to_date(environment):
+                    print(
+                        f"    The archive of the Conda environment '{environment}' "
+                        "is up to date (built from this environment file)."
+                    )
+                else:
+                    self._archive(environment, "Building")
+            elif self.conda.exists(environment):
+                if self._unchanged_since_applied(environment):
+                    print(
+                        f"    The Conda environment '{environment}' is up to date "
+                        "(the environment file is unchanged since it was applied)."
+                    )
+                else:
+                    print(f"    Updating Conda environment '{environment}' for tblite.")
+                    self.conda.update_environment(
+                        self.environment_file, name=environment
+                    )
+                    self._record_applied(environment)
+            else:
+                print(f"    Installing Conda environment '{environment}' for tblite.")
+                self.conda.create_environment(self.environment_file, name=environment)
+                self._record_applied(environment)
+        finally:
+            self.environment_file = saved
         self.exe_config.set_value("local", "tblite-environment", environment)
         self.exe_config.save()
 
