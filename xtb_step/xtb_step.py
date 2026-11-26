@@ -327,12 +327,21 @@ class xTBStep(object):
         # tblite uses the number of unpaired electrons, not 2S+1.
         uhf = multiplicity - 1
 
+        # The conda that runs the engine, as seamm_exec's local executor chooses it:
+        # CONDA_EXE first, which on clusters is SEAMM's staging wrapper that unpacks
+        # an environment kept as an archive onto the node; the ini's conda knows
+        # only shared environments, so an archive-only seamm-tblite failed to start.
+        conda = os.environ.get("CONDA_EXE") or config.get("conda") or "conda"
+        environment = tblite_environment(config)
+        if environment.startswith("~"):
+            environment = str(Path(environment).expanduser())
+        flag = "-p" if Path(environment).is_absolute() else "-n"
         argv = [
-            config["conda"],
+            conda,
             "run",
             "--live-stream",
-            "-n",
-            tblite_environment(config),
+            flag,
+            environment,
             "python",
             config["mdi_script"],
             "-mdi",
