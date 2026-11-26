@@ -2,6 +2,14 @@
 History
 =======
 
+2026.11.26 -- Bugfix: the tblite MDI engine ignored SEAMM's conda wrapper
+    * The engine was launched with the conda named in xtb.ini, while SEAMM's local
+      executor prefers CONDA_EXE. On clusters CONDA_EXE is SEAMM's wrapper that unpacks
+      an environment kept as an archive onto the node, so an archive-only seamm-tblite
+      could not start ("MDI engine exited (return code 1) before connecting"; ARC,
+      SEAMM job 6088). The engine now uses the same conda as the executor: CONDA_EXE,
+      else the ini's, and a prefix (-p) for an environment given as a path.
+
 2026.11.21.1 -- Bugfix: the installer bypassed SEAMM's environment policies
     * 2026.11.21's installer made the two conda environments itself, which skipped the
       installation's policies: shared or prefixed code environments, environments kept
